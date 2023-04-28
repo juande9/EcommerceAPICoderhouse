@@ -1,4 +1,5 @@
 import fs from "fs/promises"
+import productShema from "./models/productShema.js";
 
 class ProductManager {
 
@@ -21,45 +22,13 @@ class ProductManager {
     }
   }
 
-  async addProduct(product) {
+  async addProduct(data) {
     try {
-      const productsFile = await fs.readFile(this.path, "utf-8")
-      let productList = JSON.parse(productsFile)
-      const requiredKeys = ["title", "description", "code", "price", "status", "stock", "category"]
+      const newProduct = await productShema.create(data);
 
-      const keyExist = (k) => {
-        return product.hasOwnProperty(k)
-      }
-
-      requiredKeys.forEach(key => {
-        if (!keyExist(key)) {
-          throw new Error(`Error cargar. El campo ${key} es requerido. `)
-        }
-      })
-
-      const validCode = productList.find(
-        (p) => p.id === product.id ||
-          p.code === product.code
-      )
-
-      if (validCode) {
-        throw new Error(`El código ${product.code} ya fue ingresado`)
-      }
-
-      if (productList.length > 0) {
-        let lastProduct = productList[productList.length - 1];
-        this.autoId = lastProduct.id + 1
-      }
-
-      productList.push({
-        ...product,
-        status: true,
-        id: this.autoId++,
-      })
-
-      await fs.writeFile(this.path, JSON.stringify(productList, null, 2))
-
+      return newProduct
     }
+    
     catch (e) {
       return e
     }
