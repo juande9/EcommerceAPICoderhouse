@@ -1,5 +1,4 @@
 import fs from "fs/promises"
-import productShema from "./models/productShema.js";
 
 class ProductManager {
 
@@ -9,7 +8,7 @@ class ProductManager {
 
   constructor() {
     this.#products = [];
-    this.path = `./src/db/products.json`;
+    this.path = `../db/products.json`;
   }
 
   async getProducts() {
@@ -22,13 +21,45 @@ class ProductManager {
     }
   }
 
-  async addProduct(data) {
+  async addProduct(product) {
     try {
-      const newProduct = await productShema.create(data);
+      const productsFile = await fs.readFile(this.path, "utf-8")
+      let productList = JSON.parse(productsFile)
+      const requiredKeys = ["title", "description", "code", "price", "status", "stock", "category"]
 
-      return newProduct
+      const keyExist = (k) => {
+        return product.hasOwnProperty(k)
+      }
+
+      requiredKeys.forEach(key => {
+        if (!keyExist(key)) {
+          throw new Error(`Error cargar. El campo ${key} es requerido. `)
+        }
+      })
+
+      const validCode = productList.find(
+        (p) => p.id === product.id ||
+          p.code === product.code
+      )
+
+      if (validCode) {
+        throw new Error(`El código ${product.code} ya fue ingresado`)
+      }
+
+      if (productList.length > 0) {
+        let lastProduct = productList[productList.length - 1];
+        this.autoId = lastProduct.id + 1
+      }
+
+      productList.push({
+        ...product,
+        status: true,
+        id: this.autoId++,
+      })
+
+      await fs.writeFile(this.path, JSON.stringify(productList, null, 2))
+
     }
-    
     catch (e) {
       return e
     }

@@ -4,7 +4,7 @@ class ProductMongooseDao {
 
   async getProducts() {
     try {
-      const productsDocument = await productShema.find({ enable: true });
+      const productsDocument = await productShema.find({ enabled: true });
       return productsDocument.map(document => ({
         _id: document._id,
         title: document.title,
@@ -13,7 +13,7 @@ class ProductMongooseDao {
         thumbnail: document.thumbnail,
         code: document.code,
         stock: document.stock,
-        enable: document.enable,
+        enabled: document.enabled,
       }))
     }
     catch (e) {
@@ -32,7 +32,7 @@ class ProductMongooseDao {
         thumbnail: productDocument.thumbnail,
         code: productDocument.code,
         stock: productDocument.stock,
-        enable: productDocument.enable,
+        enabled: productDocument.enabled,
       }
     }
     catch (e) {
@@ -51,7 +51,7 @@ class ProductMongooseDao {
         thumbnail: productDocument.thumbnail,
         code: productDocument.code,
         stock: productDocument.stock,
-        enable: productDocument.enable,
+        enabled: productDocument.enabled,
       }
     }
     catch (e) {
@@ -70,7 +70,7 @@ class ProductMongooseDao {
         thumbnail: productDocument.thumbnail,
         code: productDocument.code,
         stock: productDocument.stock,
-        enable: productDocument.enable,
+        enabled: productDocument.enabled,
       }
     }
     catch (e) {
@@ -80,8 +80,7 @@ class ProductMongooseDao {
 
   async deleteProduct(uid) {
     try {
-      productDocument
-      return productShema.updateOne({ _id: uid }, { enable: false });
+      return productShema.updateOne({ _id: uid }, { enabled: false });
     }
     catch (e) {
       return e

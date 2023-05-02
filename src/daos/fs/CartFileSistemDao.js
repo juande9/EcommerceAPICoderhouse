@@ -8,7 +8,7 @@ class Cart {
 
     constructor() {
         this.#cart = [];
-        this.path = `./src/db/cart.json`;
+        this.path = `../db/cart.json`;
     }
 
     async createCart() {

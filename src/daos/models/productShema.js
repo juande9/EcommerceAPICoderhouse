@@ -9,7 +9,7 @@ const productSchema = new Schema({
     thumbnail: { type: String, },
     code: { type: String, required: true, unique: true },
     stock: { type: Number, required: true },
-    enable: { type: Boolean, default: true }
+    enabled: { type: Boolean, default: true }
 })
 
 export default mongoose.model(productsCollection, productSchema)

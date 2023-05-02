@@ -62,7 +62,7 @@ export const deleteProduct = async (req, res) => {
 export const deleteAll = async (req, res) => {
     try {
         const manager = new ProductManager();manager
-        const removeList = await manager.deleteMany({ enable: false })
+        const removeList = await manager.deleteMany({ enabled: false })
         res.status(201).send({ status: "success", message: `Todos los productos fueron eliminados` })
     }
     catch (e) {
