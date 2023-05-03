@@ -3,18 +3,20 @@ import mongoose, { Schema } from "mongoose"
 const cartsCollection = "carts"
 
 const cartSchema = new Schema({
-    cart: [
-        {
+    cart: {
+        type: [{
             product: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'product'
+                ref: 'products'
             },
             quantity: {
                 type: Number,
                 default: 1
             }
         }
-    ],
+        ],
+        default: [],
+    },
     enabled: {
         type: Boolean,
         default: true
