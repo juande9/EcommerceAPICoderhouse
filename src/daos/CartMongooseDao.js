@@ -32,9 +32,7 @@ class CartMongooseDao {
 
     async getCartById(cid) {
         try {
-            const cartDocument = await cartSchema
-                .findOne({ _id: cid })
-                .populate(["cart.product"])
+            const cartDocument = await cartSchema.findOne({ _id: cid })
 
             return {
                 _id: cartDocument._id,
@@ -62,7 +60,6 @@ class CartMongooseDao {
                     { _id: cid },
                     { $push: { cart: { product: productDocument._id, quantity: 1 } } },
                     { new: true },
-                    console.log(updateProdQuantity)
                 )
             }
 
@@ -70,7 +67,6 @@ class CartMongooseDao {
                 _id: updateProdQuantity._id,
                 cart: updateProdQuantity.cart,
                 enabled: updateProdQuantity.enabled,
-                productAdded: updateProdQuantity
             }
         }
         catch (e) {

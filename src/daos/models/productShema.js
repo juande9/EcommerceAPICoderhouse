@@ -12,4 +12,5 @@ const productSchema = new Schema({
     enabled: { type: Boolean, default: true }
 })
 
+
 export default mongoose.model(productsCollection, productSchema)
