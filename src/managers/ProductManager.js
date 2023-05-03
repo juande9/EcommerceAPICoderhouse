@@ -26,27 +26,27 @@ class ProductManager {
     }
   }
 
-  async getProductById(uid) {
+  async getProductById(pid) {
     try {
-      return this.dao.getProductById(uid);
+      return this.dao.getProductById(pid);
     }
     catch (e) {
       return e
     }
   }
 
-  async updateProduct(uid, updatedData) {
+  async updateProduct(pid, updatedData) {
     try {
-      return this.dao.updateProduct(uid, updatedData);
+      return this.dao.updateProduct(pid, updatedData);
     }
     catch (e) {
       return e
     }
   }
 
-  async deleteProduct(uid) {
+  async deleteProduct(pid) {
     try {
-      return this.dao.deleteProduct(uid);
+      return this.dao.deleteProduct(pid);
     }
     catch (e) {
       return e

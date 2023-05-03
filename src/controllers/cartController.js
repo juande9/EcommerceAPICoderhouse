@@ -44,9 +44,9 @@ export const addProduct = async (req, res) => {
     try {
         const manager = new CartManager();
         const { cid, pid } = req.params
-        const cartFound = await manager.addProduct(cid, pid);
+        const cartUpdated = await manager.addProduct(cid, pid);
         res.status(200).send({ status: "success", 
-        message: `${cartFound.productAdded.title} agregado correctamente al carrito: ${cartFound._id}`})
+        message: `Producto agregado correctamente al carrito`})
     }
     catch (e) {
         res.send({ status: "error", meesage: e })

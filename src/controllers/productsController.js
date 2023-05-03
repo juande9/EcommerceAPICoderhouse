@@ -40,7 +40,7 @@ export const updateProduct = async (req, res) => {
         const newData = req.body
         const { pid } = req.params
         const productUpdated = await manager.updateProduct(pid, newData);
-        res.status(200).send({ status: "success", payload: productUpdated })
+        res.status(200).send({ status: "success", message: `Producto ${pid} actualizado` })
     }
     catch (e) {
         res.send({ status: "error", meesage: e })

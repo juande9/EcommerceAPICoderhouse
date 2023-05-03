@@ -40,9 +40,9 @@ class ProductMongooseDao {
     }
   }
 
-  async getProductById(uid) {
+  async getProductById(pid) {
     try {
-      const productDocument = productShema.findOne({ _id: uid });
+      const productDocument = await productShema.findOne({ _id: pid });
       return {
         _id: productDocument._id,
         title: productDocument.title,
@@ -59,9 +59,9 @@ class ProductMongooseDao {
     }
   }
 
-  async updateProduct(uid, updatedData) {
+  async updateProduct(pid, updatedData) {
     try {
-      const productDocument = productShema.updateOne({ _id: uid }, updatedData);
+      const productDocument = await productShema.updateOne({ _id: pid }, updatedData);
       return {
         _id: productDocument._id,
         title: productDocument.title,
@@ -78,9 +78,9 @@ class ProductMongooseDao {
     }
   }
 
-  async deleteProduct(uid) {
+  async deleteProduct(pid) {
     try {
-      return productShema.updateOne({ _id: uid }, { enabled: false });
+      return await productShema.updateOne({ _id: pid }, { enabled: false });
     }
     catch (e) {
       return e
