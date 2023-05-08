@@ -11,8 +11,6 @@ class ProductMongooseDao {
         ...(type && { title: type })
       };
 
-      console.log(options)
-
       const productsDocument =
         await productShema
           .find(options)
