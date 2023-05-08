@@ -8,9 +8,9 @@ class ProductManager {
 
   }
 
-  async getProducts() {
+  async getProducts(params) {
     try {
-      return this.dao.getProducts();
+      return this.dao.getProducts(params);
     }
     catch (e) {
       return e
