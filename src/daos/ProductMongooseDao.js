@@ -92,7 +92,7 @@ class ProductMongooseDao {
 
   async deleteProduct(uid) {
     try {
-      return productShema.updateOne({ _id: uid }, { enabled: false });
+      return await productShema.updateOne({ _id: uid }, { enabled: false });
     }
     catch (e) {
       return e

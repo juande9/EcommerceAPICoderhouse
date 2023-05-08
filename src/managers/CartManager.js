@@ -34,15 +34,34 @@ class CartManager {
             return e
         }
     }
-    
+
     async addProduct(cid, pid) {
         try {
-            return this.dao.addProduct(cid,pid);
+            return this.dao.addProduct(cid, pid);
         }
         catch (e) {
             return e
         }
     }
+
+    async deleteProduct(cid, pid) {
+        try {
+            return this.dao.deleteProduct(cid, pid);
+        }
+        catch (e) {
+            return e
+        }
+    }
+
+    async updateQuantity(cid, pid, qty) {
+        try {
+            return this.dao.updateQuantity(cid, pid, qty);
+        }
+        catch (e) {
+            return e
+        }
+    }
+
 
 
 }
