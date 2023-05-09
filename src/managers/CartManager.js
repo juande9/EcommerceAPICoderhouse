@@ -62,6 +62,15 @@ class CartManager {
         }
     }
 
+    async emptyCart(cid) {
+        try {
+            return this.dao.emptyCart(cid);
+        }
+        catch (e) {
+            return e
+        }
+    }
+
 
 
 }

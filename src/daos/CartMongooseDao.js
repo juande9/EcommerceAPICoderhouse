@@ -39,7 +39,9 @@ class CartMongooseDao {
         try {
             const cartDocument = await cartSchema.findOne({ _id: cid })
 
-            if (!cartDocument) throw new Error(`No se encontraron carritos con id: ${cid}`);
+            if (!cartDocument) {
+                return Promise.reject(new Error(`No se encontraron carritos con id: ${cid}`))
+              }
 
             return {
                 _id: cartDocument._id,
@@ -56,7 +58,9 @@ class CartMongooseDao {
         try {
             const productDocument = await productShema.findOne({ _id: pid });
 
-            if (!productDocument) throw new Error("Producto no encontrado")
+            if (!productDocument) {
+                return Promise.reject(new Error("Producto no encontrado"));
+              }
 
             const updateProdQuantity = await cartSchema.findOneAndUpdate(
                 { _id: cid, "cart.product": productDocument._id },
@@ -87,7 +91,7 @@ class CartMongooseDao {
         try {
             const deletedProduct = await cartSchema.findOneAndUpdate(
                 { _id: cid },
-                { $pull: { cart: { product: pid } } },
+                { $pull: { cart: { product: productDocument._id } } },
                 { new: true }
             );
 
@@ -106,7 +110,9 @@ class CartMongooseDao {
         try {
             const productDocument = await productShema.findOne({ _id: pid });
 
-            if (!productDocument) throw new Error("Producto no encontrado")
+            if (!productDocument) {
+                return Promise.reject(new Error("Producto no encontrado"));
+              }
 
             const stockUpdated = await cartSchema.findOneAndUpdate(
                 { _id: cid, "cart.product": productDocument._id },
@@ -123,6 +129,29 @@ class CartMongooseDao {
         }
         catch (e) {
             return e.message
+        }
+    }
+
+    async emptyCart(cid) {
+        try {
+            const emptiedCart = await cartSchema.findOneAndUpdate(
+                { _id: cid },
+                { $set: { cart: [] } },
+                { new: true }
+            );
+
+            if (!emptiedCart) {
+                return Promise.reject(new Error('El carrito no existe'));
+              }
+
+            return {
+                _id: emptiedCart._id,
+                cart: emptiedCart.cart,
+                enabled: emptiedCart.enabled,
+            }
+        }
+        catch (e) {
+            return e
         }
     }
 }

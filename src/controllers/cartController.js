@@ -88,3 +88,18 @@ export const updateQuantity = async (req, res) => {
     }
 }
 
+export const emptyCart = async (req, res) => {
+    try {
+        const manager = new CartManager();
+        const { cid } = req.params
+        const emptiedCart = await manager.emptyCart(cid);
+
+        res.status(200).send({
+            status: "success", message: `Se han eliminado los productos del carrito.`
+        })
+    }
+    catch (e) {
+        res.status(400).send({ status: "error", message: e.message });
+    }
+}
+
