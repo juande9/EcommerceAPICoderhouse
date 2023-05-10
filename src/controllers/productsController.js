@@ -4,8 +4,8 @@ export const getProducts = async (req, res) => {
     try {
         const manager = new ProductManager();
         const params = req.query
-
         const products = await manager.getProducts(params);
+        console.log(products)
         res.status(200).send({ status: "success", payload: products });
     } catch (e) {
         res.status(400).send({ status: "error", message: e.message });
@@ -50,7 +50,7 @@ export const updateProduct = async (req, res) => {
         if (pid.length !== 24) throw new Error("El ID ingresado es inválido");
 
         const productUpdated = await manager.updateProduct(pid, newData);
-        res.status(200).send({ status: "success", payload: productUpdated })
+        res.status(200).send({ status: "success", message: "Producto modificado" })
     }
     catch (e) {
         res.status(400).send({ status: "error", message: e.message });

@@ -5,20 +5,23 @@ class ProductMongooseDao {
   async getProducts(params) {
     try {
       const { limit = 10, sort, type, page } = params
-      const limitValue = limit || 10
-      const options = {
-        enabled: true,
-        ...(type && { title: type })
-      };
 
-      const productsDocument =
-        await productShema
-          .find(options)
-          .limit(limitValue)
-          .sort({ price: sort });
+      const paginateOptions = {
+        limit: limit || 10,
+        page: page || 1,
+        sort: { price: sort },
+      }
 
-      return productsDocument.map(document => ({
-        _id: document._id,
+      const queryOptions = { enabled: true };
+      if (type) {
+        queryOptions.title = type;
+      }
+
+      const productsDocument = await productShema
+        .paginate(queryOptions, paginateOptions)
+
+      productsDocument.docs = productsDocument.docs.map(document => ({
+        id: document._id,
         title: document.title,
         description: document.description,
         price: document.price,
@@ -27,6 +30,7 @@ class ProductMongooseDao {
         stock: document.stock,
         enabled: document.enabled,
       }))
+      return productsDocument
     }
     catch (e) {
       return e
@@ -37,7 +41,7 @@ class ProductMongooseDao {
     try {
       const productDocument = await productShema.create(data);
       return {
-        _id: productDocument._id,
+        id: productDocument._id,
         title: productDocument.title,
         description: productDocument.description,
         price: productDocument.price,
@@ -56,7 +60,7 @@ class ProductMongooseDao {
     try {
       const productDocument = await productShema.findOne({ _id: uid });
       return {
-        _id: productDocument._id,
+        id: productDocument._id,
         title: productDocument.title,
         description: productDocument.description,
         price: productDocument.price,
@@ -73,17 +77,7 @@ class ProductMongooseDao {
 
   async updateProduct(uid, updatedData) {
     try {
-      const productDocument = await productShema.updateOne({ _id: uid }, updatedData);
-      return {
-        _id: productDocument._id,
-        title: productDocument.title,
-        description: productDocument.description,
-        price: productDocument.price,
-        thumbnail: productDocument.thumbnail,
-        code: productDocument.code,
-        stock: productDocument.stock,
-        enabled: productDocument.enabled,
-      }
+      return await productShema.updateOne({ _id: uid }, updatedData);
     }
     catch (e) {
       return e
