@@ -89,6 +89,8 @@ class CartMongooseDao {
 
     async deleteProduct(cid, pid) {
         try {
+            const productDocument = await productShema.findOne({ _id: pid });
+            
             const deletedProduct = await cartSchema.findOneAndUpdate(
                 { _id: cid },
                 { $pull: { cart: { product: productDocument._id } } },
