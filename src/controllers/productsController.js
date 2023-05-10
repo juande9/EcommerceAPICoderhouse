@@ -6,7 +6,7 @@ export const getProducts = async (req, res) => {
         const params = req.query
         const products = await manager.getProducts(params);
 
-        res.status(200).send({ status: "success", payload: products });
+        res.status(200).send({ status: "success", payload: products.docs, ...products, docs: undefined });
     } catch (e) {
         res.status(400).send({ status: "error", message: e.message });
     }
