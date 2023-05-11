@@ -6,6 +6,13 @@ export const getProducts = async (req, res) => {
         const params = req.query
         const products = await manager.getProducts(params);
 
+        if (Object.keys(params).length > 0) {
+            Object.keys(params).forEach(key => {
+                const value = params[key];
+                res.cookie(key, value, { maxAge: 10000, signed: true });
+            });
+        }
+
         res.status(200).send({ status: "success", payload: products.docs, ...products, docs: undefined });
     } catch (e) {
         res.status(400).send({ status: "error", message: e.message });
@@ -79,5 +86,14 @@ export const deleteAll = async (req, res) => {
     }
     catch (e) {
         res.status(400).send({ status: "error", message: e.message });
+    }
+}
+
+export const getCookies = async (req, res) => {
+    try {
+        res.status(200).send({ status: "success", cookies: req.signedCookies })
+    }
+    catch (e) {
+        res.status(400).send({ status: "error", message: "No hay cookies" });
     }
 }

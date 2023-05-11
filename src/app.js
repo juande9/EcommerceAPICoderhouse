@@ -4,6 +4,7 @@ dotenv.config()
 import express from "express"
 import mongoose from "mongoose";
 import { resolve } from 'path';
+import cookieParser from "cookie-parser";
 import pmRouter from "./routes/ProductManagerRouter.js"
 import cartRouter from "./routes/CartRouter.js"
 
@@ -22,6 +23,7 @@ void (async () => {
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
         app.use(express.static(resolve('src/public')));
+        app.use(cookieParser(process.env.COOKIE_PASS))
 
         app.use('/api/products', pmRouter);
         app.use('/api/carts', cartRouter);
