@@ -1,53 +1,36 @@
-export const newSessionPublic = (req, res) => {
+import SessionManager from "../managers/SessionManager.js";
+import UsersManager from "../managers/UsersManager.js";
+
+export const login = async (req, res) => {
     try {
-        if (!req.session?.counter) {
-            req.session.counter = 1
-            return res.send("Bienvenido")
-        }
-        req.session.counter++;
-        res.send(`Se ha iniciado con exito ${req.session.counter} veces`)
+        const { email, password } = req.body
 
-    }
-    catch (e) {
-        res.status(400).send({ status: "error", message: "No se genero la sesion" });
-    }
-}
+        const manager = new SessionManager()
+        const foundUser = await manager.login(email, password)
 
-
-export const newSessionPrivate = (req, res) => {
-    try {
-        if (!req.session?.counter) {
-            req.session.counter = 1;
-            return res.send({ message: 'Bienvenido!' });
-        }
-
-        req.session.counter++;
-        res.send({ message: `Se ha visitado el sitio ${req.session.counter} veces.` });
-
-    }
-    catch (e) {
-        res.status(400).send({ status: "error", message: "No se genero la sesion" });
-    }
-}
-
-export const login = (req, res) => {
-    try {
-        const { username, password } = req.body
-
-        if (username !== "pepe" || password !== "123456") {
-            res.status(400).send({ status: "error", message: "Error en el Log in" });
-        }
-
-        req.session.user = username
-        req.session.admin = true
+        req.session.user = { email };
 
         res.status(201).send({ status: "success", message: "Logueado" });
 
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: "No se genero la sesion" });
+        res.status(400).send({ status: "error", message: e.message });
     }
 }
+
+//*Cambiar esto!
+export const signup = async (req, res) => {
+    try {
+        const data = req.body
+        const manager = new UsersManager();
+        const newUser = await manager.createUser(data)
+        return res.status(201).send({ status: "success", message: `Usuario ${newUser.email} creado`, payload: newUser })
+    }
+    catch (e) {
+        res.status(400).send({ status: "error", message: e.message });
+    }
+}
+
 
 export const logout = (req, res) => {
     try {

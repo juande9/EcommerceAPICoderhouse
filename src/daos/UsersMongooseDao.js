@@ -2,21 +2,31 @@ import userSchema from "./models/userSchema.js";
 
 class UsersMongooseDao {
 
-    async getUsers() {
+    async getUsers(params) {
         try {
-            const userDocument = await userSchema.find({ enabled: true });
+            const { limit = 10, page } = params
+
+            const paginateOptions = {
+                limit: limit || 10,
+                page: page || 1,
+            }
+
+            const userDocument = await userSchema
+                .paginate({ enabled: true }, paginateOptions)
 
             if (userDocument.length === 0) {
                 throw new Error('No se encontraron usuarios.');
             }
 
-            return userDocument.map(document => ({
+            userDocument.docs = userDocument.docs.map(document => ({
                 id: document._id,
                 firstName: document.firstName,
                 lastName: document.lastName,
                 email: document.email,
                 age: document.age,
             }))
+
+            return userDocument
         }
         catch (e) {
             return e.message
@@ -32,6 +42,7 @@ class UsersMongooseDao {
                 lastName: userDocument.lastName,
                 email: userDocument.email,
                 age: userDocument.age,
+                password: userDocument.password
             }
         }
         catch (e) {
@@ -42,12 +53,40 @@ class UsersMongooseDao {
     async getUserById(uid) {
         try {
             const userDocument = await userSchema.findOne({ _id: uid, enabled: true });
+
+            if (!userDocument) {
+                return Promise.reject(new Error("Usuario no existe"))
+            }
+
             return {
                 id: userDocument._id,
                 firstName: userDocument.firstName,
                 lastName: userDocument.lastName,
                 email: userDocument.email,
                 age: userDocument.age,
+                password: userDocument.password
+            }
+        }
+        catch (e) {
+            return e
+        }
+    }
+
+    async getOneByEmail(email) {
+        try {
+            const userDocument = await userSchema.findOne({ email, enabled: true });
+
+            if (!userDocument) {
+                return Promise.reject(new Error("Usuario no existe"))
+            }
+
+            return {
+                id: userDocument._id,
+                firstName: userDocument.firstName,
+                lastName: userDocument.lastName,
+                email: userDocument.email,
+                age: userDocument.age,
+                password: userDocument.password
             }
         }
         catch (e) {
@@ -68,7 +107,26 @@ class UsersMongooseDao {
         }
     }
 
+    async updateUser(uid, data) {
+        try {
+            const userDocument = await userSchema.findOneAndUpdate({ _id: uid, enabled: true }
+                , data, { new: true });
 
+            if (!userDocument) {
+                throw new Error("Usuario no existe")
+            }
+            return {
+                id: userDocument._id,
+                firstName: userDocument.firstName,
+                lastName: userDocument.lastName,
+                email: userDocument.email,
+                age: userDocument.age,
+                password: userDocument.password
+            }
+        }
+        catch (e) {
+            return e
+        }
+    }
 }
-
 export default UsersMongooseDao

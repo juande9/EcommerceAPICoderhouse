@@ -17,9 +17,9 @@ class UsersManager {
         }
     }
 
-    async getUsers() {
+    async getUsers(params) {
         try {
-            return this.dao.getUsers();
+            return this.dao.getUsers(params);
         }
         catch (e) {
             return e
@@ -35,6 +35,14 @@ class UsersManager {
         }
     }
 
+    async getOneByEmail(email) {
+        try {
+            return this.dao.getOneByEmail(email);
+        }
+        catch (e) {
+            return e
+        }
+    }
 
     async deleteUser(uid) {
         try {
@@ -43,6 +51,16 @@ class UsersManager {
         catch (e) {
             return e
         }
+    }
+
+    async updateUser(uid, data) {
+        try {
+            return this.dao.updateUser(uid, data);
+        }
+        catch (e) {
+            return e
+        }
+
     }
 
 }
