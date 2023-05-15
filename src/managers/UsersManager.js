@@ -8,9 +8,9 @@ class UsersManager {
 
     }
 
-    async createUser(data) {
+    async createUser(data, isAdmin) {
         try {
-            return this.dao.createUser(data);
+            return this.dao.createUser(data, isAdmin);
         }
         catch (e) {
             return e

@@ -24,6 +24,7 @@ class UsersMongooseDao {
                 lastName: document.lastName,
                 email: document.email,
                 age: document.age,
+                role: document.role
             }))
 
             return userDocument
@@ -33,9 +34,10 @@ class UsersMongooseDao {
         }
     }
 
-    async createUser(data) {
+    async createUser(data, isAdmin) {
         try {
-            const userDocument = await userSchema.create(data);
+            const role = isAdmin ? 'admin' : 'user';
+            const userDocument = await userSchema.create({ ...data, role });
             return {
                 id: userDocument._id,
                 firstName: userDocument.firstName,
@@ -64,6 +66,7 @@ class UsersMongooseDao {
                 lastName: userDocument.lastName,
                 email: userDocument.email,
                 age: userDocument.age,
+                role: userDocument.role,
                 password: userDocument.password
             }
         }
@@ -86,7 +89,8 @@ class UsersMongooseDao {
                 lastName: userDocument.lastName,
                 email: userDocument.email,
                 age: userDocument.age,
-                password: userDocument.password
+                password: userDocument.password,
+                role: userDocument.role
             }
         }
         catch (e) {

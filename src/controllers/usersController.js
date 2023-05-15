@@ -13,11 +13,12 @@ export const getUsers = async (req, res) => {
     }
 }
 
-export const createUser = async (req, res) => {
+export const createUserAdmin = async (req, res) => {
     try {
         const data = req.body
+        const isAdmin = true
         const manager = new UsersManager();
-        const newUser = await manager.createUser(data)
+        const newUser = await manager.createUser(data, isAdmin)
 
         return res.status(200).send({ status: "success", message: `Usuario ${newUser.email} creado`, payload: newUser })
     }
