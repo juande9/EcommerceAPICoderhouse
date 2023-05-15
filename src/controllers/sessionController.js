@@ -4,6 +4,10 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body
 
+        if (!email || !password) {
+            throw new Error("Error en el correo electrónico o la contraseña");
+        }
+
         const manager = new SessionManager()
         const foundUser = await manager.login(email, password, req)
 

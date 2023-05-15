@@ -17,9 +17,9 @@ class UsersManager {
         }
     }
 
-    async getUsers(params) {
+    async getUsers(params, req) {
         try {
-            return this.dao.getUsers(params);
+            return this.dao.getUsers(params, req);
         }
         catch (e) {
             return e

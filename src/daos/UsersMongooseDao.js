@@ -2,7 +2,7 @@ import userSchema from "./models/userSchema.js";
 
 class UsersMongooseDao {
 
-    async getUsers(params) {
+    async getUsers(params, req) {
         try {
             const { limit = 10, page } = params
 
@@ -11,8 +11,10 @@ class UsersMongooseDao {
                 page: page || 1,
             }
 
+            const isAdmin = req.session?.user?.role === "admin"
+
             const userDocument = await userSchema
-                .paginate({ enabled: true }, paginateOptions)
+                .paginate(isAdmin ? { enabled: true } : { enabled: true, role: "user" }, paginateOptions)
 
             if (userDocument.length === 0) {
                 throw new Error('No se encontraron usuarios.');
@@ -100,7 +102,7 @@ class UsersMongooseDao {
 
     async deleteUser(uid) {
         try {
-            const userDocument = await userSchema.updateOne({ _id: uid }, { enabled: false });
+            const userDocument = await userSchema.deleteMany();
             return {
                 id: userDocument._id,
                 email: userDocument.email

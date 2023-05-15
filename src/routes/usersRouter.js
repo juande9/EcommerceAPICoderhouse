@@ -4,11 +4,11 @@ import { createUserAdmin, deleteUser, getUserById, getUsers, updateUser } from '
 
 const usersRouter = Router()
 
-usersRouter.get("/", auth, getUsers)
+usersRouter.get("/", getUsers)
 usersRouter.get("/:uid", getUserById)
 usersRouter.post("/", auth, createUserAdmin)
-usersRouter.put("/:uid", updateUser)
-usersRouter.delete("/:uid", deleteUser)
+usersRouter.put("/:uid", auth, updateUser)
+usersRouter.delete("/:uid", auth, deleteUser)
 
 
 export default usersRouter
