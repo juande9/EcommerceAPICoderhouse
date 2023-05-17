@@ -4,10 +4,6 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body
 
-        if (!email || !password) {
-            throw new Error("Error en el correo electrónico o la contraseña");
-        }
-
         const manager = new SessionManager()
         const foundUser = await manager.login(email, password, req)
 
@@ -26,7 +22,7 @@ export const signup = async (req, res) => {
         const manager = new SessionManager();
         const newUser = await manager.signup(data)
 
-        res.status(201).send({ status: "success", message: `Usuario ${newUser.email} creado`, payload: newUser })
+        res.status(201).send({ status: "success", message: `Usuario ${newUser.email} creado`, payload: {...newUser, password: undefined }})
     }
     catch (e) {
         res.status(400).send({ status: "error", message: e.message });

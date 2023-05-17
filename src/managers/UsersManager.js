@@ -1,4 +1,5 @@
 import UsersMongooseDao from "../daos/UsersMongooseDao.js";
+import bcrypt from "bcrypt";
 
 class UsersManager {
 
@@ -10,7 +11,12 @@ class UsersManager {
 
     async createUser(data, isAdmin) {
         try {
-            return this.dao.createUser(data, isAdmin);
+            const payload = {
+                ...data,
+                password: await bcrypt.hash(data.password, 10)
+            }
+
+            return this.dao.createUser(payload, isAdmin);
         }
         catch (e) {
             return e

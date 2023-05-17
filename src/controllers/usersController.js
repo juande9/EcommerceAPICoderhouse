@@ -8,7 +8,6 @@ export const getUsers = async (req, res) => {
         res.status(200).send({ status: "success", payload: users.docs, ...users, docs: undefined });
     }
     catch (e) {
-        console.log(e)
         res.status(400).send({ status: "error", message: e.message });
     }
 }
@@ -19,8 +18,8 @@ export const createUserAdmin = async (req, res) => {
         const isAdmin = true
         const manager = new UsersManager();
         const newUser = await manager.createUser(data, isAdmin)
-
-        return res.status(200).send({ status: "success", message: `Usuario ${newUser.email} creado`, payload: newUser })
+        console.log(newUser)
+        return res.status(200).send({ status: "success", message: `Administrador "${newUser.email}" creado`, payload: payload: {...newUser, password: undefined }})
     }
     catch (e) {
         res.status(400).send({ status: "error", message: e.message });

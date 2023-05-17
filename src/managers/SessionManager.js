@@ -1,4 +1,5 @@
 import UsersManager from "../managers/UsersManager.js";
+import bcrypt from "bcrypt"
 
 class SessionManager {
 
@@ -12,13 +13,14 @@ class SessionManager {
             const manager = new UsersManager();
             const foundUser = await manager.getOneByEmail(email);
 
-            if (foundUser.password !== password) {
-                throw new Error("Usuario y contraseña no coinciden");
+            const isHashedPassword = await bcrypt.compare(password, foundUser.password)
+
+            if (isHashedPassword) {
+                req.session.user = { email, role: foundUser.role };
+                return foundUser
             }
 
-            req.session.user = { email, role: foundUser.role };
 
-            return foundUser;
         } catch (e) {
             return Promise.reject(e);
         }
@@ -28,7 +30,13 @@ class SessionManager {
         try {
 
             const manager = new UsersManager();
-            const newUser = await manager.createUser(data, false)
+
+            const payload = {
+                ...data,
+                password: await bcrypt.hash(data.password, 10)
+            }
+
+            const newUser = await manager.createUser(payload, false)
 
             return newUser
 
