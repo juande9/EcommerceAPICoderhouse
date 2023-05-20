@@ -12,6 +12,8 @@ import pmRouter from "./routes/ProductManagerRouter.js"
 import cartRouter from "./routes/CartRouter.js"
 import sessionRouter from "./routes/sessionRouter.js";
 import usersRouter from "./routes/usersRouter.js";
+import initializePassport from "./config/passport.config.js";
+import passport from "passport";
 
 void (async () => {
     try {
@@ -38,6 +40,10 @@ void (async () => {
             resave: true,
             saveUninitialized: true,
         }))
+
+        initializePassport()
+        app.use(passport.initialize())
+        app.use(passport.session())
 
         app.use('/api/products', pmRouter);
         app.use('/api/carts', cartRouter);

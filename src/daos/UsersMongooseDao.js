@@ -36,6 +36,22 @@ class UsersMongooseDao {
         }
     }
 
+    async getUsersPassport() {
+
+        let userDocument = await userSchema.find({})
+
+        userDocument = userDocument.map(document => ({
+            id: document._id,
+            firstName: document.firstName,
+            lastName: document.lastName,
+            email: document.email,
+            age: document.age,
+            role: document.role
+        }))
+
+        return userDocument
+    }
+
     async createUser(data, isAdmin) {
         try {
             const role = isAdmin ? 'admin' : 'user';
@@ -80,6 +96,8 @@ class UsersMongooseDao {
     async getOneByEmail(email) {
         try {
             const userDocument = await userSchema.findOne({ email, enabled: true });
+
+            console.log(email)
 
             if (!userDocument) {
                 return Promise.reject(new Error("Usuario no existe"))

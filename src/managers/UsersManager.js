@@ -23,6 +23,16 @@ class UsersManager {
         }
     }
 
+    async getUsersPassport(params, req) {
+        try {
+            return this.dao.getUsersPassport(params, req);
+        }
+        catch (e) {
+            return e
+        }
+    }
+
+
     async getUsers(params, req) {
         try {
             return this.dao.getUsers(params, req);
