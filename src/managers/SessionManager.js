@@ -1,5 +1,5 @@
 import UsersManager from "../managers/UsersManager.js";
-import bcrypt from "bcrypt"
+import { isValidPassword } from "../helpers/index.js";
 
 class SessionManager {
 
@@ -7,19 +7,19 @@ class SessionManager {
         try {
 
             if (!email || !password) {
-                throw new Error("Error en mail y password")
+                throw new Error('Invalid email or password format')
             }
 
             const manager = new UsersManager();
-            const foundUser = await manager.getOneByEmail(email);
+            const user = await manager.getOneByEmail(email);
+            const isHashedPassword = await isValidPassword(password, user.password)
 
-            const isHashedPassword = await bcrypt.compare(password, foundUser.password)
-
-            if (isHashedPassword) {
-                req.session.user = { email, role: foundUser.role };
-                return foundUser
+            if (!isHashedPassword) {
+                throw new Error ('Incorrect Password.')
             }
 
+            req.session.user = { email, role: user.role };
+            return user
 
         } catch (e) {
             return Promise.reject(e);
@@ -28,15 +28,8 @@ class SessionManager {
 
     async signup(data) {
         try {
-
             const manager = new UsersManager();
-
-            const payload = {
-                ...data,
-                password: await bcrypt.hash(data.password, 10)
-            }
-
-            const newUser = await manager.createUser(payload, false)
+            const newUser = await manager.createUser(data, false)
 
             return newUser
 
