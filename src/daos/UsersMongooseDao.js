@@ -97,8 +97,6 @@ class UsersMongooseDao {
         try {
             const userDocument = await userSchema.findOne({ email, enabled: true });
 
-            console.log(email)
-
             if (!userDocument) {
                 return Promise.reject(new Error("Usuario no existe"))
             }
