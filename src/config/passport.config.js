@@ -20,7 +20,8 @@ const initializePassport = () => {
                 }
 
                 let newUser = await manager.createUser(req.body)
-                return done(null, newUser)
+                done(null, newUser)
+                return newUser
             }
             catch (e) {
                 done('Error al obtener el usuario' + e)
@@ -39,7 +40,7 @@ const initializePassport = () => {
                     return done(null, false)
                 }
 
-                if (!isValidPassword(user, password)) return done(null, false)
+                if (!isValidPassword(user.email, password)) return done(null, false)
 
                 return done(null, user)
             }

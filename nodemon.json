@@ -7,7 +7,7 @@
     "watch":[
         "src/*"
     ],
-    "exec": "node --inspect src/app.js",
+    "exec": "node --inspect src/index.js",
     "legacyWatch": true,
     "ext": "js, handlebars"
 }

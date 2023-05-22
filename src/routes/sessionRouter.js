@@ -8,7 +8,8 @@ sessionRouter.post("/login", login)
 sessionRouter.post("/logout", logout)
 sessionRouter.post("/signup", signup)
 sessionRouter.post('/registerPassport', passport.authenticate('register', { failureRedirect: 'failRegister' }), async (req, res) => {
-    res.send({ status: 'success', message: `User Registered` })
+    const newUser = req.user
+    res.status(201).send({ status: 'success', message: `${newUser.email} Registered`, payload: { ...newUser, password: undefined } })
 })
 sessionRouter.post('/loginPassport', passport.authenticate('login', { failureRedirect: 'failRegister' }), async (req, res) => {
     if (!req.user) res.status(400).send({ status: 'error', message: 'Invalid credentials' })
@@ -16,7 +17,8 @@ sessionRouter.post('/loginPassport', passport.authenticate('login', { failureRed
     req.session.user = {
         email: req.user.email,
     }
-    res.send({ status: 'success', message: `${user.email} log in` })
+
+    res.send({ status: 'success', message: `${req.user.email} log in` })
 })
 sessionRouter.get('/failRegister', async (req, res) => {
     console.log('Failed registration')
