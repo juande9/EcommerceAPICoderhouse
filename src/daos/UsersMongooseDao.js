@@ -52,8 +52,12 @@ class UsersMongooseDao {
         return userDocument
     }
 
-    async createUser(data, role) {
-        const userDocument = await userSchema.create({ ...data, role });
+    async createUser(dto) {
+        const userDocument = await userSchema.create(dto);
+
+        if (!userDocument) {
+            throw new Error('User creating problem');
+        }
 
         return {
             id: userDocument._id,

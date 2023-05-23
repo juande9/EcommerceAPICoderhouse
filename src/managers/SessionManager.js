@@ -1,5 +1,5 @@
 import UsersManager from "../managers/UsersManager.js";
-import { isValidPassword } from "../helpers/index.js";
+import { isValidPassword, generateToken } from "../helpers/index.js";
 
 class SessionManager {
 
@@ -22,12 +22,31 @@ class SessionManager {
 
     }
 
-    async signup(data) {
+    async loginJwt(email, password) {
+
+        if (!email || !password) {
+            throw new Error('Invalid email or password format')
+        }
 
         const manager = new UsersManager();
-        const newUser = await manager.createUser(data, false)
-        return newUser
+        const user = await manager.getOneByEmail(email);
+        const isHashedPassword = await isValidPassword(password, user.password)
 
+        if (!isHashedPassword) {
+            throw new Error('Incorrect Password.')
+        }
+
+        const accessToken = await generateToken(user)
+        
+        return accessToken
+
+    }
+
+    async signup(dto) {
+        const manager = new UsersManager();
+        const newUser = await manager.createUser(dto, false)
+
+        return newUser
     }
 
     async logout(req) {

@@ -25,15 +25,33 @@ export const loginPassport = async (req, res) => {
     res.send({ status: 'success', message: `${req.user.email} log in` })
 }
 
+export const loginJwt = async (req, res, next) => {
+    try {
+        const { email, password } = req.body
+
+        const manager = new SessionManager()
+        const foundUser = await manager.loginJwt(email, password)
+
+        res.status(201).send({ status: "success", message: `${email} logueado con éxito`, accessToken: foundUser });
+
+    }
+    catch (e) {
+        next(e)
+    }
+}
+
 
 export const signup = async (req, res, next) => {
     try {
         await userDataValidation.parseAsync(req.body);
-        const data = req.body
+        const dto = req.body
 
         const manager = new SessionManager();
-        const newUser = await manager.signup(data)
-        res.status(201).send({ status: "success", message: `Usuario ${newUser.email} creado`, payload: { ...newUser, password: undefined } })
+        const newUser = await manager.signup(dto)
+        res.status(201).send({
+            status: 'success', message: `${newUser.email} Registered`,
+            payload: { ...newUser, password: undefined }
+        })
     }
     catch (e) {
         next(e)
@@ -43,11 +61,11 @@ export const signup = async (req, res, next) => {
 export const signupPassport = async (req, res, next) => {
     try {
         await userDataValidation.parseAsync(req.body);
-        const data = req.body
+        const dto = req.body
 
         res.status(201).send({
-            status: 'success', message: `${data.email} Registered`,
-            payload: { ...data, password: undefined }
+            status: 'success', message: `${dto.email} Registered`,
+            payload: { ...dto, password: undefined }
         })
     }
     catch (e) {
@@ -55,6 +73,27 @@ export const signupPassport = async (req, res, next) => {
     }
 }
 
+export const signupJwt = async (req, res, next) => {
+    try {
+        await userDataValidation.parseAsync(req.body);
+        const dto = req.body
+
+        const manager = new SessionManager();
+        const newUser = await manager.signup(dto)
+
+        res.status(201).send({
+            status: 'success', message: `${newUser.email} Registered`,
+            payload: { ...newUser, password: undefined }
+        })
+    }
+    catch (e) {
+        next(e)
+    }
+}
+
+export const currentJwt = async (req, res) => {
+    res.status(200).send({ status: 'Success', payload: req.user });
+}
 
 
 export const logout = (req, res) => {
