@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+/* import dotenv from "dotenv";
 dotenv.config();
 import passport from "passport";
 import local from 'passport-local'
@@ -98,4 +98,4 @@ const initializePassport = () => {
     })
 }
 
-export default initializePassport
+export default initializePassport */

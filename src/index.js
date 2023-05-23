@@ -7,15 +7,13 @@ import { resolve } from 'path';
 import MongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import { engine } from 'express-handlebars';
 
 import pmRouter from "./routes/ProductManagerRouter.js"
 import cartRouter from "./routes/CartRouter.js"
 import sessionRouter from "./routes/sessionRouter.js";
 import usersRouter from "./routes/usersRouter.js";
-import initializePassport from "./config/passport.config.js";
 import errorHandler from "./middleware/errorHandler.js";
-import passport from "passport";
+
 
 void (async () => {
     try {
@@ -42,18 +40,6 @@ void (async () => {
             resave: true,
             saveUninitialized: true,
         }))
-
-        const viewsPath = resolve('src/views');
-        app.engine('handlebars', engine({
-          layoutsDir: `${viewsPath}/layouts`,
-          defaultLayout: `${viewsPath}/layouts/main.handlebars`,
-        }));
-        app.set('view engine', 'handlebars');
-        app.set('views', viewsPath);
-
-        initializePassport()
-        app.use(passport.initialize())
-        app.use(passport.session())
 
         app.use('/api/products', pmRouter);
         app.use('/api/carts', cartRouter);

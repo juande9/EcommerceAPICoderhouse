@@ -3,33 +3,33 @@ import { isValidPassword, generateToken } from "../helpers/index.js";
 
 class SessionManager {
 
-    async login(email, password, req) {
-
-        if (!email || !password) {
-            throw new Error('Invalid email or password format')
-        }
-
-        const manager = new UsersManager();
-        const user = await manager.getOneByEmail(email);
-        const isHashedPassword = await isValidPassword(password, user.password)
-
-        if (!isHashedPassword) {
-            throw new Error('Incorrect Password.')
-        }
-
-        req.session.user = { email, role: user.role };
-        return user
-
-    }
+    /*     async login(email, password, req) {
+    
+            if (!email || !password) {
+                throw new Error('Invalid email or password format')
+            }
+    
+            const manager = new UsersManager();
+            const user = await manager.getOneByEmail(email);
+            const isHashedPassword = await isValidPassword(password, user.password)
+    
+            if (!isHashedPassword) {
+                throw new Error('Incorrect Password.')
+            }
+    
+            req.session.user = { email, role: user.role };
+            return user
+    
+        } */
 
     async loginJwt(email, password) {
-
-        if (!email || !password) {
-            throw new Error('Invalid email or password format')
-        }
-
         const manager = new UsersManager();
         const user = await manager.getOneByEmail(email);
+
+        if (user instanceof Error) {
+            throw user
+        }
+
         const isHashedPassword = await isValidPassword(password, user.password)
 
         if (!isHashedPassword) {
@@ -37,7 +37,6 @@ class SessionManager {
         }
 
         const accessToken = await generateToken(user)
-        
         return accessToken
 
     }
@@ -45,11 +44,10 @@ class SessionManager {
     async signup(dto) {
         const manager = new UsersManager();
         const newUser = await manager.createUser(dto, false)
-
         return newUser
     }
 
-    async logout(req) {
+/*     async logout(req) {
         try {
 
             req.session.destroy(err => {
@@ -61,7 +59,7 @@ class SessionManager {
         } catch (e) {
             return e
         }
-    }
+    } */
 
 }
 
