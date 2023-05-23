@@ -14,9 +14,11 @@ class UsersManager {
             const dto = {
                 ...data,
                 password: await createHash(data.password, 10)
-              }
-          
-            return this.dao.createUser(dto, isAdmin);
+            }
+
+            const role = isAdmin ? 'admin' : 'user';
+
+            return this.dao.createUser(dto, role);
         }
         catch (e) {
             return e

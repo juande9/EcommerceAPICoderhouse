@@ -13,6 +13,7 @@ import cartRouter from "./routes/CartRouter.js"
 import sessionRouter from "./routes/sessionRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import initializePassport from "./config/passport.config.js";
+import errorHandler from "./middleware/errorHandler.js";
 import passport from "passport";
 
 void (async () => {
@@ -49,6 +50,7 @@ void (async () => {
         app.use('/api/carts', cartRouter);
         app.use('/api/session', sessionRouter);
         app.use('/api/users', usersRouter)
+        app.use(errorHandler)
 
         app.listen(SERVER_PORT, () => {
             console.log(`Conectado al server en el puerto: ${SERVER_PORT}`);

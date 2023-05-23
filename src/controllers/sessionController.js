@@ -1,6 +1,7 @@
 import SessionManager from "../managers/SessionManager.js";
+import userDataValidation from "../middleware/userValidation.js";
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
     try {
         const { email, password } = req.body
 
@@ -11,48 +12,54 @@ export const login = async (req, res) => {
 
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e)
     }
 }
 
 export const loginPassport = async (req, res) => {
     if (!req.user) res.status(400).send({ status: 'error', message: 'Invalid credentials' })
-
     req.session.passport = {
         email: req.user.email,
+        role: req.user.role,
     }
-
     res.send({ status: 'success', message: `${req.user.email} log in` })
 }
 
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
     try {
+        await userDataValidation.parseAsync(req.body);
         const data = req.body
+
         const manager = new SessionManager();
         const newUser = await manager.signup(data)
-
         res.status(201).send({ status: "success", message: `Usuario ${newUser.email} creado`, payload: { ...newUser, password: undefined } })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e)
     }
 }
 
-export const signupPassport = async (req, res) => {
+export const signupPassport = async (req, res, next) => {
+    try {
+        await userDataValidation.parseAsync(req.body);
+        const data = req.body
 
-    const newUser = req.user
-    res.status(201).send({
-        status: 'success', message: `${newUser.email} Registered`,
-        payload: { ...newUser, password: undefined }
-    })
+        res.status(201).send({
+            status: 'success', message: `${data.email} Registered`,
+            payload: { ...data, password: undefined }
+        })
+    }
+    catch (e) {
+        next(e)
+    }
 }
+
 
 
 export const logout = (req, res) => {
     try {
         req.session.destroy(err => {
-            req.logout(); // Cerrar sesión en Passport
             if (!err) {
                 return res.status(201).send({ status: "success", message: "Logout successful." });
             }

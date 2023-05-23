@@ -1,4 +1,5 @@
 import ProductManager from "../managers/ProductManager.js";
+import { idValidationProduct } from "../middleware/idValidation.js";
 
 export const getProducts = async (req, res) => {
     try {
@@ -26,47 +27,47 @@ export const addProduct = async (req, res) => {
     }
 };
 
-export const getProductById = async (req, res) => {
+export const getProductById = async (req, res, next) => {
     try {
+        await idValidationProduct.parseAsync(req.params);
+        const { pid } = req.params
+
         const manager = new ProductManager();
-        const { pid } = req.params;
-
-        if (pid.length !== 24) throw new Error("El ID ingresado es inválido");
-
         const productFound = await manager.getProductById(pid);
         res.status(200).send({ status: "success", payload: productFound });
 
     } catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e)
     }
 };
 
-export const updateProduct = async (req, res) => {
+export const updateProduct = async (req, res, next) => {
     try {
+        await idValidationProduct.parseAsync(req.params);
+        const { pid } = req.params
+
         const manager = new ProductManager();
         const newData = req.body
-        const { pid } = req.params
-        if (pid.length !== 24) throw new Error("El ID ingresado es inválido");
 
         const productUpdated = await manager.updateProduct(pid, newData);
-        res.status(200).send({ status: "success", message: "Producto modificado" })
+        res.status(200).send({ status: "success", message: `${productUpdated.title} ha sido modificado`, payload: productUpdated })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e)
     }
 }
 
-export const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res, next) => {
     try {
-        const manager = new ProductManager();
+        await idValidationProduct.parseAsync(req.params);
         const { pid } = req.params
-        if (pid.length !== 24) throw new Error("El ID ingresado es inválido");
 
+        const manager = new ProductManager();
         const productDeleted = await manager.deleteProduct(pid);
-        res.status(200).send({ status: "success", message: `Producto ${pid} eliminado` })
+        res.status(200).send({ status: "success", message: `Producto ${productDeleted.title} eliminado` })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e)
     }
 }
 

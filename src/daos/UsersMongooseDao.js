@@ -17,7 +17,7 @@ class UsersMongooseDao {
                 .paginate(isAdmin ? { enabled: true } : { enabled: true, role: "user" }, paginateOptions)
 
             if (userDocument.length === 0) {
-                throw new Error('No se encontraron usuarios.');
+                throw new Error('Users not Found.');
             }
 
             userDocument.docs = userDocument.docs.map(document => ({
@@ -52,73 +52,59 @@ class UsersMongooseDao {
         return userDocument
     }
 
-    async createUser(data, isAdmin) {
-        try {
-            const role = isAdmin ? 'admin' : 'user';
-            const userDocument = await userSchema.create({ ...data, role });
-            return {
-                id: userDocument._id,
-                firstName: userDocument.firstName,
-                lastName: userDocument.lastName,
-                email: userDocument.email,
-                age: userDocument.age,
-                password: userDocument.password
-            }
-        }
-        catch (e) {
-            return e
+    async createUser(data, role) {
+        const userDocument = await userSchema.create({ ...data, role });
+
+        return {
+            id: userDocument._id,
+            firstName: userDocument.firstName,
+            lastName: userDocument.lastName,
+            email: userDocument.email,
+            age: userDocument.age,
+            password: userDocument.password
         }
     }
 
     async getUserById(uid) {
-        try {
-            const userDocument = await userSchema.findOne({ _id: uid, enabled: true });
+        const userDocument = await userSchema.findOne({ _id: uid, enabled: true })
 
-            if (!userDocument) {
-                return Promise.reject(new Error("Usuario no existe"))
-            }
+        if (!userDocument) {
+            throw new Error('User not found');
+        }
 
-            return {
-                id: userDocument._id,
-                firstName: userDocument.firstName,
-                lastName: userDocument.lastName,
-                email: userDocument.email,
-                age: userDocument.age,
-                role: userDocument.role,
-                password: userDocument.password
-            }
+        return {
+            id: userDocument._id,
+            firstName: userDocument.firstName,
+            lastName: userDocument.lastName,
+            email: userDocument.email,
+            age: userDocument.age,
+            role: userDocument.role,
+            password: userDocument.password
         }
-        catch (e) {
-            return e
-        }
+
     }
 
     async getOneByEmail(email) {
-        try {
-            const userDocument = await userSchema.findOne({ email, enabled: true });
+        const userDocument = await userSchema.findOne({ email, enabled: true });
 
-            if (!userDocument) {
-                return Promise.reject(new Error("Usuario no existe"))
-            }
-
-            return {
-                id: userDocument._id,
-                firstName: userDocument.firstName,
-                lastName: userDocument.lastName,
-                email: userDocument.email,
-                age: userDocument.age,
-                password: userDocument.password,
-                role: userDocument.role
-            }
+        if (!userDocument) {
+            return new Error("User not found")
         }
-        catch (e) {
-            return e
+
+        return {
+            id: userDocument._id,
+            firstName: userDocument.firstName,
+            lastName: userDocument.lastName,
+            email: userDocument.email,
+            age: userDocument.age,
+            password: userDocument.password,
+            role: userDocument.role
         }
     }
 
     async deleteUser(uid) {
         try {
-            const userDocument = await userSchema.deleteMany();
+            const userDocument = await userSchema.deleteOne(uid);
             return {
                 id: userDocument._id,
                 email: userDocument.email
@@ -135,7 +121,7 @@ class UsersMongooseDao {
                 , data, { new: true });
 
             if (!userDocument) {
-                throw new Error("Usuario no existe")
+                throw new Error('User not found')
             }
             return {
                 id: userDocument._id,

@@ -76,23 +76,22 @@ class ProductMongooseDao {
   }
 
   async updateProduct(uid, updatedData) {
-    try {
-      return await productShema.updateOne({ _id: uid }, updatedData);
-    }
-    catch (e) {
-      return e
+    const productDocument = await productShema.updateOne({ _id: uid }, updatedData);
+
+    if (!productDocument) {
+      throw new Error('Product not found')
     }
   }
+
 
   async deleteProduct(uid) {
-    try {
-      return await productShema.updateOne({ _id: uid }, { enabled: false });
-    }
-    catch (e) {
-      return e
-    }
-  }
+    const productDocument = await productShema.deleteOne({ _id: uid, enabled: true });
 
+    if (productDocument.deletedCount === 0) {
+      throw new Error('Product not found');
+    }
+
+  }
 }
 
 export default ProductMongooseDao

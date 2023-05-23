@@ -1,4 +1,5 @@
 import CartManager from "../managers/CartManager.js";
+import { idValidationCart, idValidationProduct } from "../middleware/idValidation.js";
 
 export const createCart = async (req, res) => {
     try {
@@ -30,44 +31,47 @@ export const getCarts = async (req, res) => {
 
 export const getCartById = async (req, res) => {
     try {
-        const manager = new CartManager();
-        const { cid } = req.params
 
-        if (cid.length !== 24) throw new Error("El ID ingresado es inválido");
-        const cartFound = await manager.getCartById(cid);
+        await idValidationCart.parseAsync(req.params);
+        const { uid } = req.params
+
+        const manager = new CartManager();
+        const cartFound = await manager.getCartById(uid);
         res.status(200).send({ status: "success", payload: cartFound })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e);
     }
 }
 
 export const addProduct = async (req, res) => {
     try {
-        const manager = new CartManager();
+        await idValidationCart.parseAsync(req.params);
+        await idValidationProduct.parseAsync(req.params)
         const { cid, pid } = req.params
+
+        const manager = new CartManager();
         const cartUpdated = await manager.addProduct(cid, pid);
 
-        res.status(200).send({
-            status: "success",
-            message: `Producto agregado correctamente.`
-        })
+        res.status(200).send({ status: "success", message: `Producto agregado correctamente.` })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e);
     }
 }
 
 export const deleteProduct = async (req, res) => {
     try {
-        const manager = new CartManager();
+        await idValidationCart.parseAsync(req.params);
         const { cid, pid } = req.params
+
+        const manager = new CartManager();
         const cartDeleted = await manager.deleteProduct(cid, pid);
 
         res.status(200).send({ status: "success", message: `Producto eliminado correctamente.` })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e);
     }
 }
 

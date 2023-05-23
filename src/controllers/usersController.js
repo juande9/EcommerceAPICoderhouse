@@ -1,4 +1,6 @@
 import UsersManager from "../managers/UsersManager.js";
+import { idValidationUser } from "../middleware/idValidation.js";
+import userDataValidation from "../middleware/userValidation.js";
 
 export const getUsers = async (req, res) => {
     try {
@@ -8,67 +10,71 @@ export const getUsers = async (req, res) => {
         res.status(200).send({ status: "success", payload: users.docs, ...users, docs: undefined });
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e);
     }
 }
 
-export const createUserAdmin = async (req, res) => {
+export const createUserAdmin = async (req, res, next) => {
     try {
+        await userDataValidation.parseAsync(req.body);
         const data = req.body
+
         const isAdmin = true
         const manager = new UsersManager();
         const newUser = await manager.createUser(data, isAdmin)
-        return res.status(200).send({ status: "success", message: `Administrador "${newUser.email}" creado`, payload: {...newUser, password: undefined }})
+        return res.status(200).send({ status: "success", message: `Administrador "${newUser.email}" creado`, payload: { ...newUser, password: undefined } })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e);
     }
 }
 
-export const getUserById = async (req, res) => {
+export const getUserById = async (req, res, next) => {
     try {
+
+        await idValidationUser.parseAsync(req.params);
+        const { uid } = req.params
+
         const manager = new UsersManager();
-        const { uid } = req.params;
-
-        if (uid.length !== 24) throw new Error("El ID ingresado es inválido");
         const userFound = await manager.getUserById(uid);
-
-        if (!userFound || Object.keys(userFound).length === 0) {
-            throw new Error("No se encontró ningún usuario con el ID proporcionado");
-        }
 
         res.status(200).send({ status: "success", payload: userFound });
 
     } catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e);
     }
 }
 
-export const updateUser = async (req, res) => {
+export const updateUser = async (req, res, next) => {
     try {
-        const manager = new UsersManager();
-        const { uid } = req.params
+
+        await idValidationUser.parseAsync(req.body);
         const newData = req.body
-        if (uid.length !== 24) throw new Error("El ID ingresado es inválido");
+        
+        await idValidationUser.parseAsync(req.params);
+        const { uid } = req.params
+
+        const manager = new UsersManager();
 
         const userUpdated = await manager.updateUser(uid, newData);
         res.status(200).send({ status: "success", message: `${userUpdated.email} modificado.` })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e);
     }
 }
 
-export const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res, next) => {
     try {
-        const manager = new UsersManager();
-        const { uid } = req.params
-        if (uid.length !== 24) throw new Error("El ID ingresado es inválido");
 
+        await idValidationUser.parseAsync(req.params);
+        const { uid } = req.params
+
+        const manager = new UsersManager();
         const userDeleted = await manager.deleteUser(uid);
         res.status(200).send({ status: "success", message: `Usuario ${userDeleted.email} eliminado` })
     }
     catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
+        next(e)
     }
 }
