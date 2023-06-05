@@ -1,5 +1,5 @@
-import cartSchema from "./models/cartSchema.js"
-import productShema from "./models/productShema.js";
+import cartSchema from "../models/cartSchema.js"
+import productShema from "../models/productShema.js";
 
 class CartMongooseDao {
 

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose"
-import mongoosePaginate from "mongoose-paginate-v2"
+import paginate from "mongoose-paginate-v2"
 
 const usersCollection = "users";
 
@@ -9,9 +9,10 @@ const userSchema = new Schema({
     email: { type: String, required: true, unique: true },
     age: { type: Number, required: true },
     password: { type: String },
-    role: { type: String, enum: ["admin", "user"], default: "user" },
+    role: { type: mongoose.Schema.Types.ObjectId, index: true, ref: 'roles' },
+    isAdmin: { type: Boolean, default: false },
     enabled: { type: Boolean, default: true }
 });
 
-userSchema.plugin(mongoosePaginate)
+userSchema.plugin(paginate)
 export default mongoose.model(usersCollection, userSchema);

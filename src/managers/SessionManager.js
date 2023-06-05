@@ -1,28 +1,9 @@
 import UsersManager from "../managers/UsersManager.js";
-import { isValidPassword, generateToken } from "../helpers/index.js";
+import { isValidPassword, generateToken } from "../shared/index.js";
 
 class SessionManager {
 
-    async login(email, password, req) {
-
-        if (!email || !password) {
-            throw new Error('Invalid email or password format')
-        }
-
-        const manager = new UsersManager();
-        const user = await manager.getOneByEmail(email);
-        const isHashedPassword = await isValidPassword(password, user.password)
-
-        if (!isHashedPassword) {
-            throw new Error('Incorrect Password.')
-        }
-
-        req.session.user = { email, role: user.role };
-        return user
-
-    }
-
-    async loginJwt(email, password) {
+    async login(email, password) {
 
         if (!email || !password) {
             throw new Error('Invalid email or password format')
@@ -37,9 +18,7 @@ class SessionManager {
         }
 
         const accessToken = await generateToken(user)
-        
         return accessToken
-
     }
 
     async signup(dto) {

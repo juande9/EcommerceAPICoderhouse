@@ -1,5 +1,5 @@
 import UsersMongooseDao from "../daos/UsersMongooseDao.js";
-import { createHash } from "../helpers/index.js";
+import { createHash } from "../shared/index.js";
 
 class UsersManager {
 
@@ -24,16 +24,6 @@ class UsersManager {
             return e
         }
     }
-
-    async getUsersPassport(params, req) {
-        try {
-            return this.dao.getUsersPassport(params, req);
-        }
-        catch (e) {
-            return e
-        }
-    }
-
 
     async getUsers(params, req) {
         try {

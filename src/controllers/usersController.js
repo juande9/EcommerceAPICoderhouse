@@ -5,8 +5,7 @@ import userDataValidation from "../middleware/userValidation.js";
 export const getUsers = async (req, res) => {
     try {
         const manager = new UsersManager();
-        const params = req.query
-        const users = await manager.getUsers(params, req)
+        const users = await manager.getUsers(req.query, req)
         res.status(200).send({ status: "success", payload: users.docs, ...users, docs: undefined });
     }
     catch (e) {

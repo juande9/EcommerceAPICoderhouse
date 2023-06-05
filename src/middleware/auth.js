@@ -2,11 +2,12 @@ import jwt from "jsonwebtoken";
 
 const auth = (req, res, next) =>
 {
+    console.log(req.headers)
     const authHeader = req.headers.authorization;
 
     if (!authHeader)
     {
-        return res.status(401).send({ message: 'Empty authentication header!'})
+        return res.status(401).send({ message: 'Empty authentication header'})
     }
 
     const token = authHeader.split(' ')[1]

@@ -8,6 +8,5 @@
         "src/*"
     ],
     "exec": "node --inspect src/index.js",
-    "legacyWatch": true,
     "ext": "js, handlebars"
 }

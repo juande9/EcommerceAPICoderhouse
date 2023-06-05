@@ -1,4 +1,4 @@
-import userSchema from "./models/userSchema.js";
+import userSchema from "../models/userSchema.js";
 
 class UsersMongooseDao {
 
@@ -36,21 +36,6 @@ class UsersMongooseDao {
         }
     }
 
-    async getUsersPassport() {
-
-        let userDocument = await userSchema.find({})
-
-        userDocument = userDocument.map(document => ({
-            id: document._id,
-            firstName: document.firstName,
-            lastName: document.lastName,
-            email: document.email,
-            age: document.age,
-            role: document.role
-        }))
-
-        return userDocument
-    }
 
     async createUser(dto) {
         const userDocument = await userSchema.create(dto);

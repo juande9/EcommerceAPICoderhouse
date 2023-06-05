@@ -1,4 +1,4 @@
-import productShema from "./models/productShema.js";
+import productShema from "../models/productShema.js";
 
 class ProductMongooseDao {
 

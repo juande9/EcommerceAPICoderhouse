@@ -4,18 +4,15 @@ dotenv.config()
 import express from "express"
 import mongoose from "mongoose";
 import { resolve } from 'path';
-import MongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
-import session from "express-session";
 import { engine } from 'express-handlebars';
 
 import pmRouter from "./routes/ProductManagerRouter.js"
 import cartRouter from "./routes/CartRouter.js"
 import sessionRouter from "./routes/sessionRouter.js";
 import usersRouter from "./routes/usersRouter.js";
-import initializePassport from "./config/passport.config.js";
 import errorHandler from "./middleware/errorHandler.js";
-import passport from "passport";
+import roleRouter from "./routes/roleRouter.js";
 
 void (async () => {
     try {
@@ -33,15 +30,6 @@ void (async () => {
         app.use(express.urlencoded({ extended: true }));
         app.use(express.static(resolve('src/public')));
         app.use(cookieParser(process.env.COOKIE_PASS))
-        app.use(session({
-            store: MongoStore.create({
-                mongoUrl: process.env.MONGO_DB_URI,
-                ttl: 15,
-            }),
-            secret: process.env.SESSION_SECRET,
-            resave: true,
-            saveUninitialized: true,
-        }))
 
         const viewsPath = resolve('src/views');
         app.engine('handlebars', engine({
@@ -51,14 +39,12 @@ void (async () => {
         app.set('view engine', 'handlebars');
         app.set('views', viewsPath);
 
-        initializePassport()
-        app.use(passport.initialize())
-        app.use(passport.session())
-
         app.use('/api/products', pmRouter);
         app.use('/api/carts', cartRouter);
+        app.use('/api/roles', roleRouter)
         app.use('/api/session', sessionRouter);
         app.use('/api/users', usersRouter)
+        
         app.use(errorHandler)
 
         app.listen(SERVER_PORT, () => {
