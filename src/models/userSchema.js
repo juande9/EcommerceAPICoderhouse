@@ -11,6 +11,7 @@ const userSchema = new Schema({
     password: { type: String },
     role: { type: Schema.Types.ObjectId, index: true, ref: 'roles' },
     isAdmin: { type: Boolean, default: false },
+    cart: { type: Schema.Types.ObjectId, index: true, ref: 'cart' },
     enabled: { type: Boolean, default: true }
 });
 
