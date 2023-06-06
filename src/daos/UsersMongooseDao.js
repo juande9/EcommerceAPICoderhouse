@@ -1,8 +1,9 @@
 import userSchema from "../models/userSchema.js";
+import roleSchema from "../models/roleSchema.js";
 
 class UsersMongooseDao {
 
-    async getUsers(params, req) {
+    async getUsers(params) {
         try {
             const { limit = 10, page } = params
 
@@ -11,10 +12,8 @@ class UsersMongooseDao {
                 page: page || 1,
             }
 
-            const isAdmin = req.session?.user?.role === "admin"
-
             const userDocument = await userSchema
-                .paginate(isAdmin ? { enabled: true } : { enabled: true, role: "user" }, paginateOptions)
+                .paginate({ enabled: true }, paginateOptions)
 
             if (userDocument.length === 0) {
                 throw new Error('Users not Found.');
@@ -26,7 +25,9 @@ class UsersMongooseDao {
                 lastName: document.lastName,
                 email: document.email,
                 age: document.age,
-                role: document.role
+                password: document.password,
+                role: document.role,
+                isAdmin: document.isAdmin
             }))
 
             return userDocument
@@ -50,7 +51,9 @@ class UsersMongooseDao {
             lastName: userDocument.lastName,
             email: userDocument.email,
             age: userDocument.age,
-            password: userDocument.password
+            password: userDocument.password,
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin
         }
     }
 
@@ -67,8 +70,9 @@ class UsersMongooseDao {
             lastName: userDocument.lastName,
             email: userDocument.email,
             age: userDocument.age,
+            password: userDocument.password,
             role: userDocument.role,
-            password: userDocument.password
+            isAdmin: userDocument.isAdmin
         }
 
     }
@@ -87,7 +91,8 @@ class UsersMongooseDao {
             email: userDocument.email,
             age: userDocument.age,
             password: userDocument.password,
-            role: userDocument.role
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin
         }
     }
 
@@ -104,10 +109,22 @@ class UsersMongooseDao {
         }
     }
 
+    async assignRole(uid, rid) {
+
+        const role = await roleSchema.findOne({ _id: rid });
+        const newRole = { $set: { role } }
+        const userDocument = await userSchema.findOneAndUpdate({ _id: uid }, newRole, { new: true });
+
+        if (!userDocument) {
+            throw new Error('User not found')
+        }
+
+    }
+
     async updateUser(uid, data) {
         try {
-            const userDocument = await userSchema.findOneAndUpdate({ _id: uid, enabled: true }
-                , data, { new: true });
+
+            const userDocument = await userSchema.findOneAndUpdate({ _id: uid }, data, { new: true });
 
             if (!userDocument) {
                 throw new Error('User not found')
@@ -118,7 +135,9 @@ class UsersMongooseDao {
                 lastName: userDocument.lastName,
                 email: userDocument.email,
                 age: userDocument.age,
-                password: userDocument.password
+                password: userDocument.password,
+                role: userDocument.role,
+                isAdmin: userDocument.isAdmin
             }
         }
         catch (e) {

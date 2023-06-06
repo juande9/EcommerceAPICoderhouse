@@ -25,7 +25,7 @@ class CartMongooseDao {
         try {
             const cartDocument = await cartSchema.create(data)
             return {
-                _id: cartDocument._id,
+                id: cartDocument._id,
                 cart: cartDocument.cart,
                 enabled: cartDocument.enabled,
             }
@@ -41,10 +41,10 @@ class CartMongooseDao {
 
             if (!cartDocument) {
                 return Promise.reject(new Error(`No se encontraron carritos con id: ${cid}`))
-              }
+            }
 
             return {
-                _id: cartDocument._id,
+                id: cartDocument._id,
                 cart: cartDocument.cart,
                 enabled: cartDocument.enabled,
             }
@@ -55,42 +55,37 @@ class CartMongooseDao {
     }
 
     async addProduct(cid, pid) {
-        try {
-            const productDocument = await productShema.findOne({ _id: pid });
+        const productDocument = await productShema.findOne({ _id: pid });
 
-            if (!productDocument) {
-                return Promise.reject(new Error("Producto no encontrado"));
-              }
-
-            const updateProdQuantity = await cartSchema.findOneAndUpdate(
-                { _id: cid, "cart.product": productDocument._id },
-                { $inc: { "cart.$.quantity": 1 } },
-                { new: true }
-            );
-
-            if (!updateProdQuantity) {
-                await cartSchema.updateOne(
-                    { _id: cid },
-                    { $push: { cart: { product: productDocument._id, quantity: 1 } } },
-                    { new: true },
-                )
-            }
-
-            return {
-                _id: updateProdQuantity._id,
-                cart: updateProdQuantity.cart,
-                enabled: updateProdQuantity.enabled,
-            }
+        if (!productDocument) {
+            throw new Error("Producto no encontrado");
         }
-        catch (e) {
-            return e.message
+
+        const updateProdQuantity = await cartSchema.findOneAndUpdate(
+            { _id: cid, "cart.product": productDocument._id },
+            { $inc: { "cart.$.quantity": 1 } },
+            { new: true }
+        );
+
+        if (!updateProdQuantity) {
+            await cartSchema.updateOne(
+                { _id: cid },
+                { $push: { cart: { product: productDocument._id, quantity: 1 } } },
+                { new: true },
+            )
+        }
+
+        return {
+            id: updateProdQuantity._id,
+            cart: updateProdQuantity.cart,
+            enabled: updateProdQuantity.enabled,
         }
     }
 
     async deleteProduct(cid, pid) {
         try {
             const productDocument = await productShema.findOne({ _id: pid });
-            
+
             const deletedProduct = await cartSchema.findOneAndUpdate(
                 { _id: cid },
                 { $pull: { cart: { product: productDocument._id } } },
@@ -98,7 +93,7 @@ class CartMongooseDao {
             );
 
             return {
-                _id: deletedProduct._id,
+                id: deletedProduct._id,
                 cart: deletedProduct.cart,
                 enabled: deletedProduct.enabled,
             }
@@ -114,7 +109,7 @@ class CartMongooseDao {
 
             if (!productDocument) {
                 return Promise.reject(new Error("Producto no encontrado"));
-              }
+            }
 
             const stockUpdated = await cartSchema.findOneAndUpdate(
                 { _id: cid, "cart.product": productDocument._id },
@@ -123,7 +118,7 @@ class CartMongooseDao {
             );
 
             return {
-                _id: stockUpdated._id,
+                id: stockUpdated._id,
                 cart: stockUpdated.cart,
                 enabled: stockUpdated.enabled,
                 product: productDocument.title
@@ -144,10 +139,10 @@ class CartMongooseDao {
 
             if (!emptiedCart) {
                 return Promise.reject(new Error('El carrito no existe'));
-              }
+            }
 
             return {
-                _id: emptiedCart._id,
+                id: emptiedCart._id,
                 cart: emptiedCart.cart,
                 enabled: emptiedCart.enabled,
             }

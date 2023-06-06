@@ -9,16 +9,14 @@ class UsersManager {
 
     }
 
-    async createUser(data, isAdmin) {
+    async createUser(data) {
         try {
             const dto = {
                 ...data,
                 password: await createHash(data.password, 10)
             }
 
-            const role = isAdmin ? 'admin' : 'user';
-
-            return this.dao.createUser(dto, role);
+            return this.dao.createUser(dto);
         }
         catch (e) {
             return e
@@ -68,7 +66,15 @@ class UsersManager {
         catch (e) {
             return e
         }
+    }
 
+    async assignRole(uid, data) {
+        try {
+            return this.dao.assignRole(uid, data);
+        }
+        catch (e) {
+            return e
+        }
     }
 
 }

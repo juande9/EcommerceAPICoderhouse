@@ -1,6 +1,6 @@
 import UsersManager from "../managers/UsersManager.js";
-import { idValidationUser } from "../middleware/idValidation.js";
-import userDataValidation from "../middleware/userValidation.js";
+import { idValidationRole, idValidationUser } from "../middleware/idValidation.js";
+import createUserValidation from "../middleware/createUserValidation.js";
 
 export const getUsers = async (req, res) => {
     try {
@@ -15,7 +15,7 @@ export const getUsers = async (req, res) => {
 
 export const createUserAdmin = async (req, res, next) => {
     try {
-        await userDataValidation.parseAsync(req.body);
+        await createUserValidation.parseAsync(req.body);
         const data = req.body
 
         const isAdmin = true
@@ -46,17 +46,31 @@ export const getUserById = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
     try {
-
-        await idValidationUser.parseAsync(req.body);
         const newData = req.body
-        
         await idValidationUser.parseAsync(req.params);
         const { uid } = req.params
 
         const manager = new UsersManager();
-
         const userUpdated = await manager.updateUser(uid, newData);
         res.status(200).send({ status: "success", message: `${userUpdated.email} modificado.` })
+    }
+    catch (e) {
+        next(e);
+    }
+}
+
+export const assignRole = async (req, res, next) => {
+    try {
+
+        await idValidationRole.parseAsync(req.body);
+        const { role } = req.body
+
+        await idValidationUser.parseAsync(req.params);
+        const { uid } = req.params
+
+        const manager = new UsersManager();
+        const userUpdated = await manager.assignRole(uid, role);
+        res.status(200).send({ status: "success", message: `${userUpdated} modificado.` })
     }
     catch (e) {
         next(e);

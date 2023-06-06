@@ -14,12 +14,9 @@ export const list = async (req, res, next) => {
 export const getOne = async (req, res, next) => {
     try {
         const { id } = req.params
-
         const manager = new roleManager();
         const roleFound = await manager.getOne(id);
-
         res.status(200).send({ status: "success", payload: roleFound });
-
     } catch (e) {
         next(e);
     }
@@ -33,10 +30,11 @@ export const create = async (req, res) => {
 
 export const update = async (req, res, next) => {
     try {
+        const newData = req.body
         const { id } = req.params
         const manager = new roleManager();
         const roleUpdated = await manager.updateRole(id, newData);
-        res.status(200).send({ status: "success", message: `${roleUpdated.email} modificado.` })
+        res.status(200).send({ status: "success", message: `Rol ${roleUpdated.name} modified.` })
     }
     catch (e) {
         next(e);
@@ -48,7 +46,7 @@ export const deleteOne = async (req, res, next) => {
         const { id } = req.params
         const manager = new roleManager();
         const roleDeleted = await manager.deleteRole(id);
-        res.status(200).send({ status: "success", message: `Usuario ${roleDeleted.email} eliminado` })
+        res.status(200).send({ status: "success", message: `Rol ${roleDeleted.name} deleted` })
     }
     catch (e) {
         next(e)

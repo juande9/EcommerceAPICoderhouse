@@ -1,6 +1,6 @@
 import z from 'zod'
 
-const userDataValidation = z.object({
+const createUserValidation = z.object({
     firstName: z.string(),
     lastName: z.string(),
     email: z.string().email(),
@@ -8,4 +8,4 @@ const userDataValidation = z.object({
     password: z.string().min(8)
 })
 
-export default userDataValidation
+export default createUserValidation

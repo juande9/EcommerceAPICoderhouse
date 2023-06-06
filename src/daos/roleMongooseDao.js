@@ -11,7 +11,7 @@ class roleMongooseDao {
             page: page || 1,
         }
 
-        const rolesDocument = await roleSchema.paginate(paginateOptions)
+        const rolesDocument = await roleSchema.paginate({}, paginateOptions)
 
         rolesDocument.docs = rolesDocument.docs.map(document => ({
             id: document._id,
@@ -32,7 +32,7 @@ class roleMongooseDao {
         }
     }
 
-    async getRolebyId(id) {
+    async getOne(id) {
         const rolesDocument = await roleSchema.findOne({ _id: id })
 
         if (!rolesDocument) {

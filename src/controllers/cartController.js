@@ -3,19 +3,18 @@ import { idValidationCart, idValidationProduct } from "../middleware/idValidatio
 
 export const createCart = async (req, res) => {
     try {
-        const manager = new CartManager();
-        const newCart = await manager.createCart({
-            cart: [],
-            enabled: true,
-        }
+      const manager = new CartManager();
+      const newCart = await manager.createCart({
+        cart: [],
+        enabled: true
+      });
 
-        )
-        return res.status(200).send({ status: "success", message: `Nuevo carrito creado con exito` })
+      return res.status(200).send({ status: "success", message: `Nuevo carrito creado con éxito`, id: newCart.id });
+    } catch (e) {
+      res.status(400).send({ status: "error", message: e.message });
     }
-    catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
-    }
-}
+  };
+  
 
 export const getCarts = async (req, res) => {
     try {
@@ -29,7 +28,7 @@ export const getCarts = async (req, res) => {
     }
 }
 
-export const getCartById = async (req, res) => {
+export const getCartById = async (req, res, next) => {
     try {
 
         await idValidationCart.parseAsync(req.params);
@@ -44,7 +43,7 @@ export const getCartById = async (req, res) => {
     }
 }
 
-export const addProduct = async (req, res) => {
+export const addProduct = async (req, res, next) => {
     try {
         await idValidationCart.parseAsync(req.params);
         await idValidationProduct.parseAsync(req.params)
@@ -60,7 +59,7 @@ export const addProduct = async (req, res) => {
     }
 }
 
-export const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res, next) => {
     try {
         await idValidationCart.parseAsync(req.params);
         const { cid, pid } = req.params

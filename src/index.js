@@ -7,7 +7,7 @@ import { resolve } from 'path';
 import cookieParser from "cookie-parser";
 import { engine } from 'express-handlebars';
 
-import pmRouter from "./routes/ProductManagerRouter.js"
+import pmRouter from "./routes/productRouter.js"
 import cartRouter from "./routes/CartRouter.js"
 import sessionRouter from "./routes/sessionRouter.js";
 import usersRouter from "./routes/usersRouter.js";

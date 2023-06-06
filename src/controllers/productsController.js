@@ -70,23 +70,3 @@ export const deleteProduct = async (req, res, next) => {
         next(e)
     }
 }
-
-export const deleteAll = async (req, res) => {
-    try {
-        const manager = new ProductManager(); manager
-        const removeList = await manager.deleteMany({ enabled: false })
-        res.status(200).send({ status: "success", message: `Todos los productos fueron eliminados` })
-    }
-    catch (e) {
-        res.status(400).send({ status: "error", message: e.message });
-    }
-}
-
-export const getCookies = async (req, res) => {
-    try {
-        res.status(200).send({ status: "success", cookies: req.signedCookies })
-    }
-    catch (e) {
-        res.status(400).send({ status: "error", message: "No hay cookies" });
-    }
-}
