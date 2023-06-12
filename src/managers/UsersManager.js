@@ -1,5 +1,6 @@
 import UsersMongooseDao from "../daos/UsersMongooseDao.js";
 import { createHash } from "../shared/index.js";
+import roleManager from "./RoleManager.js";
 
 class UsersManager {
 
@@ -11,17 +12,19 @@ class UsersManager {
 
     async createUser(data) {
         try {
+            const role = await new roleManager().getOne("647e6757f16ff85ac7ec7c0d");
             const dto = {
                 ...data,
-                password: await createHash(data.password, 10)
-            }
-
+                password: await createHash(data.password, 10),
+                role: role.id
+            };
+    
             return this.dao.createUser(dto);
-        }
-        catch (e) {
-            return e
+        } catch (e) {
+            return e;
         }
     }
+    
 
     async getUsers(params, req) {
         try {

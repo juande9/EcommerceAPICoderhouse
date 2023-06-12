@@ -97,7 +97,7 @@ class CartMongooseDao {
             const productDocument = await productSchema.findOne({ _id: pid });
 
             if (!productDocument) {
-                return Promise.reject(new Error("Producto no encontrado"));
+                throw new Error("Producto no encontrado");
             }
 
             const stockUpdated = await cartSchema.findOneAndUpdate(
@@ -127,7 +127,7 @@ class CartMongooseDao {
             );
 
             if (!emptiedCart) {
-                return Promise.reject(new Error('El carrito no existe'));
+                throw new Error('El carrito no existe');
             }
 
             return {

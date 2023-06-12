@@ -3,9 +3,7 @@ import roleSchema from "../models/roleSchema.js"
 class roleMongooseDao {
 
     async getRoles(params) {
-
         const { limit = 10, page } = params
-
         const paginateOptions = {
             limit: limit || 10,
             page: page || 1,
@@ -19,7 +17,6 @@ class roleMongooseDao {
             permissions: document.permissions,
         }))
         return rolesDocument
-
     }
 
 

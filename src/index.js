@@ -5,10 +5,9 @@ import express from "express"
 import mongoose from "mongoose";
 import { resolve } from 'path';
 import cookieParser from "cookie-parser";
-import { engine } from 'express-handlebars';
 
 import pmRouter from "./routes/productRouter.js"
-import cartRouter from "./routes/cartRouter.js"
+import cartRouter from "./routes/cartRouter.js";
 import sessionRouter from "./routes/sessionRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import errorHandler from "./middleware/errorHandler.js";
@@ -30,14 +29,6 @@ void (async () => {
         app.use(express.urlencoded({ extended: true }));
         app.use(express.static(resolve('src/public')));
         app.use(cookieParser(process.env.COOKIE_PASS))
-
-        const viewsPath = resolve('src/views');
-        app.engine('handlebars', engine({
-          layoutsDir: `${viewsPath}/layouts`,
-          defaultLayout: `${viewsPath}/layouts/main.handlebars`,
-        }));
-        app.set('view engine', 'handlebars');
-        app.set('views', viewsPath);
 
         app.use('/api/products', pmRouter);
         app.use('/api/carts', cartRouter);

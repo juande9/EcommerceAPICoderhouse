@@ -42,7 +42,7 @@ class UsersMongooseDao {
         const userDocument = await userSchema.create(dto);
 
         if (!userDocument) {
-            throw new Error('User creating problem');
+            throw new Error('User creating problem.');
         }
 
         return {
@@ -97,17 +97,13 @@ class UsersMongooseDao {
     }
 
     async deleteUser(uid) {
-        try {
-            const userDocument = await userSchema.deleteOne(uid);
-            return {
-                id: userDocument._id,
-                email: userDocument.email
-            }
-        }
-        catch (e) {
-            return e
+        const userDocument = await userSchema.deleteOne(uid);
+        return {
+            id: userDocument._id,
+            email: userDocument.email
         }
     }
+
 
     async assignRole(uid, rid) {
 
@@ -122,26 +118,21 @@ class UsersMongooseDao {
     }
 
     async updateUser(uid, data) {
-        try {
 
-            const userDocument = await userSchema.findOneAndUpdate({ _id: uid }, data, { new: true });
+        const userDocument = await userSchema.findOneAndUpdate({ _id: uid }, data, { new: true });
 
-            if (!userDocument) {
-                throw new Error('User not found')
-            }
-            return {
-                id: userDocument._id,
-                firstName: userDocument.firstName,
-                lastName: userDocument.lastName,
-                email: userDocument.email,
-                age: userDocument.age,
-                password: userDocument.password,
-                role: userDocument.role,
-                isAdmin: userDocument.isAdmin
-            }
+        if (!userDocument) {
+            throw new Error('User not found')
         }
-        catch (e) {
-            return e
+        return {
+            id: userDocument._id,
+            firstName: userDocument.firstName,
+            lastName: userDocument.lastName,
+            email: userDocument.email,
+            age: userDocument.age,
+            password: userDocument.password,
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin
         }
     }
 }
