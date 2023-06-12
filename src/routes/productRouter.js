@@ -8,7 +8,7 @@ const pmRouter = Router()
 pmRouter.get("/", getProducts)
 pmRouter.get("/:pid", getProductById)
 pmRouter.post("/", auth, authorization('addProduct'), addProduct)
-pmRouter.put("/:pid", auth, authorization('updateroduct'),updateProduct)
+pmRouter.put("/:pid", auth, authorization('updateProduct'),updateProduct)
 pmRouter.delete("/:pid", auth, authorization('deleteProduct'),deleteProduct)
 
 export default pmRouter

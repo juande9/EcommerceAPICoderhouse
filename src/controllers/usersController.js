@@ -1,5 +1,5 @@
 import UsersManager from "../managers/UsersManager.js";
-import { idValidationRole, idValidationUser } from "../middleware/idValidation.js";
+import { idValidation } from "../middleware/idValidation.js";
 import createUserValidation from "../middleware/createUserValidation.js";
 
 export const getUsers = async (req, res) => {
@@ -31,7 +31,7 @@ export const createUserAdmin = async (req, res, next) => {
 export const getUserById = async (req, res, next) => {
     try {
 
-        await idValidationUser.parseAsync(req.params);
+        await idValidation.parseAsync(req.params);
         const { uid } = req.params
 
         const manager = new UsersManager();
@@ -47,7 +47,7 @@ export const getUserById = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
     try {
         const newData = req.body
-        await idValidationUser.parseAsync(req.params);
+        await idValidation.parseAsync(req.params);
         const { uid } = req.params
 
         const manager = new UsersManager();
@@ -62,10 +62,10 @@ export const updateUser = async (req, res, next) => {
 export const assignRole = async (req, res, next) => {
     try {
 
-        await idValidationRole.parseAsync(req.body);
+        await idValidation.parseAsync(req.body);
         const { role } = req.body
 
-        await idValidationUser.parseAsync(req.params);
+        await idValidation.parseAsync(req.params);
         const { uid } = req.params
 
         const manager = new UsersManager();
@@ -80,7 +80,7 @@ export const assignRole = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
     try {
 
-        await idValidationUser.parseAsync(req.params);
+        await idValidation.parseAsync(req.params);
         const { uid } = req.params
 
         const manager = new UsersManager();

@@ -1,90 +1,79 @@
 import cartSchema from "../models/cartSchema.js"
-import productShema from "../models/productShema.js";
+import productSchema from "../models/productSchema.js";
 
 class CartMongooseDao {
 
     async getCarts() {
-        try {
-            const cartsDocument = await cartSchema.find({ enabled: true });
+        const cartsDocument = await cartSchema.find({ enabled: true });
 
-            if (cartsDocument.length === 0) {
-                throw new Error('No se encontraron carritos.');
-            }
+        if (cartsDocument.length === 0) {
+            throw new Error('No se encontraron carritos.');
+        }
 
-            return cartsDocument.map(document => ({
-                _id: document._id,
-                cart: document.cart,
-            }))
-        }
-        catch (e) {
-            return e.message
-        }
+        return cartsDocument.map(document => ({
+            _id: document._id,
+            cart: document.cart,
+        }))
     }
 
     async createCart(data) {
-        try {
-            const cartDocument = await cartSchema.create(data)
-            return {
-                id: cartDocument._id,
-                cart: cartDocument.cart,
-                enabled: cartDocument.enabled,
-            }
-        }
-        catch (e) {
-            return e.message
+        const cartDocument = await cartSchema.create(data)
+        return {
+            id: cartDocument._id,
+            cart: cartDocument.cart,
+            enabled: cartDocument.enabled,
         }
     }
 
     async getCartById(cid) {
-        try {
-            const cartDocument = await cartSchema.findOne({ _id: cid })
-
-            if (!cartDocument) {
-                return Promise.reject(new Error(`No se encontraron carritos con id: ${cid}`))
-            }
-
-            return {
-                id: cartDocument._id,
-                cart: cartDocument.cart,
-                enabled: cartDocument.enabled,
-            }
+        const cartDocument = await cartSchema.findOne({ _id: cid })
+        if (!cartDocument) {
+            return Promise.reject(new Error(`No se encontraron carritos con id: ${cid}`))
         }
-        catch (e) {
-            return e.message
+
+        return {
+            id: cartDocument._id,
+            cart: cartDocument.cart,
+            enabled: cartDocument.enabled,
         }
     }
 
     async addProduct(cid, pid) {
-        const productDocument = await productShema.findOne({ _id: pid });
+        const productDocument = await productSchema.findOne({ _id: pid });
+        const cartDocument = await cartSchema.findOne({ _id: cid })
 
         if (!productDocument) {
             throw new Error("Producto no encontrado");
         }
 
-        const updateProdQuantity = await cartSchema.findOneAndUpdate(
-            { _id: cid, "cart.product": productDocument._id },
-            { $inc: { "cart.$.quantity": 1 } },
-            { new: true }
-        );
+        const productFound = cartDocument.cart.some(item => item.product._id.equals(productDocument._id));
 
-        if (!updateProdQuantity) {
-            await cartSchema.updateOne(
+        if (!productFound) {
+            await cartSchema.findOneAndUpdate(
                 { _id: cid },
                 { $push: { cart: { product: productDocument._id, quantity: 1 } } },
                 { new: true },
-            )
+            );
+        } else {
+            await cartSchema.findOneAndUpdate(
+                { _id: cid, "cart.product": productDocument._id },
+                { $inc: { "cart.$.quantity": 1 } },
+                { new: true }
+            );
         }
 
+        const updatedCart = await cartSchema.findOne({ _id: cid });
+
         return {
-            id: updateProdQuantity._id,
-            cart: updateProdQuantity.cart,
-            enabled: updateProdQuantity.enabled,
+            id: updatedCart._id,
+            cart: updatedCart.cart,
+            enabled: updatedCart.enabled,
         }
     }
 
     async deleteProduct(cid, pid) {
         try {
-            const productDocument = await productShema.findOne({ _id: pid });
+            const productDocument = await productSchema.findOne({ _id: pid });
 
             const deletedProduct = await cartSchema.findOneAndUpdate(
                 { _id: cid },
@@ -105,7 +94,7 @@ class CartMongooseDao {
 
     async updateQuantity(cid, pid, qty) {
         try {
-            const productDocument = await productShema.findOne({ _id: pid });
+            const productDocument = await productSchema.findOne({ _id: pid });
 
             if (!productDocument) {
                 return Promise.reject(new Error("Producto no encontrado"));
