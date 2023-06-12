@@ -6,7 +6,7 @@ import { createUserAdmin, deleteUser, getUserById, getUsers, updateUser, assignR
 const usersRouter = Router()
 
 usersRouter.get("/", auth, authorization('getUsers'), getUsers)
-usersRouter.get("/:uid", authorization('getUser'), getUserById)
+usersRouter.get("/:uid", auth, authorization('getUser'), getUserById)
 usersRouter.post("/", auth, authorization('createUser'), createUserAdmin)
 usersRouter.put("/:uid", auth, authorization('updateUser'), updateUser)
 usersRouter.delete("/:uid", auth, authorization('deleteUser'), deleteUser)
