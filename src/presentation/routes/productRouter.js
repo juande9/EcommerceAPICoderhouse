@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getProducts, addProduct, getProductById, updateProduct, deleteProduct } from "../controllers/productsController.js"
-import auth from '../middleware/auth.js';
-import authorization from '../middleware/authorization.js';
+import auth from '../middlewares/auth.js';
+import authorization from '../middlewares/authorization.js';
 
 const pmRouter = Router()
 

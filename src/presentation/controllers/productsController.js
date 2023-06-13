@@ -1,6 +1,6 @@
-import ProductManager from "../managers/ProductManager.js";
-import { idValidation } from "../middleware/idValidation.js";
-import productValidation from "../middleware/productValidation.js";
+import ProductManager from "../../domain/managers/ProductManager.js";
+import { idValidation } from "../../domain/validations/idValidation.js";
+import productValidation from "../../domain/validations/productValidation.js";
 
 export const getProducts = async (req, res, next) => {
     try {

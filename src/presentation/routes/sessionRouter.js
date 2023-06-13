@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { login, signup, current } from '../controllers/sessionController.js';
 
-import auth from '../middleware/auth.js';
+import auth from '../middlewares/auth.js';
 
 const sessionRouter = Router()
 

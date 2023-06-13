@@ -1,4 +1,4 @@
-import SessionManager from "../managers/SessionManager.js";
+import SessionManager from "../../domain/managers/SessionManager.js";
 
 export const login = async (req, res, next) => {
     try {

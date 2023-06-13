@@ -1,5 +1,5 @@
-import CartManager from "../managers/CartManager.js";
-import { idValidation } from "../middleware/idValidation.js";
+import CartManager from "../../domain/managers/CartManager.js";
+import { idValidation } from "../../domain/validations/idValidation.js";
 
 export const createCart = async (req, res) => {
     try {

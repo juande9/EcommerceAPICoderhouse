@@ -8,5 +8,5 @@
         "src/*"
     ],
     "exec": "node --inspect src/index.js",
-    "ext": "js, handlebars"
+    "ext": "js"
 }

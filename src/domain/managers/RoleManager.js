@@ -1,4 +1,4 @@
-import roleMongooseDao from "../daos/roleMongooseDao.js";
+import roleMongooseDao from "../../data/daos/roleMongooseDao.js";
 
 class roleManager {
 

@@ -1,6 +1,6 @@
-import UsersManager from "../managers/UsersManager.js";
-import { idValidation } from "../middleware/idValidation.js";
-import createUserValidation from "../middleware/createUserValidation.js";
+import UsersManager from "../../domain/managers/UsersManager.js";
+import { idValidation } from "../../domain/validations/idValidation.js";
+import createUserValidation from "../../domain/validations/createUserValidation.js";
 
 export const getUsers = async (req, res) => {
     try {

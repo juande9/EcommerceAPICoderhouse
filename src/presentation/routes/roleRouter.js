@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import authorization from '../middleware/authorization.js'
+import authorization from '../middlewares/authorization.js'
 import { list, deleteOne, getOne, create, update } from '../controllers/roleController.js';
 
-import auth from '../middleware/auth.js';
+import auth from '../middlewares/auth.js';
 
 const roleRouter = Router()
 

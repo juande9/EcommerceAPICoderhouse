@@ -1,5 +1,5 @@
-import UsersMongooseDao from "../daos/UsersMongooseDao.js";
-import { createHash } from "../shared/index.js";
+import UsersMongooseDao from "../../data/daos/UsersMongooseDao.js";
+import { createHash } from "../../shared/index.js";
 import roleManager from "./RoleManager.js";
 
 class UsersManager {

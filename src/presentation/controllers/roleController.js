@@ -1,4 +1,4 @@
-import roleManager from "../managers/RoleManager.js";
+import roleManager from "../../domain/managers/RoleManager.js";
 
 export const list = async (req, res, next) => {
     try {

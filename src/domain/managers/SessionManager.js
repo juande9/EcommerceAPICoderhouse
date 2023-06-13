@@ -1,7 +1,7 @@
 import UsersManager from "../managers/UsersManager.js";
-import loginValidation from "../middleware/loginValidation.js";
-import createUserValidation from "../middleware/createUserValidation.js";
-import { isValidPassword, generateToken } from "../shared/index.js";
+import loginValidation from "../../domain/validations/loginValidation.js";
+import createUserValidation from "../../domain/validations/createUserValidation.js";
+import { isValidPassword, generateToken } from "../../shared/index.js";
 
 class SessionManager {
 
