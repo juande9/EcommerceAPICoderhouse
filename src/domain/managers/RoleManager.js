@@ -1,60 +1,29 @@
-import roleMongooseDao from "../../data/daos/roleMongooseDao.js";
 
 class roleManager {
 
     constructor() {
-
-        this.dao = new roleMongooseDao()
-
+        this.roleDao = container.resolve('RoleDao')
     }
 
     async create(data) {
-        try {
-            return this.dao.createRole(data);
-        }
-
-        catch (e) {
-            return e
-        }
+        return this.roleDao.createRole(data);
     }
 
     async getRoles(params, req) {
-        try {
-            return this.dao.getRoles(params, req);
-        }
-        catch (e) {
-            return e
-        }
+        return this.roleDao.getRoles(params, req);
     }
 
     async getOne(id) {
-        try {
-            return this.dao.getOne(id);
-        }
-        catch (e) {
-            return e
-        }
+        return this.roleDao.getOne(id);
     }
 
     async deleteRole(uid) {
-        try {
-            return this.dao.deleteRole(uid);
-            }
-        catch (e) {
-            return e
-        }
+        return this.roleDao.deleteRole(uid);
     }
 
     async updateRole(uid, data) {
-        try {
-            return this.dao.updateRole(uid, data);
-        }
-        catch (e) {
-            return e
-        }
-
+        return this.roleDao.updateRole(uid, data);
     }
-
 }
 
 export default roleManager

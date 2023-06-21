@@ -1,6 +1,6 @@
 import roleSchema from "../models/roleSchema.js"
 
-class roleMongooseDao {
+class RoleMongooseDao {
 
     async getRoles(params) {
         const { limit = 10, page } = params
@@ -68,4 +68,4 @@ class roleMongooseDao {
 
     }
 }
-export default roleMongooseDao
+export default RoleMongooseDao
