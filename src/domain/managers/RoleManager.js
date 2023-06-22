@@ -1,3 +1,4 @@
+import container from "../../container.js";
 
 class roleManager {
 

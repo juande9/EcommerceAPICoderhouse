@@ -20,6 +20,7 @@ class SessionManager {
     }
 
     async signup(dto) {
+        
         await createUserValidation.parseAsync(dto);
         const manager = new UsersManager();
 

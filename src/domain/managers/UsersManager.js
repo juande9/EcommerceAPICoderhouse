@@ -1,83 +1,46 @@
-import UsersMongooseDao from "../../data/daos/UsersMongooseDao.js";
+import container from "../../container.js";
 import { createHash } from "../../shared/index.js";
 import roleManager from "./RoleManager.js";
 
 class UsersManager {
 
     constructor() {
-
-        this.dao = new UsersMongooseDao()
-
+        this.usersDao = container.resolve('UsersDao')
     }
 
     async createUser(data) {
-        try {
-            const role = await new roleManager().getOne("647e6757f16ff85ac7ec7c0d");
-            const dto = {
-                ...data,
-                password: await createHash(data.password, 10),
-                role: role.id
-            };
-    
-            return this.dao.createUser(dto);
-        } catch (e) {
-            return e;
-        }
+        const role = await new roleManager().getOne("647e6757f16ff85ac7ec7c0d");
+        const dto = {
+            ...data,
+            password: await createHash(data.password, 10),
+            role: role.id
+        };
+        return this.usersDao.createUser(dto);
     }
-    
+
 
     async getUsers(params, req) {
-        try {
-            return this.dao.getUsers(params, req);
-        }
-        catch (e) {
-            return e
-        }
+        return this.usersDao.getUsers(params, req);
     }
 
     async getUserById(uid) {
-        try {
-            return this.dao.getUserById(uid);
-        }
-        catch (e) {
-            return e
-        }
+        return this.usersDao.getUserById(uid);
     }
 
     async getOneByEmail(email) {
-        try {
-            return this.dao.getOneByEmail(email);
-        }
-        catch (e) {
-            return e
-        }
+        return this.usersDao.getOneByEmail(email);
     }
 
     async deleteUser(uid) {
-        try {
-            return this.dao.deleteUser(uid);
-        }
-        catch (e) {
-            return e
-        }
+        return this.usersDao.deleteUser(uid);
     }
 
     async updateUser(uid, data) {
-        try {
-            return this.dao.updateUser(uid, data);
-        }
-        catch (e) {
-            return e
-        }
+        return this.usersDao.updateUser(uid, data);
     }
 
     async assignRole(uid, data) {
-        try {
-            return this.dao.assignRole(uid, data);
-        }
-        catch (e) {
-            return e
-        }
+        return this.usersDao.assignRole(uid, data);
     }
 
 }

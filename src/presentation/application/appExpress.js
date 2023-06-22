@@ -16,6 +16,7 @@ class AppExpress {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.static(resolve('src/public')));
         this.app.use(cookieParser(process.env.COOKIE_PASS))
+        this.app.use(express.json())
     }
 
     build() {

@@ -1,58 +1,30 @@
-import ProductMongooseDao from "../../data/daos/ProductMongooseDao.js";
+import container from "../../container.js";
 
 class ProductManager {
 
   constructor() {
-
-    this.dao = new ProductMongooseDao()
-
+    this.productDao = container.resolve('ProductDao')
   }
 
   async getProducts(params) {
-    try {
-      return this.dao.getProducts(params);
-    }
-    catch (e) {
-      return e
-    }
+    return this.productDao.getProducts(params);
   }
 
   async addProduct(data) {
-    try {
-      return this.dao.addProduct(data);
-    }
-    catch (e) {
-      return e
-    }
+    return this.productDao.addProduct(data);
   }
 
   async getProductById(uid) {
-    try {
-      return this.dao.getProductById(uid);
-    }
-    catch (e) {
-      return e
-    }
+    return this.productDao.getProductById(uid);
   }
 
   async updateProduct(uid, updatedData) {
-    try {
-      return this.dao.updateProduct(uid, updatedData);
-    }
-    catch (e) {
-      return e
-    }
+    return this.productDao.updateProduct(uid, updatedData);
   }
 
   async deleteProduct(uid) {
-    try {
-      return this.dao.deleteProduct(uid);
-    }
-    catch (e) {
-      return e
-    }
+    return this.productDao.deleteProduct(uid);
   }
-
 }
 
 export default ProductManager
