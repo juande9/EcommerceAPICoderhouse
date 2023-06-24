@@ -1,9 +1,10 @@
+import { managerDependencies } from "../../config/managerDependencies.js";
 import container from "../../container.js";
 
 class roleManager {
 
     constructor() {
-        this.roleDao = container.resolve('RoleDao')
+        this.roleDao = container.resolve(managerDependencies.roleManager)
     }
 
     async create(data) {

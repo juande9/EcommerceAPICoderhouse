@@ -1,9 +1,11 @@
+
+import { managerDependencies } from "../../config/managerDependencies.js";
 import container from "../../container.js";
 
 class ProductManager {
 
   constructor() {
-    this.productDao = container.resolve('ProductDao')
+    this.productDao = container.resolve(managerDependencies.productManager)
   }
 
   async getProducts(params) {

@@ -1,3 +1,4 @@
+import { managerDependencies } from "../../config/managerDependencies.js";
 import container from "../../container.js";
 import { createHash } from "../../shared/index.js";
 import roleManager from "./RoleManager.js";
@@ -5,11 +6,12 @@ import roleManager from "./RoleManager.js";
 class UsersManager {
 
     constructor() {
-        this.usersDao = container.resolve('UsersDao')
+        this.usersDao = container.resolve(managerDependencies.usersManager)
     }
 
     async createUser(data) {
         const role = await new roleManager().getOne("647e6757f16ff85ac7ec7c0d");
+
         const dto = {
             ...data,
             password: await createHash(data.password, 10),

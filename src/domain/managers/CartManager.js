@@ -1,37 +1,38 @@
+import { managerDependencies } from "../../config/managerDependencies.js";
 import container from "../../container.js";
 
 class CartManager {
 
     constructor() {
-        this.cartDao = container.resolve('CartDao')
+        this.cartDb = container.resolve(managerDependencies.cartManager)
     }
 
     async createCart(data) {
-        return this.cartDao.createCart(data);
+        return this.cartDb.createCart(data);
     }
 
     async getCarts() {
-        return this.cartDao.getCarts();
+        return this.cartDb.getCarts();
     }
 
     async getCartById(cid) {
-        return this.cartDao.getCartById(cid);
+        return this.cartDb.getCartById(cid);
     }
 
     async addProduct(cid, pid) {
-        return this.cartDao.addProduct(cid, pid);
+        return this.cartDb.addProduct(cid, pid);
     }
 
     async deleteProduct(cid, pid) {
-        return this.cartDao.deleteProduct(cid, pid);
+        return this.cartDb.deleteProduct(cid, pid);
     }
 
     async updateQuantity(cid, pid, qty) {
-        return this.cartDao.updateQuantity(cid, pid, qty);
+        return this.cartDb.updateQuantity(cid, pid, qty);
     }
 
     async emptyCart(cid) {
-        return this.cartDao.emptyCart(cid);
+        return this.cartDb.emptyCart(cid);
     }
 }
 
