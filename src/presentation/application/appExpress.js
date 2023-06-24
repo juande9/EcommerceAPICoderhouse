@@ -6,17 +6,18 @@ import pmRouter from "../../presentation/routes/productRouter.js";
 import cartRouter from "../../presentation/routes/cartRouter.js";
 import sessionRouter from "../../presentation/routes/sessionRouter.js";
 import usersRouter from "../../presentation/routes/usersRouter.js";
-import errorHandler from "../../presentation/middlewares/errorHandler.js";
 import roleRouter from "../../presentation/routes/roleRouter.js";
+
+import errorHandler from "../../presentation/middlewares/errorHandler.js";
 
 class AppExpress {
 
     init() {
         this.app = express();
+        this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.static(resolve('src/public')));
         this.app.use(cookieParser(process.env.COOKIE_PASS))
-        this.app.use(express.json())
     }
 
     build() {

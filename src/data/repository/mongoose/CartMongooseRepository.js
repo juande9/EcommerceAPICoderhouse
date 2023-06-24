@@ -1,7 +1,7 @@
-import cartSchema from "../models/cartSchema.js"
-import productSchema from "../models/productSchema.js";
+import cartSchema from "../../models/cartSchema.js"
+import productSchema from "../../models/productSchema.js";
 
-class CartMongooseDao {
+class CartMongooseRepository {
 
     async getCarts() {
         const cartsDocument = await cartSchema.find({ enabled: true });
@@ -142,4 +142,4 @@ class CartMongooseDao {
     }
 }
 
-export default CartMongooseDao
+export default CartMongooseRepository

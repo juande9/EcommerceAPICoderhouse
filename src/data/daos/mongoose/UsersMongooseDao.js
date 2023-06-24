@@ -1,5 +1,5 @@
-import userSchema from "../models/userSchema.js";
-import roleSchema from "../models/roleSchema.js";
+import userSchema from "../../models/userSchema.js";
+import roleSchema from "../../models/roleSchema.js";
 
 class UsersMongooseDao {
 

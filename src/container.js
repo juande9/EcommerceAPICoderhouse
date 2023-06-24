@@ -3,16 +3,16 @@ dotenv.config()
 
 import { createContainer, asClass, Lifetime } from 'awilix'
 
-import UsersMongooseDao from './data/daos/UsersMongooseDao.js'
-import RoleMongooseDao from './data/daos/RoleMongooseDao.js'
-import ProductMongooseDao from './data/daos/ProductMongooseDao.js'
-import CartMongooseDao from './data/daos/CartMongooseDao.js'
+import UsersMongooseRepository from './data/repository/mongoose/UsersMongooseRepository.js'
+import RoleMongooseRepository from './data/repository/mongoose/RoleMongooseRepository.js'
+import ProductMongooseRepository from './data/repository/mongoose/ProductMongooseRepository.js'
+import CartMongooseRepository from './data/repository/mongoose/CartMongooseRepository.js'
 
 const container = createContainer()
 
-container.register('UsersDao', asClass(UsersMongooseDao), { Lifetime: Lifetime.SINGLETON })
-container.register('RoleDao', asClass(RoleMongooseDao), { Lifetime: Lifetime.SINGLETON })
-container.register('ProductDao', asClass(ProductMongooseDao), { Lifetime: Lifetime.SINGLETON })
-container.register('CartDao', asClass(CartMongooseDao), { Lifetime: Lifetime.SINGLETON })
+container.register('UsersRepository', asClass(UsersMongooseRepository), { Lifetime: Lifetime.SINGLETON })
+container.register('RoleRepository', asClass(RoleMongooseRepository), { Lifetime: Lifetime.SINGLETON })
+container.register('ProductRepository', asClass(ProductMongooseRepository), { Lifetime: Lifetime.SINGLETON })
+container.register('CartRepository', asClass(CartMongooseRepository), { Lifetime: Lifetime.SINGLETON })
 
 export default container

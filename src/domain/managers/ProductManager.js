@@ -3,27 +3,27 @@ import container from "../../container.js";
 class ProductManager {
 
   constructor() {
-    this.productDao = container.resolve('ProductDao')
+    this.ProductRepository = container.resolve('ProductRepository')
   }
 
   async getProducts(params) {
-    return this.productDao.getProducts(params);
+    return this.ProductRepository.getProducts(params);
   }
 
   async addProduct(data) {
-    return this.productDao.addProduct(data);
+    return this.ProductRepository.addProduct(data);
   }
 
   async getProductById(uid) {
-    return this.productDao.getProductById(uid);
+    return this.ProductRepository.getProductById(uid);
   }
 
   async updateProduct(uid, updatedData) {
-    return this.productDao.updateProduct(uid, updatedData);
+    return this.ProductRepository.updateProduct(uid, updatedData);
   }
 
   async deleteProduct(uid) {
-    return this.productDao.deleteProduct(uid);
+    return this.ProductRepository.deleteProduct(uid);
   }
 }
 

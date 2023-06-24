@@ -5,7 +5,7 @@ import roleManager from "./RoleManager.js";
 class UsersManager {
 
     constructor() {
-        this.usersDao = container.resolve('UsersDao')
+        this.UsersRepository = container.resolve('UsersRepository')
     }
 
     async createUser(data) {
@@ -15,32 +15,32 @@ class UsersManager {
             password: await createHash(data.password, 10),
             role: role.id
         };
-        return this.usersDao.createUser(dto);
+        return this.UsersRepository.createUser(dto);
     }
 
 
     async getUsers(params, req) {
-        return this.usersDao.getUsers(params, req);
+        return this.UsersRepository.getUsers(params, req);
     }
 
     async getUserById(uid) {
-        return this.usersDao.getUserById(uid);
+        return this.UsersRepository.getUserById(uid);
     }
 
     async getOneByEmail(email) {
-        return this.usersDao.getOneByEmail(email);
+        return this.UsersRepository.getOneByEmail(email);
     }
 
     async deleteUser(uid) {
-        return this.usersDao.deleteUser(uid);
+        return this.UsersRepository.deleteUser(uid);
     }
 
     async updateUser(uid, data) {
-        return this.usersDao.updateUser(uid, data);
+        return this.UsersRepository.updateUser(uid, data);
     }
 
     async assignRole(uid, data) {
-        return this.usersDao.assignRole(uid, data);
+        return this.UsersRepository.assignRole(uid, data);
     }
 
 }

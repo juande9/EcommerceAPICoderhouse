@@ -1,4 +1,4 @@
-import roleSchema from "../models/roleSchema.js"
+import roleSchema from "../../models/roleSchema.js"
 
 class RoleMongooseDao {
 

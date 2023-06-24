@@ -20,10 +20,7 @@ export const signup = async (req, res, next) => {
     try {
         const manager = new SessionManager();
         const newUser = await manager.signup(req.body)
-        res.status(201).send({
-            status: 'success', message: `${newUser.email} registered.`,
-            payload: { ...newUser, password: undefined }
-        })
+        res.status(201).send({ status: 'success', message: `${newUser.email} registered.`, payload: { ...newUser, password: undefined } })
     }
     catch (e) {
         next(e)
@@ -31,5 +28,6 @@ export const signup = async (req, res, next) => {
 }
 
 export const current = async (req, res) => {
-    res.status(200).send({ status: 'success', payload: req.user });
+    const currentUser = req.user
+    res.status(200).send({ status: 'success', payload: currentUser });
 }
