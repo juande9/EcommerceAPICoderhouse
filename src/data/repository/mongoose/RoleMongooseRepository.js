@@ -38,8 +38,6 @@ class RoleMongooseRepository {
     async getOne(id) {
         const rolesDocument = await roleSchema.findOne({ _id: id })
 
-        console.log(rolesDocument)
-
         if (!rolesDocument) {
             throw new Error('Role not found');
         }

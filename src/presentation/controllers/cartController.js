@@ -43,7 +43,6 @@ export const getCartById = async (req, res, next) => {
 export const addProduct = async (req, res, next) => {
     try {
         const { cid, pid } = req.params
-
         const validatedCartId = await idValidation.parseAsync(cid);
         const validatedProdId = await idValidation.parseAsync(pid)
 

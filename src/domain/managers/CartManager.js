@@ -9,7 +9,6 @@ class CartManager {
 
     async createCart() {
         const newCart = { cart: [], enabled: true }
-
         return this.CartRepository.createCart(newCart);
     }
 

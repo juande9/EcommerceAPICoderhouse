@@ -1,5 +1,4 @@
 import cartSchema from "../../models/cartSchema.js"
-import productSchema from "../../models/productSchema.js";
 import Cart from "../../../domain/entities/cart.js"
 
 class CartMongooseRepository {

@@ -1,51 +1,44 @@
 import userSchema from "../../models/userSchema.js";
-import roleSchema from "../../models/roleSchema.js";
+import User from "../../../domain/entities/user.js";
 
 class UsersMongooseRepository {
 
     async getUsers(params) {
-        try {
-            const { limit = 10, page } = params
-
-            const paginateOptions = {
-                limit: limit || 10,
-                page: page || 1,
-            }
-
-            const userDocument = await userSchema
-                .paginate({ enabled: true }, paginateOptions)
-
-            if (userDocument.length === 0) {
-                throw new Error('Users not Found.');
-            }
-
-            userDocument.docs = userDocument.docs.map(document => ({
-                id: document._id,
-                firstName: document.firstName,
-                lastName: document.lastName,
-                email: document.email,
-                age: document.age,
-                password: document.password,
-                role: document.role,
-                isAdmin: document.isAdmin
-            }))
-
-            return userDocument
+        const { limit = 10, page } = params
+        const paginateOptions = {
+            limit: limit || 10,
+            page: page || 1,
         }
-        catch (e) {
-            return e.message
+
+        const userDocument = await userSchema.paginate({ enabled: true }, paginateOptions)
+        const { docs, ...pagination } = userDocument
+
+        if (userDocument.length === 0) {
+            throw new Error('Users not Found.');
         }
+
+        const users = docs.map(document => new User({
+            id: document._id,
+            firstName: document.firstName,
+            lastName: document.lastName,
+            email: document.email,
+            age: document.age,
+            password: document.password,
+            role: document.role,
+            isAdmin: document.isAdmin
+        }))
+
+        return {
+            users,
+            pagination
+        }
+
     }
-
 
     async createUser(dto) {
         const userDocument = await userSchema.create(dto);
 
-        if (!userDocument) {
-            throw new Error('User creating problem.');
-        }
-
-        return {
+        return new User({
             id: userDocument._id,
             firstName: userDocument.firstName,
             lastName: userDocument.lastName,
@@ -54,7 +47,7 @@ class UsersMongooseRepository {
             password: userDocument.password,
             role: userDocument.role,
             isAdmin: userDocument.isAdmin
-        }
+        })
     }
 
     async getUserById(uid) {
@@ -64,7 +57,7 @@ class UsersMongooseRepository {
             throw new Error('User not found');
         }
 
-        return {
+        return new User({
             id: userDocument._id,
             firstName: userDocument.firstName,
             lastName: userDocument.lastName,
@@ -72,9 +65,9 @@ class UsersMongooseRepository {
             age: userDocument.age,
             password: userDocument.password,
             role: userDocument.role,
-            isAdmin: userDocument.isAdmin
-        }
-
+            isAdmin: userDocument.isAdmin,
+            enabled: userDocument.enabled,
+        })
     }
 
     async getOneByEmail(email) {
@@ -84,7 +77,34 @@ class UsersMongooseRepository {
             return new Error("User not found")
         }
 
-        return {
+        return new User({
+            id: userDocument._id,
+            firstName: userDocument.firstName,
+            lastName: userDocument.lastName,
+            email: userDocument.email,
+            age: userDocument.age,
+            password: userDocument.password,
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin,
+        })
+    }
+
+    async deleteUser(uid) {
+        return await userSchema.deleteOne(uid);
+    }
+
+
+    async assignRole(uid, role) {
+        const newRole = { $set: { role: role.id } }
+        const userDocument = await userSchema.findOneAndUpdate({ _id: uid }, newRole, { new: true });
+
+        if (!userDocument) {
+            throw new Error('User not found')
+        }
+
+        console.log(userDocument.email)
+
+        return new User({
             id: userDocument._id,
             firstName: userDocument.firstName,
             lastName: userDocument.lastName,
@@ -93,28 +113,7 @@ class UsersMongooseRepository {
             password: userDocument.password,
             role: userDocument.role,
             isAdmin: userDocument.isAdmin
-        }
-    }
-
-    async deleteUser(uid) {
-        const userDocument = await userSchema.deleteOne(uid);
-        return {
-            id: userDocument._id,
-            email: userDocument.email
-        }
-    }
-
-
-    async assignRole(uid, rid) {
-
-        const role = await roleSchema.findOne({ _id: rid });
-        const newRole = { $set: { role } }
-        const userDocument = await userSchema.findOneAndUpdate({ _id: uid }, newRole, { new: true });
-
-        if (!userDocument) {
-            throw new Error('User not found')
-        }
-
+        })
     }
 
     async updateUser(uid, data) {
@@ -124,7 +123,8 @@ class UsersMongooseRepository {
         if (!userDocument) {
             throw new Error('User not found')
         }
-        return {
+        
+        return new User({
             id: userDocument._id,
             firstName: userDocument.firstName,
             lastName: userDocument.lastName,
@@ -133,7 +133,7 @@ class UsersMongooseRepository {
             password: userDocument.password,
             role: userDocument.role,
             isAdmin: userDocument.isAdmin
-        }
+        })
     }
 }
 export default UsersMongooseRepository

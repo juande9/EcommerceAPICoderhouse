@@ -31,8 +31,8 @@ export const createUserAdmin = async (req, res, next) => {
 export const getUserById = async (req, res, next) => {
     try {
 
-        await idValidation.parseAsync(req.params);
         const { uid } = req.params
+        await idValidation.parseAsync(uid);
 
         const manager = new UsersManager();
         const userFound = await manager.getUserById(uid);
@@ -47,8 +47,9 @@ export const getUserById = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
     try {
         const newData = req.body
-        await idValidation.parseAsync(req.params);
+
         const { uid } = req.params
+        await idValidation.parseAsync(uid);
 
         const manager = new UsersManager();
         const userUpdated = await manager.updateUser(uid, newData);
@@ -61,16 +62,15 @@ export const updateUser = async (req, res, next) => {
 
 export const assignRole = async (req, res, next) => {
     try {
-
-        await idValidation.parseAsync(req.body);
         const { role } = req.body
-
-        await idValidation.parseAsync(req.params);
+        await idValidation.parseAsync(role);
         const { uid } = req.params
+        await idValidation.parseAsync(uid);
 
         const manager = new UsersManager();
         const userUpdated = await manager.assignRole(uid, role);
-        res.status(200).send({ status: "success", message: `${userUpdated} modificado.` })
+
+        res.status(200).send({ status: "success", message: `${userUpdated.email} modificado.` })
     }
     catch (e) {
         next(e);

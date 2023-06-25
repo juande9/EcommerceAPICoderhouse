@@ -16,6 +16,7 @@ export const addProduct = async (req, res, next) => {
     try {
         const manager = new ProductManager();
         const verifiedData = await productValidation.parseAsync(req.body)
+        
         const newProduct = await manager.addProduct(verifiedData);
         res.status(200).send({ status: "success", message: `${newProduct.title} cargado correctamente` });
     } catch (e) {

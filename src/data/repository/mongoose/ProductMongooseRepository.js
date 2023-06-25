@@ -1,10 +1,11 @@
+import Product from "../../../domain/entities/product.js";
 import productSchema from "../../models/productSchema.js";
 
 class ProductMongooseRepository {
+
   async getProducts(params) {
 
     const { limit = 10, sort, type, page } = params
-
     const paginateOptions = {
       limit: limit || 10,
       page: page || 1,
@@ -12,14 +13,12 @@ class ProductMongooseRepository {
     }
 
     const queryOptions = { enabled: true };
-    if (type) {
-      queryOptions.title = type;
-    }
+    if (type) { queryOptions.title = type; }
 
-    const productsDocument = await productSchema
-      .paginate(queryOptions, paginateOptions)
+    const productsDocument = await productSchema.paginate(queryOptions, paginateOptions)
+    const { docs, ...pagination } = productsDocument
 
-    productsDocument.docs = productsDocument.docs.map(document => ({
+    const products = docs.map(document => new Product({
       id: document._id,
       title: document.title,
       description: document.description,
@@ -29,13 +28,18 @@ class ProductMongooseRepository {
       stock: document.stock,
       enabled: document.enabled,
     }))
-    return productsDocument
+
+    return {
+      products,
+      pagination
+    }
+
   }
 
   async addProduct(data) {
     const productDocument = await productSchema.create(data);
 
-    return {
+    return new Product({
       id: productDocument._id,
       title: productDocument.title,
       description: productDocument.description,
@@ -44,12 +48,13 @@ class ProductMongooseRepository {
       code: productDocument.code,
       stock: productDocument.stock,
       enabled: productDocument.enabled,
-    }
+    })
   }
 
   async getProductById(uid) {
     const productDocument = await productSchema.findOne({ _id: uid });
-    return {
+
+    return new Product({
       id: productDocument._id,
       title: productDocument.title,
       description: productDocument.description,
@@ -58,7 +63,7 @@ class ProductMongooseRepository {
       code: productDocument.code,
       stock: productDocument.stock,
       enabled: productDocument.enabled,
-    }
+    })
   }
 
   async updateProduct(uid, updatedData) {

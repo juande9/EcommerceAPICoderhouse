@@ -1,15 +1,15 @@
 import container from "../../container.js";
 import { createHash } from "../../shared/index.js";
-import roleManager from "./RoleManager.js";
 
 class UsersManager {
 
     constructor() {
         this.UsersRepository = container.resolve('UsersRepository')
+        this.RoleRepository = container.resolve('RoleRepository')
     }
 
     async createUser(data) {
-        const role = await new roleManager().getOne("647e6757f16ff85ac7ec7c0d");
+        const role = await this.RoleRepository.getOne("647e6757f16ff85ac7ec7c0d")
         const dto = {
             ...data,
             password: await createHash(data.password, 10),
@@ -39,8 +39,10 @@ class UsersManager {
         return this.UsersRepository.updateUser(uid, data);
     }
 
-    async assignRole(uid, data) {
-        return this.UsersRepository.assignRole(uid, data);
+    async assignRole(uid, rid) {
+        const role = await this.RoleRepository.getOne(rid)
+
+        return this.UsersRepository.assignRole(uid, role);
     }
 
 }
