@@ -5,8 +5,7 @@ import productValidation from "../../domain/validations/productValidation.js";
 export const getProducts = async (req, res, next) => {
     try {
         const manager = new ProductManager();
-        const params = req.query
-        const products = await manager.getProducts(params);
+        const products = await manager.getProducts(req.query);
         res.status(200).send({ status: "success", payload: products.docs, ...products, docs: undefined });
     } catch (e) {
         next(e)

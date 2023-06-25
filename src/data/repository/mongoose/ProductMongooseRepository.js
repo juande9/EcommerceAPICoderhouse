@@ -47,8 +47,6 @@ class ProductMongooseRepository {
     }
   }
 
-
-
   async getProductById(uid) {
     const productDocument = await productSchema.findOne({ _id: uid });
     return {

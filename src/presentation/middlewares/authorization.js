@@ -5,7 +5,7 @@ const authorization = (permission) => {
     const isAuthorized = isAdmin || (role && role.permissions && role.permissions.includes(permission));
 
     if (!isAuthorized) {
-      return res.status(403).send({ message: 'Error de autorización' });
+      return res.status(403).send({ message: 'Authorization error' });
     }
 
     next();

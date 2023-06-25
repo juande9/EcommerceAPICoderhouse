@@ -4,10 +4,9 @@ import { idValidation } from "../../domain/validations/idValidation.js";
 export const createCart = async (req, res) => {
     try {
         const manager = new CartManager();
-        const newCart = await manager.createCart({
-            cart: [],
-            enabled: true
-        });
+        const newCart = await manager.createCart();
+
+        console.log(newCart)
 
         return res.status(200).send({ status: "success", message: `Nuevo carrito creado con éxito`, id: newCart.id });
     } catch (e) {
@@ -19,8 +18,8 @@ export const createCart = async (req, res) => {
 export const getCarts = async (req, res, next) => {
     try {
         const manager = new CartManager();
-        const carts = await manager.getCarts()
-        res.status(200).send({ status: "success", payload: carts })
+        const carts = await manager.getCarts(req.query)
+        res.status(200).send({ status: "success", payload: carts });
     }
     catch (e) {
         next(e);
@@ -49,8 +48,9 @@ export const addProduct = async (req, res, next) => {
         const validatedProdId = await idValidation.parseAsync(pid)
 
         const manager = new CartManager();
-        const cartUpdated = await manager.addProduct(validatedCartId, validatedProdId);
-        res.status(200).send({ status: "success", message: `Producto agregado correctamente.` })
+        const updatedCart = await manager.addProduct(validatedCartId, validatedProdId);
+
+        res.status(200).send({ status: "success", message: `Producto agregado correctamente`, payload: updatedCart })
     }
     catch (e) {
         next(e);
@@ -60,12 +60,13 @@ export const addProduct = async (req, res, next) => {
 export const deleteProduct = async (req, res, next) => {
     try {
         const { cid, pid } = req.params
+
         const validatedCartId = await idValidation.parseAsync(cid);
         const validatedProdId = await idValidation.parseAsync(pid)
 
         const manager = new CartManager();
-        const cartDeleted = await manager.deleteProduct(validatedCartId, validatedProdId);
-        res.status(200).send({ status: "success", message: `Producto eliminado correctamente.` })
+        const updatedCart = await manager.deleteProduct(validatedCartId, validatedProdId);
+        res.status(200).send({ status: "success", message: `Producto eliminado correctamente.`, payload: updatedCart })
     }
     catch (e) {
         next(e);
@@ -81,6 +82,8 @@ export const updateQuantity = async (req, res, next) => {
         const validatedProdId = await idValidation.parseAsync(pid)
 
         const newQuantity = await manager.updateQuantity(validatedCartId, validatedProdId, quantity);
+
+        console.log(newQuantity)
 
         res.status(200).send({
             status: "success", message: `Cantidad modificada correctamente. Producto: ${newQuantity.product}. Nueva cantidad: ${quantity}`

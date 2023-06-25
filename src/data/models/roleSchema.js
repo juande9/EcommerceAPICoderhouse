@@ -1,13 +1,13 @@
 import mongoose, { Schema } from "mongoose";
-import paginate from "mongoose-paginate-v2";
+import mongoosePaginate from "mongoose-paginate-v2"
 
 const roleCollection = 'roles';
 
-const RoleSchema = new Schema({
-  name: { type: Schema.Types.String, required: true },
-  permissions: [{ type: Schema.Types.String }]
+const roleSchema = new Schema({
+  name: { type: String, required: true, unique: true },    
+  permissions: { type: [String], required: true },
 });
 
-RoleSchema.plugin(paginate);
+roleSchema.plugin(mongoosePaginate);
 
-export default mongoose.model(roleCollection, RoleSchema);
+export default mongoose.model(roleCollection, roleSchema);

@@ -12,5 +12,7 @@ const productSchema = new Schema({
     stock: { type: Number, required: true },
     enabled: { type: Boolean, default: true }
 })
+
 productSchema.plugin(mongoosePaginate)
+
 export default mongoose.model(productsCollection, productSchema)

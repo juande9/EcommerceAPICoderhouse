@@ -1,144 +1,117 @@
 import cartSchema from "../../models/cartSchema.js"
 import productSchema from "../../models/productSchema.js";
+import Cart from "../../../domain/entities/cart.js"
 
 class CartMongooseRepository {
 
-    async getCarts() {
-        const cartsDocument = await cartSchema.find({ enabled: true });
-
-        if (cartsDocument.length === 0) {
-            throw new Error('No se encontraron carritos.');
+    async getCarts(params) {
+        const { limit = 10, page } = params
+        const paginateOptions = {
+            limit: limit || 10,
+            page: page || 1,
         }
 
-        return cartsDocument.map(document => ({
-            _id: document._id,
+        const cartsDocument = await cartSchema.paginate({}, paginateOptions)
+        const { docs, ...pagination } = cartsDocument
+
+        const carts = docs.map(document => new Cart({
+            id: document._id,
             cart: document.cart,
         }))
+
+        return {
+            carts,
+            pagination
+        }
     }
 
     async createCart(data) {
         const cartDocument = await cartSchema.create(data)
-        return {
+
+        return new Cart({
             id: cartDocument._id,
             cart: cartDocument.cart,
             enabled: cartDocument.enabled,
-        }
+        })
     }
 
     async getCartById(cid) {
         const cartDocument = await cartSchema.findOne({ _id: cid })
+
         if (!cartDocument) {
-            return Promise.reject(new Error(`No se encontraron carritos con id: ${cid}`))
+            throw new Error(`No se encontraron carritos con id: ${cid}`)
         }
 
-        return {
+        return new Cart({
             id: cartDocument._id,
             cart: cartDocument.cart,
             enabled: cartDocument.enabled,
-        }
+        })
     }
 
-    async addProduct(cid, pid) {
-        const productDocument = await productSchema.findOne({ _id: pid });
-        const cartDocument = await cartSchema.findOne({ _id: cid })
+    async addProduct(cid, product) {
+        const cartDocument = await cartSchema.findOne({ _id: cid });
+        const productExist = cartDocument.cart.some(item => item.product._id.equals(product.id));
 
-        if (!productDocument) {
-            throw new Error("Producto no encontrado");
-        }
-
-        const productFound = cartDocument.cart.some(item => item.product._id.equals(productDocument._id));
-
-        if (!productFound) {
-            await cartSchema.findOneAndUpdate(
-                { _id: cid },
-                { $push: { cart: { product: productDocument._id, quantity: 1 } } },
-                { new: true },
-            );
-        } else {
-            await cartSchema.findOneAndUpdate(
-                { _id: cid, "cart.product": productDocument._id },
-                { $inc: { "cart.$.quantity": 1 } },
-                { new: true }
-            );
-        }
+        productExist ? Cart.addProduct(cid, product) : Cart.addNewProduct(cid, product);
 
         const updatedCart = await cartSchema.findOne({ _id: cid });
 
-        return {
+        return new Cart({
             id: updatedCart._id,
             cart: updatedCart.cart,
             enabled: updatedCart.enabled,
-        }
+        });
     }
 
-    async deleteProduct(cid, pid) {
-        try {
-            const productDocument = await productSchema.findOne({ _id: pid });
+    async deleteProduct(cid, product) {
+        const cartDocument = await cartSchema.findOne({ _id: cid });
+        const productExist = cartDocument.cart.some(item => item.product._id.equals(product.id));
 
-            const deletedProduct = await cartSchema.findOneAndUpdate(
-                { _id: cid },
-                { $pull: { cart: { product: productDocument._id } } },
-                { new: true }
-            );
+        if (productExist) {
+            const newCart = await Cart.deleteProduct(cid, product)
+            return new Cart({
+                id: newCart._id,
+                cart: newCart.cart,
+                enabled: newCart.enabled,
+            })
+        }
+        else {
+            throw new Error('Product not found in cart.');
+        }
 
-            return {
-                id: deletedProduct._id,
-                cart: deletedProduct.cart,
-                enabled: deletedProduct.enabled,
-            }
-        }
-        catch (e) {
-            return e.message
-        }
     }
 
-    async updateQuantity(cid, pid, qty) {
-        try {
-            const productDocument = await productSchema.findOne({ _id: pid });
+    async updateQuantity(cid, product, qty) {
+        const cartDocument = await cartSchema.findOne({ _id: cid });
+        const productExist = cartDocument.cart.some(item => item.product._id.equals(product.id));
 
-            if (!productDocument) {
-                throw new Error("Producto no encontrado");
-            }
+        if (productExist) {
+            const qtyUpdated = await Cart.updateQuantity(cid, product, qty)
 
-            const stockUpdated = await cartSchema.findOneAndUpdate(
-                { _id: cid, "cart.product": productDocument._id },
-                { $set: { "cart.$.quantity": qty } },
-                { new: true }
-            );
-
-            return {
-                id: stockUpdated._id,
-                cart: stockUpdated.cart,
-                enabled: stockUpdated.enabled,
-                product: productDocument.title
-            }
+            return new Cart({
+                id: qtyUpdated._id,
+                cart: qtyUpdated.cart,
+                enabled: qtyUpdated.enabled,
+            })
         }
-        catch (e) {
-            return e.message
+        else {
+            throw new Error('Product not found in cart.');
         }
+
     }
 
     async emptyCart(cid) {
-        try {
-            const emptiedCart = await cartSchema.findOneAndUpdate(
-                { _id: cid },
-                { $set: { cart: [] } },
-                { new: true }
-            );
+        const emptiedCart = await cartSchema.findOneAndUpdate(
+            { _id: cid },
+            { $set: { cart: [] } },
+            { new: true }
+        );
 
-            if (!emptiedCart) {
-                throw new Error('El carrito no existe');
-            }
-
-            return {
-                id: emptiedCart._id,
-                cart: emptiedCart.cart,
-                enabled: emptiedCart.enabled,
-            }
+        if (!emptiedCart) {
+            throw new Error('El carrito no existe');
         }
-        catch (e) {
-            return e
-        }
+        return emptiedCart
     }
 }
 

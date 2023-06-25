@@ -1,4 +1,5 @@
 import roleManager from "../../domain/managers/RoleManager.js";
+import { idValidation } from "../../domain/validations/idValidation.js";
 
 export const list = async (req, res, next) => {
     try {
@@ -15,17 +16,21 @@ export const getOne = async (req, res, next) => {
     try {
         const { id } = req.params
         const manager = new roleManager();
-        const roleFound = await manager.getOne(id);
+        const roleFound = await manager.getOne(await idValidation.parseAsync(id));
         res.status(200).send({ status: "success", payload: roleFound });
     } catch (e) {
         next(e);
     }
 }
 
-export const create = async (req, res) => {
-    const manager = new roleManager();
-    const role = await manager.create(req.body);
-    res.send({ status: 'success', role, message: 'Role created.' })
+export const create = async (req, res, next) => {
+    try {
+        const manager = new roleManager();
+        const role = await manager.create(req.body);
+        res.send({ status: 'success', role, message: 'Role created.' })
+    } catch (e) {
+        next(e)
+    }
 };
 
 export const update = async (req, res, next) => {

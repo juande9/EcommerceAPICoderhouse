@@ -4,14 +4,17 @@ class CartManager {
 
     constructor() {
         this.CartRepository = container.resolve('CartRepository')
+        this.ProductRepository = container.resolve('ProductRepository')
     }
 
-    async createCart(data) {
-        return this.CartRepository.createCart(data);
+    async createCart() {
+        const newCart = { cart: [], enabled: true }
+
+        return this.CartRepository.createCart(newCart);
     }
 
-    async getCarts() {
-        return this.CartRepository.getCarts();
+    async getCarts(params) {
+        return this.CartRepository.getCarts(params);
     }
 
     async getCartById(cid) {
@@ -19,15 +22,29 @@ class CartManager {
     }
 
     async addProduct(cid, pid) {
-        return this.CartRepository.addProduct(cid, pid);
+        const productDocument = await this.ProductRepository.getProductById(pid)
+        if (!productDocument) {
+            throw new Error("Product not found.")
+        }
+
+        return this.CartRepository.addProduct(cid, productDocument);
     }
 
     async deleteProduct(cid, pid) {
-        return this.CartRepository.deleteProduct(cid, pid);
+        const productDocument = await this.ProductRepository.getProductById(pid)
+        if (!productDocument) {
+            throw new Error("Product not found.")
+        }
+
+        return this.CartRepository.deleteProduct(cid, productDocument);
     }
 
     async updateQuantity(cid, pid, qty) {
-        return this.CartRepository.updateQuantity(cid, pid, qty);
+        const productDocument = await this.ProductRepository.getProductById(pid)
+        if (!productDocument) {
+            throw new Error("Product not found.")
+        }
+        return this.CartRepository.updateQuantity(cid, productDocument, qty);
     }
 
     async emptyCart(cid) {
