@@ -1,5 +1,7 @@
 import cartSchema from "../../models/cartSchema.js"
+import ticketSchema from "../../models/ticketSchema.js"
 import Cart from "../../../domain/entities/cart.js"
+import Ticket from "../../../domain/entities/ticket.js"
 
 class CartMongooseRepository {
 
@@ -87,7 +89,6 @@ class CartMongooseRepository {
 
         if (productExist) {
             const qtyUpdated = await Cart.updateQuantity(cid, product, qty)
-
             return new Cart({
                 id: qtyUpdated._id,
                 cart: qtyUpdated.cart,
@@ -97,7 +98,6 @@ class CartMongooseRepository {
         else {
             throw new Error('Product not found in cart.');
         }
-
     }
 
     async emptyCart(cid) {
@@ -110,8 +110,22 @@ class CartMongooseRepository {
         if (!emptiedCart) {
             throw new Error('El carrito no existe');
         }
+
         return emptiedCart
     }
+
+    async createTicket(data) {
+        const ticketDocument = await ticketSchema.create(data)
+
+        return new Ticket({
+            id: ticketDocument._id,
+            code: ticketDocument.code,
+            purchase_datetime: ticketDocument.purchase_datetime,
+            amount: ticketDocument.amount,
+            purchaser: ticketDocument.purchaser
+        })
+    }
+
 }
 
 export default CartMongooseRepository

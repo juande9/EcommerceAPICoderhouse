@@ -1,4 +1,5 @@
 import container from "../../container.js";
+import { nanoid } from "nanoid";
 
 class CartManager {
 
@@ -40,15 +41,44 @@ class CartManager {
 
     async updateQuantity(cid, pid, qty) {
         const productDocument = await this.ProductRepository.getProductById(pid)
+
         if (!productDocument) {
             throw new Error("Product not found.")
         }
+
         return this.CartRepository.updateQuantity(cid, productDocument, qty);
     }
 
     async emptyCart(cid) {
         return this.CartRepository.emptyCart(cid);
     }
+
+    async createTicket(user, cid) {
+        const currentCart = await this.getCartById(cid)
+        const code = nanoid()
+
+        /*         const productsInCart = currentCart.cart.map(doc => {
+                    const cartQty = doc.quantity
+                    const stock = doc.product.stock
+        
+                    if (cartQty <= stock) {
+                        return doc.product.id
+                    } else {
+                        return 'Error'
+                    }
+                })
+        
+                console.log(productsInCart) */
+
+        const dto = {
+            code,
+            amount: 2,
+            purchaser: user
+        }
+
+        return this.CartRepository.createTicket(dto)
+    }
 }
+
 
 export default CartManager

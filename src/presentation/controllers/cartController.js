@@ -65,6 +65,7 @@ export const deleteProduct = async (req, res, next) => {
 
         const manager = new CartManager();
         const updatedCart = await manager.deleteProduct(validatedCartId, validatedProdId);
+
         res.status(200).send({ status: "success", message: `Producto eliminado correctamente.`, payload: updatedCart })
     }
     catch (e) {
@@ -80,12 +81,10 @@ export const updateQuantity = async (req, res, next) => {
         const validatedCartId = await idValidation.parseAsync(cid);
         const validatedProdId = await idValidation.parseAsync(pid)
 
-        const newQuantity = await manager.updateQuantity(validatedCartId, validatedProdId, quantity);
-
-        console.log(newQuantity)
+        const updatedCart = await manager.updateQuantity(validatedCartId, validatedProdId, quantity);
 
         res.status(200).send({
-            status: "success", message: `Cantidad modificada correctamente. Producto: ${newQuantity.product}. Nueva cantidad: ${quantity}`
+            status: "success", message: `Cantidad modificada correctamente`, payload: updatedCart
         })
     }
     catch (e) {
@@ -100,12 +99,26 @@ export const emptyCart = async (req, res, next) => {
         const manager = new CartManager();
         const emptiedCart = await manager.emptyCart(validatedCartId);
 
-        res.status(200).send({
-            status: "success", message: `Se han eliminado los productos del carrito.`
-        })
+        res.status(200).send({ status: "success", message: `Se han eliminado los productos del carrito.` })
     }
     catch (e) {
         next(e);
+    }
+}
+
+export const createTicket = async (req, res, next) => {
+    try {
+        const { cid } = req.params
+        const validatedCartId = await idValidation.parseAsync(cid);
+        const currentUser = req.user.email
+
+        const manager = new CartManager();
+        const factoredTicket = await manager.createTicket(currentUser, validatedCartId);
+
+        res.status(200).send({ status: "success", message: `Se han eliminado los productos del carrito.`, payload: factoredTicket })
+    }
+    catch (e) {
+        next(e)
     }
 }
 

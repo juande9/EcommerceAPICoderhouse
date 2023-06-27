@@ -1,3 +1,6 @@
+// VER SI SE PUEDE HACER UN METODO EN ENTITY PARA ENCONTRAR USUARIO
+
+
 import userSchema from "../../models/userSchema.js";
 import User from "../../../domain/entities/user.js";
 
@@ -123,7 +126,7 @@ class UsersMongooseRepository {
         if (!userDocument) {
             throw new Error('User not found')
         }
-        
+
         return new User({
             id: userDocument._id,
             firstName: userDocument.firstName,

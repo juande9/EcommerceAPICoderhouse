@@ -18,17 +18,11 @@ const userSchema = new Schema({
 userSchema.plugin(mongoosePaginate)
 
 userSchema.pre("find", function () {
-    this.populate({
-        path: "role",
-        select: "name"
-    });
+    this.populate(['role']);
 })
 
 userSchema.pre("findOne", function () {
-    this.populate({
-        path: "role",
-        select: "name"
-    });
+    this.populate(['role']);
 })
 
 export default mongoose.model(usersCollection, userSchema);

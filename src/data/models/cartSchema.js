@@ -34,4 +34,8 @@ cartSchema.pre("findOne", function () {
     this.populate(["cart.product"])
 })
 
+cartSchema.pre("findOneAndUpdate", function () {
+    this.populate(["cart.product"])
+})
+
 export default mongoose.model(cartsCollection, cartSchema)

@@ -28,6 +28,6 @@ export const signup = async (req, res, next) => {
 }
 
 export const current = async (req, res) => {
-    const currentUser = req.user
+    const currentUser = req
     res.status(200).send({ status: 'success', payload: currentUser });
 }
