@@ -3,7 +3,8 @@ class Ticket {
     constructor(params) {
         this.id = params.id;
         this.code = params.code;
-        this.purchase_datetime = params.purchase_datetime;
+        this.purchaseDatetime = params.purchaseDatetime;
+        this.products = params.products;
         this.amount = params.amount;
         this.purchaser = params.purchaser;
     }

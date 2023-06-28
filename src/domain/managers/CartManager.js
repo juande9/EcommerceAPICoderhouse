@@ -54,31 +54,46 @@ class CartManager {
     }
 
     async createTicket(user, cid) {
-        const currentCart = await this.getCartById(cid)
-        const code = nanoid()
+        const currentCart = await this.getCartById(cid);
+        const code = nanoid();
+        const productsInCart = [];
+        const productsNotAvailable = [];
+        let amount = 0;
 
-        /*         const productsInCart = currentCart.cart.map(doc => {
-                    const cartQty = doc.quantity
-                    const stock = doc.product.stock
-        
-                    if (cartQty <= stock) {
-                        return doc.product.id
-                    } else {
-                        return 'Error'
-                    }
-                })
-        
-                console.log(productsInCart) */
+        for (const e of currentCart.cart) {
+            const cartQty = e.quantity;
+            const { stock, id, price, title } = e.product;
+
+            if (cartQty <= stock) {
+                await this.ProductRepository.updateStock(id, stock - cartQty);
+                const total = price * cartQty;
+
+                const productDocument = await this.ProductRepository.getProductById(id);
+
+                productsInCart.push({
+                    product: productDocument.id,
+                    quantity: cartQty,
+                    price,
+                    total
+                });
+
+                await this.CartRepository.deleteProduct(currentCart.id, productDocument);
+                amount += total;
+            } else {
+                productsNotAvailable.push({ product: id });
+                throw new Error(`Insufficient stock to complete the sale for product: ${title}`);
+            }
+        }
 
         const dto = {
             code,
-            amount: 2,
+            amount,
+            products: productsInCart,
             purchaser: user
-        }
+        };
 
-        return this.CartRepository.createTicket(dto)
+        return this.CartRepository.createTicket(dto);
     }
 }
-
 
 export default CartManager

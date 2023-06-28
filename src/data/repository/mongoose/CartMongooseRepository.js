@@ -80,7 +80,6 @@ class CartMongooseRepository {
         else {
             throw new Error('Product not found in cart.');
         }
-
     }
 
     async updateQuantity(cid, product, qty) {
@@ -120,7 +119,8 @@ class CartMongooseRepository {
         return new Ticket({
             id: ticketDocument._id,
             code: ticketDocument.code,
-            purchase_datetime: ticketDocument.purchase_datetime,
+            purchaseDatetime: ticketDocument.purchaseDatetime,
+            products: ticketDocument.products,
             amount: ticketDocument.amount,
             purchaser: ticketDocument.purchaser
         })

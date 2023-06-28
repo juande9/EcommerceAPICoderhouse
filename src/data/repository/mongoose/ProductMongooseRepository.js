@@ -83,6 +83,16 @@ class ProductMongooseRepository {
     }
 
   }
+
+  async updateStock(uid, updatedNumber) {
+    const productDocument = await productSchema.updateOne({ _id: uid }, { stock: updatedNumber });
+
+    if (productDocument.nModified === 0) {
+      throw new Error('Product not found');
+    }
+  }
+
+
 }
 
 export default ProductMongooseRepository
