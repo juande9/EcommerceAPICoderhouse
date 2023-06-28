@@ -65,9 +65,7 @@ class CartManager {
             const { stock, id, price, title } = e.product;
 
             if (cartQty <= stock) {
-                await this.ProductRepository.updateStock(id, stock - cartQty);
                 const total = price * cartQty;
-
                 const productDocument = await this.ProductRepository.getProductById(id);
 
                 productsInCart.push({
@@ -77,13 +75,24 @@ class CartManager {
                     total
                 });
 
-                await this.CartRepository.deleteProduct(currentCart.id, productDocument);
                 amount += total;
             } else {
                 productsNotAvailable.push({ product: id });
                 throw new Error(`Insufficient stock to complete the sale for product: ${title}`);
             }
         }
+
+        if (productsNotAvailable.length === 0) {
+            for (const p of productsInCart) {
+                const { product, quantity } = p
+                const productDocument = await this.ProductRepository.getProductById(product)
+                const { stock } = productDocument
+/* 
+                await this.ProductRepository.updateStock(product, stock - quantity) */
+                await this.CartRepository.deleteProduct(currentCart.id, product)
+            }
+        }
+
 
         const dto = {
             code,

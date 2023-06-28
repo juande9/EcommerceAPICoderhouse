@@ -115,7 +115,7 @@ export const createTicket = async (req, res, next) => {
         const manager = new CartManager();
         const factoredTicket = await manager.createTicket(currentUser, validatedCartId);
 
-        res.status(200).send({ status: "success", message: `Se han eliminado los productos del carrito.`, ticket: factoredTicket })
+        res.status(200).send({ status: "success", message: `Ticket creado correctamente.`, ticket: factoredTicket })
     }
     catch (e) {
         next(e)

@@ -67,9 +67,11 @@ class CartMongooseRepository {
 
     async deleteProduct(cid, product) {
         const cartDocument = await cartSchema.findOne({ _id: cid });
+        console.log(product)
         const productExist = cartDocument.cart.some(item => item.product._id.equals(product.id));
+        console.log(productExist)
 
-        if (productExist) {
+/*         if (productExist) {
             const newCart = await Cart.deleteProduct(cid, product)
             return new Cart({
                 id: newCart._id,
@@ -79,7 +81,7 @@ class CartMongooseRepository {
         }
         else {
             throw new Error('Product not found in cart.');
-        }
+        } */
     }
 
     async updateQuantity(cid, product, qty) {
