@@ -82,10 +82,10 @@ class CartManager {
             }
         }
 
-        if (productsNotAvailable.length > 0) {
+        if (productsNotAvailable.length > 0 || productsInCart.length === 0) {
             return {
                 status: "error",
-                message: '`Insufficient stock to complete the sale',
+                message: '`Insufficient stock to complete the sale or the cart is empty.',
                 payload: productsNotAvailable
             }
         }
