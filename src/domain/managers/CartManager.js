@@ -84,7 +84,7 @@ class CartManager {
 
         if (productsNotAvailable.length > 0) {
             return {
-                error: true,
+                status: "error",
                 message: '`Insufficient stock to complete the sale',
                 payload: productsNotAvailable
             }

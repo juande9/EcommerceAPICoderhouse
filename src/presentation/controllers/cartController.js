@@ -83,9 +83,7 @@ export const updateQuantity = async (req, res, next) => {
 
         const updatedCart = await manager.updateQuantity(validatedCartId, validatedProdId, quantity);
 
-        res.status(200).send({
-            status: "success", message: `Cantidad modificada correctamente`, payload: updatedCart
-        })
+        res.status(200).send({ status: "success", message: `Cantidad modificada correctamente`, payload: updatedCart })
     }
     catch (e) {
         next(e);
@@ -115,14 +113,10 @@ export const createTicket = async (req, res, next) => {
         const manager = new CartManager();
         const factoredTicket = await manager.createTicket(currentUser, validatedCartId);
 
-        if (factoredTicket.error != true) {
-
+        if (factoredTicket.status != error) {
             res.status(200).send({ status: "success", message: `Ticket creado correctamente.`, ticket: factoredTicket })
-            
         }
-
-        res.status(404).send( factoredTicket )
-
+        res.status(404).send(factoredTicket)
     }
     catch (e) {
         next(e)

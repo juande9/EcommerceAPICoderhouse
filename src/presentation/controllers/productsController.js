@@ -1,6 +1,7 @@
 import ProductManager from "../../domain/managers/ProductManager.js";
 import { idValidation } from "../../domain/validations/idValidation.js";
 import productValidation from "../../domain/validations/productValidation.js";
+import mailing from "../../utils/mailing.js";
 
 export const getProducts = async (req, res, next) => {
     try {

@@ -1,5 +1,5 @@
 import container from "../../container.js";
-import { createHash } from "../../shared/index.js";
+import { createHash } from "../../utils/auth.js";
 
 class UsersManager {
 
