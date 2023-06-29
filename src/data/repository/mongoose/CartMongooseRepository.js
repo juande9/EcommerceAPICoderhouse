@@ -66,40 +66,41 @@ class CartMongooseRepository {
     }
 
     async deleteProduct(cid, product) {
-        const cartDocument = await cartSchema.findOne({ _id: cid });
-        console.log(product)
-        const productExist = cartDocument.cart.some(item => item.product._id.equals(product.id));
-        console.log(productExist)
+        const cartDocument = await cartSchema.findOneAndUpdate(
+            { _id: cid },
+            { $pull: { cart: { product: product } } },
+            { new: true }
+        );
 
-/*         if (productExist) {
-            const newCart = await Cart.deleteProduct(cid, product)
+        if (cartDocument) {
             return new Cart({
-                id: newCart._id,
-                cart: newCart.cart,
-                enabled: newCart.enabled,
+                id: cartDocument._id,
+                cart: cartDocument.cart,
+                enabled: cartDocument.enabled,
             })
         }
-        else {
-            throw new Error('Product not found in cart.');
-        } */
+        throw new Error('Product not found in cart.');
     }
 
     async updateQuantity(cid, product, qty) {
-        const cartDocument = await cartSchema.findOne({ _id: cid });
-        const productExist = cartDocument.cart.some(item => item.product._id.equals(product.id));
+        console.log(product.id)
+        const cartDocument = await cartSchema.findOneAndUpdate(
+            { _id: cid, 'cart.product': product.id },
+            { $set: { 'cart.$.quantity': qty } },
+            { new: true }
+        );
 
-        if (productExist) {
-            const qtyUpdated = await Cart.updateQuantity(cid, product, qty)
+        if (cartDocument) {
             return new Cart({
-                id: qtyUpdated._id,
-                cart: qtyUpdated.cart,
-                enabled: qtyUpdated.enabled,
-            })
+                id: cartDocument._id,
+                cart: cartDocument.cart,
+                enabled: cartDocument.enabled,
+            });
         }
-        else {
-            throw new Error('Product not found in cart.');
-        }
+
+        throw new Error('Product not found in cart.');
     }
+
 
     async emptyCart(cid) {
         const emptiedCart = await cartSchema.findOneAndUpdate(

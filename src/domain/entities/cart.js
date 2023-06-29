@@ -24,15 +24,6 @@ class Cart {
         );
     }
 
-    static async deleteProduct(cid, product) {
-        const newCart = await cartSchema.findOneAndUpdate(
-            { _id: cid },
-            { $pull: { cart: { product: product.id } } },
-            { new: true }
-        )
-        return newCart
-    }
-
     static async updateQuantity(cid, product, qty) {
         const newStock = await cartSchema.findOneAndUpdate(
             { _id: cid, "cart.product": product.id },

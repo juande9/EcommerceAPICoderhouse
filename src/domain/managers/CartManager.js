@@ -32,11 +32,12 @@ class CartManager {
 
     async deleteProduct(cid, pid) {
         const productDocument = await this.ProductRepository.getProductById(pid)
+
         if (!productDocument) {
             throw new Error("Product not found.")
         }
 
-        return this.CartRepository.deleteProduct(cid, productDocument);
+        return this.CartRepository.deleteProduct(cid, productDocument.id);
     }
 
     async updateQuantity(cid, pid, qty) {
@@ -62,7 +63,7 @@ class CartManager {
 
         for (const e of currentCart.cart) {
             const cartQty = e.quantity;
-            const { stock, id, price, title } = e.product;
+            const { stock, id, price } = e.product;
 
             if (cartQty <= stock) {
                 const total = price * cartQty;
@@ -78,7 +79,14 @@ class CartManager {
                 amount += total;
             } else {
                 productsNotAvailable.push({ product: id });
-                throw new Error(`Insufficient stock to complete the sale for product: ${title}`);
+            }
+        }
+
+        if (productsNotAvailable.length > 0) {
+            return {
+                error: true,
+                message: '`Insufficient stock to complete the sale',
+                payload: productsNotAvailable
             }
         }
 
@@ -87,12 +95,10 @@ class CartManager {
                 const { product, quantity } = p
                 const productDocument = await this.ProductRepository.getProductById(product)
                 const { stock } = productDocument
-/* 
-                await this.ProductRepository.updateStock(product, stock - quantity) */
-                await this.CartRepository.deleteProduct(currentCart.id, product)
+                await this.ProductRepository.updateStock(product, stock - quantity)
+                await this.CartRepository.deleteProduct(cid, product)
             }
         }
-
 
         const dto = {
             code,
