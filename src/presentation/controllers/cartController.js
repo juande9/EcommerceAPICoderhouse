@@ -1,13 +1,11 @@
 import CartManager from "../../domain/managers/CartManager.js";
 import { idValidation } from "../../domain/validations/idValidation.js";
+import emailManager from "../../utils/emailManager.js";
 
 export const createCart = async (req, res) => {
     try {
         const manager = new CartManager();
         const newCart = await manager.createCart();
-
-        console.log(newCart)
-
         return res.status(200).send({ status: "success", message: `Nuevo carrito creado con éxito`, id: newCart.id });
     } catch (e) {
         res.status(400).send({ status: "error", message: e.message });
@@ -113,10 +111,14 @@ export const createTicket = async (req, res, next) => {
         const manager = new CartManager();
         const factoredTicket = await manager.createTicket(currentUser, validatedCartId);
 
-        if (factoredTicket.status != error) {
+        if (factoredTicket.status != 'error') {
+            const email = new emailManager()
+            await email.sendMail({ to: currentUser, code: factoredTicket.code })
             res.status(200).send({ status: "success", message: `Ticket creado correctamente.`, ticket: factoredTicket })
+        } else {
+            res.status(404).send(factoredTicket)
         }
-        res.status(404).send(factoredTicket)
+
     }
     catch (e) {
         next(e)

@@ -1,7 +1,6 @@
 import ProductManager from "../../domain/managers/ProductManager.js";
 import { idValidation } from "../../domain/validations/idValidation.js";
 import productValidation from "../../domain/validations/productValidation.js";
-import mailing from "../../utils/mailing.js";
 
 export const getProducts = async (req, res, next) => {
     try {
@@ -17,7 +16,6 @@ export const addProduct = async (req, res, next) => {
     try {
         const manager = new ProductManager();
         const verifiedData = await productValidation.parseAsync(req.body)
-        
         const newProduct = await manager.addProduct(verifiedData);
         res.status(200).send({ status: "success", message: `${newProduct.title} cargado correctamente` });
     } catch (e) {

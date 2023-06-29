@@ -3,7 +3,6 @@ dotenv.config()
 
 import AppFactory from "./presentation/factories/appFactory.js";
 import DbFactory from "./data/factories/dbFactory.js";
-import MailingFactory from "./utils/factories/mailingFactory.js";
 
 void (async () => {
 
@@ -11,14 +10,8 @@ void (async () => {
     db.init(process.env.DB_URI)
 
     const app = AppFactory.create(process.env.APPLICATION)
-
     app.init()
     app.build()
     app.listen()
 
-    const mailing = MailingFactory.create()
-    
-    mailing.init()
 })()
-
-
