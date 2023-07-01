@@ -118,7 +118,6 @@ export const createTicket = async (req, res, next) => {
         } else {
             res.status(404).send(factoredTicket)
         }
-
     }
     catch (e) {
         next(e)

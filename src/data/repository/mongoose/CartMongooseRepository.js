@@ -1,7 +1,5 @@
 import cartSchema from "../../models/cartSchema.js"
-import ticketSchema from "../../models/ticketSchema.js"
 import Cart from "../../../domain/entities/cart.js"
-import Ticket from "../../../domain/entities/ticket.js"
 
 class CartMongooseRepository {
 
@@ -114,19 +112,6 @@ class CartMongooseRepository {
         }
 
         return emptiedCart
-    }
-
-    async createTicket(data) {
-        const ticketDocument = await ticketSchema.create(data)
-
-        return new Ticket({
-            id: ticketDocument._id,
-            code: ticketDocument.code,
-            purchaseDatetime: ticketDocument.purchaseDatetime,
-            products: ticketDocument.products,
-            amount: ticketDocument.amount,
-            purchaser: ticketDocument.purchaser
-        })
     }
 
 }

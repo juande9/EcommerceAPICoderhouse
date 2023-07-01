@@ -7,6 +7,7 @@ import UsersMongooseRepository from './data/repository/mongoose/UsersMongooseRep
 import RoleMongooseRepository from './data/repository/mongoose/RoleMongooseRepository.js'
 import ProductMongooseRepository from './data/repository/mongoose/ProductMongooseRepository.js'
 import CartMongooseRepository from './data/repository/mongoose/CartMongooseRepository.js'
+import TicketMongooseRepository from './data/repository/mongoose/TicketMongooseRepository.js'
 
 const container = createContainer()
 
@@ -14,5 +15,6 @@ container.register('UsersRepository', asClass(UsersMongooseRepository), { Lifeti
 container.register('RoleRepository', asClass(RoleMongooseRepository), { Lifetime: Lifetime.SINGLETON })
 container.register('ProductRepository', asClass(ProductMongooseRepository), { Lifetime: Lifetime.SINGLETON })
 container.register('CartRepository', asClass(CartMongooseRepository), { Lifetime: Lifetime.SINGLETON })
+container.register('TicketRepository', asClass(TicketMongooseRepository), { Lifetime: Lifetime.SINGLETON })
 
 export default container
