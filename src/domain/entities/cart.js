@@ -4,6 +4,7 @@ class Cart {
 
     constructor(params) {
         this.id = params.id;
+        this.user = params.user;
         this.cart = params.cart;
         this.enabled = params.enabled;
     }

@@ -1,6 +1,5 @@
 import container from "../../container.js";
-import { nanoid } from "nanoid";
-
+import UsersManagar from '../managers/UsersManager.js'
 class CartManager {
 
     constructor() {
@@ -8,9 +7,17 @@ class CartManager {
         this.ProductRepository = container.resolve('ProductRepository')
     }
 
-    async createCart() {
-        const newCart = { cart: [], enabled: true }
-        return this.CartRepository.createCart(newCart);
+    async createCart(email) {
+        const userMng = new UsersManagar()
+        const user = await userMng.getOneByEmail(email)
+
+        const cart = {
+            user: user.id,
+            cart: [],
+            enabled: true
+        }
+
+        return this.CartRepository.createCart(cart);
     }
 
     async getCarts(params) {

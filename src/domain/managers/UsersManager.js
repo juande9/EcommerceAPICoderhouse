@@ -13,7 +13,9 @@ class UsersManager {
         const dto = {
             ...data,
             password: await createHash(data.password, 10),
-            role: role.id
+            isAdmin: false,
+            role: role.id,
+            enabled: true
         };
         return this.UsersRepository.createUser(dto);
     }

@@ -7,7 +7,9 @@ class SessionManager {
 
     async login(data) {
         await loginValidation.parseAsync(data);
+
         const { email, password } = data
+        
         const manager = new UsersManager();
         const user = await manager.getOneByEmail(email);
         const isHashedPassword = await isValidPassword(password, user.password)
@@ -22,8 +24,8 @@ class SessionManager {
     async signup(dto) {
         await createUserValidation.parseAsync(dto);
         const manager = new UsersManager();
-
         const newUser = await manager.createUser(dto)
+
         return newUser
     }
 

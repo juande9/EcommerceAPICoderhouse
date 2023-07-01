@@ -6,7 +6,8 @@ export const createCart = async (req, res) => {
     try {
         const manager = new CartManager();
         const newCart = await manager.createCart();
-        return res.status(200).send({ status: "success", message: `Nuevo carrito creado con éxito`, id: newCart.id });
+
+        return res.status(200).send({ status: "success", message: `Nuevo carrito creado con éxito`,  id: newCart.id  });
     } catch (e) {
         res.status(400).send({ status: "error", message: e.message });
     }

@@ -1,6 +1,3 @@
-// VER SI SE PUEDE HACER UN METODO EN ENTITY PARA ENCONTRAR USUARIO
-
-
 import userSchema from "../../models/userSchema.js";
 import User from "../../../domain/entities/user.js";
 
@@ -28,7 +25,7 @@ class UsersMongooseRepository {
             age: document.age,
             password: document.password,
             role: document.role,
-            isAdmin: document.isAdmin
+            isAdmin: document.isAdmin,
         }))
 
         return {
