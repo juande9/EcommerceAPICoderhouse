@@ -36,7 +36,10 @@ class UsersMongooseRepository {
     }
 
     async createUser(dto) {
-        const userDocument = await userSchema.create(dto);
+        const password = await User.createHash(dto.password)
+        dto.password = password
+
+        const userDocument = await userSchema.create(dto)
 
         return new User({
             id: userDocument._id,
