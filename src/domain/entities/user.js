@@ -1,5 +1,3 @@
-import { createHash } from "../../utils/auth.js";
-
 class User {
 
     constructor(params) {
@@ -13,11 +11,6 @@ class User {
         this.isAdmin = params.isAdmin;
         this.enabled = params.enabled;
     }
-
-    static async createHash(password) {
-        return createHash(password, 10)
-    }
-
 }
 
 export default User

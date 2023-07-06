@@ -36,9 +36,6 @@ class UsersMongooseRepository {
     }
 
     async createUser(dto) {
-        const password = await User.createHash(dto.password)
-        dto.password = password
-
         const userDocument = await userSchema.create(dto)
 
         return new User({
@@ -93,7 +90,7 @@ class UsersMongooseRepository {
     }
 
     async deleteUser(uid) {
-        return await userSchema.deleteOne(uid);
+        return await userSchema.deleteOne({ _id: uid });
     }
 
 
@@ -120,7 +117,6 @@ class UsersMongooseRepository {
     }
 
     async updateUser(uid, data) {
-
         const userDocument = await userSchema.findOneAndUpdate({ _id: uid }, data, { new: true });
 
         if (!userDocument) {
