@@ -10,12 +10,23 @@ class MongooseAdapter {
     }
 
     async close() {
-        await this.connection.disconnect();
+        try {
+            await this.connection.disconnect();
+        }
+        catch {
+            console.log('Error closing the server')
+        }
     }
 
     async drop() {
-        await this.connection.dropDatabase();
+        try {
+            await mongoose.connection.db.dropDatabase()
+            console.log('Database dropped successfully');
+        } catch (error) {
+            console.log('Error dropping the database:', error);
+        }
     }
+
 
 }
 

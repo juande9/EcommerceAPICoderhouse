@@ -17,9 +17,9 @@ describe('Testing Role Mongoose Repository', () => {
         this.roleRepository = new RoleMongooseRepository();
     });
 
-    after(function () {
-        db.drop();
-        db.close();
+    after(async function () {
+        await db.drop();
+        await db.close();
     });
 
     beforeEach(function () {
@@ -30,12 +30,14 @@ describe('Testing Role Mongoose Repository', () => {
         const result = await this.roleRepository
         expect(result).to.be.an.instanceOf(RoleMongooseRepository);
     });
+
     it('Repository must return an array', async function () {
         const result = await this.roleRepository.getRoles({ limit: 5, page: 1 })
         expect(Array.isArray(result.roles)).to.be.equals(true)
         expect(result.roles.length).to.be.at.most(5)
         expect(result.pagination.page).to.be.equal(1)
     });
+
     it('Repository must create an unique role', async function () {
         const data = {
             name: faker.person.jobTitle(),
@@ -46,9 +48,14 @@ describe('Testing Role Mongoose Repository', () => {
         expect(result).to.have.property('id');
         expect(result.permissions).to.be.an('array')
     });
+
     it('Repository must found a role by id', async function () {
-        const id = "64a4dadecb0b36e5d2a27881"
+        const existingRole = await this.roleRepository.getRoles({ limit: 1, page: 1 });
+        expect(existingRole.roles.length).to.be.at.least(1);
+        const id = existingRole.roles[0].id;
+
         const result = await this.roleRepository.getOne(id)
         expect(result).to.not.be.null;
     });
+    
 });
