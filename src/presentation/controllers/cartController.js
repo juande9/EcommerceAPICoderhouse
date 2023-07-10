@@ -125,3 +125,17 @@ export const createTicket = async (req, res, next) => {
     }
 }
 
+export const deleteCart = async (req, res, next) => {
+    try {
+        const { cid } = req.params
+        const validatedCartId = await idValidation.parseAsync(cid)
+
+        const manager = new CartManager();
+        const productDeleted = await manager.deleteCart(validatedCartId);
+        res.status(200).send({ status: "success", message: `Cart deleted` })
+    }
+    catch (e) {
+        next(e)
+    }
+}
+

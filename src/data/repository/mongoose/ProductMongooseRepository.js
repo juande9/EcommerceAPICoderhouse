@@ -81,7 +81,6 @@ class ProductMongooseRepository {
     if (productDocument.deletedCount === 0) {
       throw new Error('Product not found');
     }
-
   }
 
   async updateStock(uid, updatedNumber) {

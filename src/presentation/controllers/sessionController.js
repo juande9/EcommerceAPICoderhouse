@@ -8,7 +8,7 @@ export const login = async (req, res, next) => {
         res.cookie('accessToken', accessToken, {
             maxAge: 60 * 60 * 100,
             httpOnly: true
-        }).status(201).send({ status: "success", message: `${req.body.email} logged in.`, accessToken: accessToken });
+        }).status(200).send({ status: "success", message: `${req.body.email} logged in.`, accessToken: accessToken });
 
     }
     catch (e) {
@@ -28,6 +28,6 @@ export const signup = async (req, res, next) => {
 }
 
 export const current = async (req, res) => {
-    const currentUser = req
+    const currentUser = req.user;
     res.status(200).send({ status: 'success', payload: currentUser });
-}
+};

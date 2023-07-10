@@ -1,5 +1,5 @@
 import container from "../../container.js";
-import UsersManagar from '../managers/UsersManager.js'
+
 class CartManager {
 
     constructor() {
@@ -7,12 +7,8 @@ class CartManager {
         this.ProductRepository = container.resolve('ProductRepository')
     }
 
-    async createCart(email) {
-        const userMng = new UsersManagar()
-        const user = await userMng.getOneByEmail(email)
-
+    async createCart() {
         const cart = {
-            user: user.id,
             cart: [],
             enabled: true
         }
@@ -60,6 +56,10 @@ class CartManager {
     async emptyCart(cid) {
         return this.CartRepository.emptyCart(cid);
     }
+
+    async deleteCart(cid) {
+        return this.CartRepository.deleteCart(cid);
+      }
 
 }
 

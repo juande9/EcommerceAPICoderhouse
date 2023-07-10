@@ -82,7 +82,6 @@ class CartMongooseRepository {
     }
 
     async updateQuantity(cid, product, qty) {
-        console.log(product.id)
         const cartDocument = await cartSchema.findOneAndUpdate(
             { _id: cid, 'cart.product': product.id },
             { $set: { 'cart.$.quantity': qty } },
@@ -115,6 +114,13 @@ class CartMongooseRepository {
         return emptiedCart
     }
 
+    async deleteCart(cid) {
+        const cartDocument = await cartSchema.deleteOne({ _id: cid, enabled: true });
+    
+        if (cartDocument.deletedCount === 0) {
+          throw new Error('Cart not found');
+        }
+      }
 }
 
 export default CartMongooseRepository

@@ -3,7 +3,7 @@ import z from 'zod';
 const allowedPermissions = [
   'getUsers',
   'getRoles',
-  'getCart',
+  'createCart',
   'addProductCart',
   'emptyCart',
   'updateProductCart',

@@ -102,8 +102,6 @@ class UsersMongooseRepository {
             throw new Error('User not found')
         }
 
-        console.log(userDocument.email)
-
         return new User({
             id: userDocument._id,
             firstName: userDocument.firstName,

@@ -11,10 +11,10 @@ class MongooseAdapter {
 
     async close() {
         try {
-            await this.connection.disconnect();
+            await mongoose.disconnect();
         }
-        catch {
-            console.log('Error closing the server')
+        catch (error) {
+            console.log('Error closing the server', error)
         }
     }
 

@@ -29,6 +29,20 @@ class AppExpress {
         this.app.use(errorHandler)
     }
 
+    callback() {
+        return this.app
+    }
+
+    close() {
+        try {
+            this.server.close();
+            console.log('Server closed successfully');
+        } catch (error) {
+            console.log('Error closing the server:', error);
+        }
+    }
+
+
     listen() {
         const server = this.app.listen(process.env.SERVER_PORT, () => {
             console.log(`Conectado al server en el puerto: ${process.env.SERVER_PORT}`);
