@@ -27,7 +27,7 @@ export const create = async (req, res, next) => {
     try {
         const manager = new roleManager();
         const role = await manager.create(req.body);
-        res.send({ status: 'success', role, message: 'Role created.' })
+        res.status(201).send({ status: 'success', role, message: 'Role created.' })
     } catch (e) {
         next(e)
     }
@@ -49,6 +49,7 @@ export const update = async (req, res, next) => {
 export const deleteOne = async (req, res, next) => {
     try {
         const { id } = req.params
+        await idValidation.parseAsync(id);
         const manager = new roleManager();
         const roleDeleted = await manager.deleteRole(id);
         res.status(200).send({ status: "success", message: `Rol ${roleDeleted.name} deleted` })

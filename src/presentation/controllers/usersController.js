@@ -33,12 +33,9 @@ export const getUserById = async (req, res, next) => {
 
         const { uid } = req.params
         await idValidation.parseAsync(uid);
-
         const manager = new UsersManager();
         const userFound = await manager.getUserById(uid);
-
         res.status(200).send({ status: "success", payload: userFound });
-
     } catch (e) {
         next(e);
     }

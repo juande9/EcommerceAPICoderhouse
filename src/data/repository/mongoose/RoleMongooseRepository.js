@@ -37,11 +37,9 @@ class RoleMongooseRepository {
 
     async getOne(id) {
         const rolesDocument = await roleSchema.findOne({ _id: id })
-
         if (!rolesDocument) {
             throw new Error('Role not found');
         }
-
         return new Role({
             id: rolesDocument._id,
             name: rolesDocument.name,
@@ -50,7 +48,7 @@ class RoleMongooseRepository {
     }
 
     async deleteRole(id) {
-        const rolesDocument = await roleSchema.deleteOne(id);
+        const rolesDocument = await roleSchema.deleteOne({ _id: id });
 
         return new Role({
             id: rolesDocument._id,

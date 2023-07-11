@@ -14,7 +14,7 @@ export const createTicket = async (req, res, next) => {
         if (factoredTicket.status != 'error') {
             const email = new emailManager()
             await email.sendMail({ to: currentUser, code: factoredTicket.code })
-            res.status(200).send({ status: "success", message: `Ticket creado correctamente.`, ticket: factoredTicket })
+            res.status(201).send({ status: "success", message: `Ticket creado correctamente.`, ticket: factoredTicket })
         } else {
             res.status(404).send(factoredTicket)
         }

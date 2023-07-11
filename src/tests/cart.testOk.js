@@ -52,10 +52,8 @@ describe('Testing Cart Endpoints', () => {
     });
 
     it('Should get a cart by id carts /api/carts/{{CART_ID}}', function () {
-        const cid = "64a0854c48c6046f217a7af4"
-
         return this.requester
-            .get(`/api/carts/${cid}`)
+            .get(`/api/carts/${cartId}`)
             .then(result => {
                 const { body, status } = result;
                 expect(Array.isArray(body.payload.cart)).to.be.true;
