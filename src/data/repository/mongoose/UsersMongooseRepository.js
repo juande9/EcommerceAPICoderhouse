@@ -50,6 +50,22 @@ class UsersMongooseRepository {
         })
     }
 
+    async createUserAdmin(dto) {
+        const userDocument = await userSchema.create(dto)
+
+        return new User({
+            id: userDocument._id,
+            firstName: userDocument.firstName,
+            lastName: userDocument.lastName,
+            email: userDocument.email,
+            age: userDocument.age,
+            password: userDocument.password,
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin
+        })
+    }
+
+
     async getUserById(uid) {
         const userDocument = await userSchema.findOne({ _id: uid, enabled: true })
 
