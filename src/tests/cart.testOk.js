@@ -82,7 +82,7 @@ describe('Testing Cart Endpoints', () => {
         const cid = cartId
 
         const newQuantity = {
-            "quantity": 200
+            "quantity": 5
         }
 
         return this.requester
