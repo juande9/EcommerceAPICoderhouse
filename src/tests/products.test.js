@@ -5,8 +5,8 @@ import initServer from "./index.js";
 
 const expect = chai.expect;
 
-describe('Testing Roles Endpoints', () => {
-    let roleId = '';
+describe('Testing Products Endpoints', () => {
+    let productId = '';
 
     before(async function () {
         const { app, db } = await initServer();
@@ -30,67 +30,77 @@ describe('Testing Roles Endpoints', () => {
         await new Promise(resolve => setTimeout(resolve, 500));
     });
 
-    it('Should create a new role /api/roles', function () {
+    it('Should create a new product /api/products', function () {
 
         const payload = {
-            name: faker.person.jobTitle(),
-            permissions: ['getUsers']
-        }
+            title: faker.commerce.product(),
+            description: faker.commerce.productDescription(),
+            price: faker.number.int({ min: 0, max: 1000 }),
+            thumbnail: faker.image.url(),
+            code: faker.number.hex({ min: 0, max: 65535 }),
+            stock: faker.number.int({ min: 0, max: 100 }),
+            enabled: true,
+        };
 
         return this.requester
-            .post('/api/roles')
+            .post('/api/products')
             .send(payload)
             .set('Authorization', `Bearer ${this.jwt}`)
             .then(result => {
                 const { body, status } = result;
                 expect(status).to.be.equals(201);
-                roleId = body.role.id
+                productId = body.payload.id
             });
     });
 
-    it('Should get all created roles /api/roles', function () {
+    it('Should get 2 created products using pagination query: limit /api/products', function () {
+        const queryParams = {
+            limit: 2
+        }
         return this.requester
-            .get('/api/roles')
-            .set('Authorization', `Bearer ${this.jwt}`)
+            .get('/api/products')
+            .query(queryParams)
             .then(result => {
                 const { body, status } = result;
-                expect(Array.isArray(body.roles)).to.be.true;
+                expect(Array.isArray(body.products)).to.be.true;
+                expect(body.pagination.limit).to.be.equals(queryParams.limit);
                 expect(status).to.be.equals(200);
             });
     });
 
-    it('Should get a role by id /api/roles/{{ROLE_ID}}', function () {
+    it('Should get a product by id /api/products/{{PRODUCT_ID}}', function () {
         return this.requester
-            .get(`/api/roles/${roleId}`)
+            .get(`/api/products/${productId}`)
             .set('Authorization', `Bearer ${this.jwt}`)
             .then(result => {
                 const { body, status } = result;
-                expect(body.payload.id).to.be.equal(roleId)
+                expect(body.status).to.be.equal('success')
+                expect(body.payload.id).to.be.equal(productId)
                 expect(status).to.be.equal(200)
             });
     });
 
-    it('Should modify a role /api/roles/{{ROLE_ID}}', function () {
+    it('Should modify a product /api/products/{{PRODUCT_ID}}', function () {
         const payload = {
-            "permissions": [
-                "getUsers"
-            ]
+            "title": "Yerba Mate Amanda",
+            "price": 100,
+            "stock": 20
         }
 
         return this.requester
-            .put(`/api/roles/${roleId}`)
+            .put(`/api/products/${productId}`)
             .send(payload)
             .set('Authorization', `Bearer ${this.jwt}`)
             .then(result => {
                 const { body, status } = result;
-                expect(body.status).to.be.equals('success');
+                expect(body.status).to.be.equal('success')
                 expect(status).to.be.equal(200)
             });
     });
 
-    it('Should delete the cart /api/roles/{{ROLE_ID}}', function () {
+    it('Should delete a product by id /api/products/{{PRODUCT_ID}}', function () {
         return this.requester
-            .delete(`/api/roles/${roleId}`)
+            .delete(`/api/products/${productId}`)
             .set('Authorization', `Bearer ${this.jwt}`)
             .then(result => {
                 const { body, status } = result;

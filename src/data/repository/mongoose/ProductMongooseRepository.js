@@ -74,7 +74,6 @@ class ProductMongooseRepository {
     }
   }
 
-
   async deleteProduct(uid) {
     const productDocument = await productSchema.deleteOne({ _id: uid, enabled: true });
 

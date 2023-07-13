@@ -17,7 +17,7 @@ export const addProduct = async (req, res, next) => {
         const manager = new ProductManager();
         const verifiedData = await productValidation.parseAsync(req.body)
         const newProduct = await manager.addProduct(verifiedData);
-        res.status(200).send({ status: "success", message: `${newProduct.title} cargado correctamente` });
+        res.status(201).send({ status: "success", message: `${newProduct.title} cargado correctamente`, payload: newProduct });
     } catch (e) {
         next(e)
     }
@@ -45,7 +45,7 @@ export const updateProduct = async (req, res, next) => {
         const newData = req.body
 
         const productUpdated = await manager.updateProduct(validatedProdId, newData);
-        res.status(200).send({ status: "success", message: `${productUpdated.title} ha sido modificado`, payload: productUpdated })
+        res.status(200).send({ status: "success", message: `Producto modificado`})
     }
     catch (e) {
         next(e)
@@ -59,7 +59,7 @@ export const deleteProduct = async (req, res, next) => {
 
         const manager = new ProductManager();
         const productDeleted = await manager.deleteProduct(validatedProdId);
-        res.status(200).send({ status: "success", message: `Producto ${productDeleted.title} eliminado` })
+        res.status(200).send({ status: "success", message: `Producto eliminado` })
     }
     catch (e) {
         next(e)
