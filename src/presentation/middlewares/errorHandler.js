@@ -5,7 +5,7 @@ const errorHandler = (err, req, res, next) => {
   }
   else if (err?.name.includes('ZodError')) {
     console.error(err.stack);
-    return res.status(400).json({ status: 'error', message: err.issues});
+    return res.status(400).json({ status: 'error', message: err.issues[0].message});
   }
   console.error(err.stack);
   res.status(500).json({ status: 'error', message: err.message });

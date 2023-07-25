@@ -54,6 +54,10 @@ class ProductMongooseRepository {
   async getProductById(uid) {
     const productDocument = await productSchema.findOne({ _id: uid });
 
+    if (!productDocument) {
+      throw new Error('Product not found')
+    }
+
     return new Product({
       id: productDocument._id,
       title: productDocument.title,

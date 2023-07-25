@@ -8,7 +8,7 @@ void (async () => {
 
     const db = DbFactory.create(process.env.DB)
     db.init(process.env.DB_URI)
-
+   
     const app = AppFactory.create(process.env.APPLICATION)
     app.init()
     app.build()

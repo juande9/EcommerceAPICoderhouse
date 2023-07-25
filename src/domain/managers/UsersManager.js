@@ -1,5 +1,7 @@
 import container from "../../container.js";
 import { createHash } from "../../utils/auth.js";
+import jwt from 'jsonwebtoken';
+import emailManager from "./emailManager.js";
 
 class UsersManager {
 
@@ -58,6 +60,35 @@ class UsersManager {
         return this.UsersRepository.assignRole(uid, role);
     }
 
+    async forgotPassword(email) {
+        const user = await this.UsersRepository.getOneByEmail(email)
+
+        if (user instanceof Error) {
+            throw new Error('Usuario no encontrado')
+        }
+
+        console.log(user.email)
+
+        const token = jwt.sign({ user: user.id }, process.env.JWT_SECRET_PASSRESET, { expiresIn: '1h' });
+        const resetLink = `http://localhost:${process.env.SERVER_PORT}/api/email/reset-password?token=${token}`;
+
+        const manager = new emailManager()
+        manager.send('forgotPassword', { user, resetLink })
+
+        return user.email
+    }
+
+    async changePassword(token, newPassword) {
+
+        const isValidToken = jwt.verify(token, process.env.JWT_SECRET_PASSRESET);
+        if (!isValidToken) {
+            return res.status(401).send('Token inválido');
+        }
+        const { user } = isValidToken
+
+        const passUpdated = await this.UsersRepository.updateUser(user, { password: await createHash(newPassword, 10) })
+        return passUpdated
+    }
 }
 
 export default UsersManager

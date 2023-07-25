@@ -1,6 +1,6 @@
 import CartManager from "../../domain/managers/CartManager.js";
 import { idValidation } from "../../domain/validations/idValidation.js";
-import emailManager from "../../utils/emailManager.js";
+import emailManager from "../../domain/managers/emailManager.js";
 
 export const createCart = async (req, res) => {
     try {

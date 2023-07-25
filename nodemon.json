@@ -7,6 +7,6 @@
     "watch":[
         "src/*"
     ],
-    "exec": "node --inspect src/index.js",
+    "exec": "node --inspect=0.0.0.0 src/index.js",
     "ext": "js"
 }

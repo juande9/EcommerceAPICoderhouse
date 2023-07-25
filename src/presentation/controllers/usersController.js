@@ -59,7 +59,7 @@ export const updateUser = async (req, res, next) => {
 export const assignRole = async (req, res, next) => {
     try {
         const { role } = req.body
-        const validatedRoleId =await idValidation.parseAsync(role);
+        const validatedRoleId = await idValidation.parseAsync(role);
         const { uid } = req.params
         const validatedUserId = await idValidation.parseAsync(uid);
 
@@ -75,13 +75,25 @@ export const assignRole = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
     try {
-
         const { uid } = req.params
         const validatedUserId = await idValidation.parseAsync(uid);
 
         const manager = new UsersManager();
         const userDeleted = await manager.deleteUser(validatedUserId);
         res.status(200).send({ status: "success", message: `Usuario eliminado` })
+    }
+    catch (e) {
+        next(e)
+    }
+
+}
+
+export const forgotPassword = async (req, res, next) => {
+    try {
+        const { email } = req.body
+        const manager = new UsersManager();
+        await manager.forgotPassword(email)
+        res.status(200).send({ status: "success", message: `Hemos enviado un link para que generes una nueva contraseña` })
     }
     catch (e) {
         next(e)

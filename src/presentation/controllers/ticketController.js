@@ -1,4 +1,4 @@
-import emailManager from "../../utils/emailManager.js";
+import emailManager from "../../domain/managers/emailManager.js";
 import { idValidation } from "../../domain/validations/idValidation.js";
 import TicketManager from "../../domain/managers/TicketManager.js";
 

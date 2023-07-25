@@ -7,8 +7,11 @@ import cartRouter from "../../presentation/routes/cartRouter.js";
 import sessionRouter from "../../presentation/routes/sessionRouter.js";
 import usersRouter from "../../presentation/routes/usersRouter.js";
 import roleRouter from "../../presentation/routes/roleRouter.js";
+import emailRouter from "../routes/emailRouter.js";
 
 import errorHandler from "../../presentation/middlewares/errorHandler.js";
+import compression from 'express-compression'
+import { engine } from 'express-handlebars';
 
 class AppExpress {
 
@@ -18,6 +21,19 @@ class AppExpress {
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.static(resolve('src/public')));
         this.app.use(cookieParser(process.env.COOKIE_PASS))
+        this.app.use(compression({
+            brotli: {
+                enabled: true,
+                zlib: {}
+            }
+        }))
+        const viewsPath = resolve('src/presentation/views');
+        this.app.engine('hbs', engine({
+            layoutsDir: `${viewsPath}/layouts`,
+            defaultLayout: `${viewsPath}/layouts/main.hbs`,
+        }));
+        this.app.set('view engine', 'hbs');
+        this.app.set('views', viewsPath);
     }
 
     build() {
@@ -26,6 +42,7 @@ class AppExpress {
         this.app.use('/api/roles', roleRouter)
         this.app.use('/api/session', sessionRouter);
         this.app.use('/api/users', usersRouter)
+        this.app.use('/api/email', emailRouter)
         this.app.use(errorHandler)
     }
 
@@ -53,9 +70,3 @@ class AppExpress {
 }
 
 export default AppExpress
-
-
-
-
-
-
