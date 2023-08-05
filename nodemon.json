@@ -1,12 +1,13 @@
 {
-    "verbose":true,
+    "verbose": true,
     "ignore": [
         ".git",
         "node_modules/**/node_modules"
     ],
-    "watch":[
-        "src/*"
+    "watch": [
+        "src/*",
+        "docs/*"
     ],
     "exec": "node --inspect=0.0.0.0 src/index.js",
-    "ext": "js"
+    "ext": "js,yaml"
 }

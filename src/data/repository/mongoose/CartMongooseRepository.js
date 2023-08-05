@@ -39,7 +39,7 @@ class CartMongooseRepository {
         const cartDocument = await cartSchema.findOne({ _id: cid })
 
         if (!cartDocument) {
-            throw new Error(`No se encontraron carritos con id: ${cid}`)
+            throw new Error(`Cart not found`)
         }
 
         return new Cart({
@@ -53,6 +53,10 @@ class CartMongooseRepository {
         const cartDocument = await cartSchema.findOne({ _id: cid });
         const productExist = cartDocument.cart.some(item => item.product._id.equals(product.id));
 
+        if (!cartDocument) {
+            throw new Error(`Cart not found`)
+        }
+        
         productExist ? Cart.addProduct(cid, product) : Cart.addNewProduct(cid, product);
 
         const updatedCart = await cartSchema.findOne({ _id: cid });

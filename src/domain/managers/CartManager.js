@@ -26,9 +26,6 @@ class CartManager {
 
     async addProduct(cid, pid) {
         const productDocument = await this.ProductRepository.getProductById(pid)
-        if (!productDocument) {
-            throw new Error("Product not found.")
-        }
 
         return this.CartRepository.addProduct(cid, productDocument);
     }

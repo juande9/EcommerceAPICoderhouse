@@ -73,7 +73,7 @@ class ProductMongooseRepository {
   async updateProduct(uid, updatedData) {
     const productDocument = await productSchema.updateOne({ _id: uid }, updatedData);
 
-    if (!productDocument) {
+    if (productDocument.matchedCount == 0) {
       throw new Error('Product not found')
     }
   }

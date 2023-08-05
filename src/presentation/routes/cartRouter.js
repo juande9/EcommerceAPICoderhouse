@@ -8,12 +8,12 @@ const cartRouter = Router()
 
 cartRouter.get("/", getCarts)
 cartRouter.get("/:cid", getCartById)
+cartRouter.delete("/:cid", auth, authorization('deleteCart'), deleteCart)
 cartRouter.post("/", auth, authorization('createCart'), createCart)
 cartRouter.post("/:cid/products/:pid", auth, authorization('addProductCart'), addProduct)
 cartRouter.delete("/:cid/products/:pid", auth, authorization('deleteProductCart'), deleteProduct)
 cartRouter.put("/:cid/products/:pid", auth, authorization('updateProductCart'), updateQuantity)
 cartRouter.delete("/:cid/products", auth, authorization('emptyCart'), emptyCart)
-cartRouter.delete("/:cid", auth, authorization('deleteCart'), deleteCart)
 cartRouter.post("/:cid/purchase", auth, authorization('endPurchase'), createTicket)
 
 export default cartRouter

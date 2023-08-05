@@ -1,0 +1,285 @@
+tags:
+  - name: Cart
+    description: Operaciones relacionadas con el carrito
+
+paths:
+  /api/carts:
+    get:
+      summary: Obtiene todos los carritos
+      tags:
+        - Cart
+      responses:
+        '200':
+          description: Lista de carritos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cart'
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+        - Cart
+      responses:
+        '200':
+          description: Genera un nuevo carrito con un id autogenerado por mongo
+          content:
+            application/json:
+              example:
+                status: success
+                message: Nuevo carrito creado con éxito
+                id: "64cdbba5a39497fae531fd35"
+
+  /api/carts/{cid}:
+    get:
+      summary: Obtener un carrito por ID
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: EL id del carrito que se quiere buscar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalles del carrito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: El ID debe tener una longitud de 24 caracteres
+        '404':
+          description: Carrito no encontrado
+
+    delete:
+      summary: Eliminar un carrito por ID
+      tags:
+        - Cart
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Carrito eliminado correctamente
+        '400':
+          description: El ID debe tener una longitud de 24 caracteres
+        '404':
+          description: Carrito no encontrado
+
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Agregar un producto al carrito
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: EL ID del carrito al que se le agrega el producto
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: EL ID del producto que se quiere agregar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto agregado al carrito correctamente
+        '400':
+          description: El ID debe tener una longitud de 24 caracteres
+        '404':
+          description: Carrito o producto no encontrado
+
+    delete:
+      summary: Eliminar un producto del carrito
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: EL ID del carrito al que se le agrega el producto
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: EL ID del producto que se quiere agregar
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Producto eliminado del carrito correctamente
+        '400':
+          description: El ID debe tener una longitud de 24 caracteres
+        '404':
+          description: Carrito o producto no encontrado
+
+    put:
+      summary: Actualizar la cantidad de un producto en el carrito
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: EL ID del carrito al que se quiere modificar
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: EL ID del producto que se quiere modificar
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+              required:
+                - quantity
+              example:
+                quantity: 2
+      responses:
+        '200':
+          description: Cantidad de producto en el carrito actualizada correctamente
+        '400':
+          description: El ID debe tener una longitud de 24 caracteres
+        '404':
+          description: Carrito o producto no encontrado
+
+  /api/carts/{cid}/products:
+    delete:
+      summary: Vaciar el carrito de productos
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Carrito vaciado correctamente
+
+/api/carts/{cid}/purchase:
+    post:
+      summary: Finalizar una compra
+      tags:
+        - Ticket
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '201':
+          description: Ticket creado correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticket'
+          
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: objectid
+          description: id autogenerado por mongo
+        cart:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: object
+                description: id del producto
+              quantity:
+                type: number
+                description: cantidad de productos en el carrito
+          example:
+            - product: 645c27196db46f0e76038fc3
+              quantity: 2
+        enabled:
+          type: boolean
+      example:
+        cart:
+          - product: 6123456789abcdef12345678
+            quantity: 3
+          - product: 9876543210abcdef56789012
+            quantity: 1
+        enabled: true
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        purchaseDatetime:
+          type: string
+          format: date-time
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                format: uuid
+              quantity:
+                type: number
+            required:
+              - product
+              - quantity
+        amount:
+          type: number
+        purchaser:
+          type: string
+      required:
+        - code
+        - purchaseDatetime
+        - products
+        - amount
+        - purchaser
+      example:
+        id: "64cdca53aed3408fc8bf4dad"
+        code: "s1_Tj5lHHa4olE1OIewNU"
+        purchaseDatetime: "2023-08-05T04:04:35.410Z"
+        products:
+          - product: "645c27196db46f0e76038fc3"
+            quantity: 6
+        amount: 120
+        purchaser: "diego167@gmail.com"
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+
+
