@@ -13,5 +13,4 @@ void (async () => {
     app.init()
     app.build()
     app.listen()
-
 })()

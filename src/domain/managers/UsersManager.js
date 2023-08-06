@@ -67,8 +67,6 @@ class UsersManager {
             throw new Error('Usuario no encontrado')
         }
 
-        console.log(user.email)
-
         const token = jwt.sign({ user: user.id }, process.env.JWT_SECRET_PASSRESET, { expiresIn: '1h' });
         const resetLink = `http://localhost:${process.env.SERVER_PORT}/api/email/reset-password?token=${token}`;
 

@@ -1,0 +1,10 @@
+[31merror[39m: Error: Incorrect Password.
+    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+{"level":"\u001b[31merror\u001b[39m","message":"Error: Incorrect Password.\n    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)\n    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)"}
+{"level":"error","message":"Error: Incorrect Password.\n    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)\n    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)"}
+undefined
+[31merror[39m: Error: Incorrect Password.
+    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+{"level":"\u001b[31merror\u001b[39m","message":"Error: Incorrect Password.\n    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)\n    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)"}

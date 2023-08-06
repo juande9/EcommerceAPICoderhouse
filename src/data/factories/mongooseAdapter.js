@@ -14,16 +14,16 @@ class MongooseAdapter {
             await mongoose.disconnect();
         }
         catch (error) {
-            console.log('Error closing the server', error)
+            req.logger.error('Error closing the server', error)
         }
     }
 
     async drop() {
         try {
             await mongoose.connection.db.dropDatabase()
-            console.log('Database dropped successfully');
+            req.logger.info('Database dropped successfully');
         } catch (error) {
-            console.log('Error dropping the database:', error);
+            req.logger.error('Error dropping the database:', error);
         }
     }
 

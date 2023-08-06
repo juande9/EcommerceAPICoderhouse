@@ -15,6 +15,7 @@ import errorHandler from "../../presentation/middlewares/errorHandler.js";
 import compression from 'express-compression'
 import { engine } from 'express-handlebars';
 import swaggerOptions from "../../../swagger.js";
+import { addLogger } from "../../utils/logger.js";
 
 class AppExpress {
 
@@ -37,6 +38,7 @@ class AppExpress {
         }));
         this.app.set('view engine', 'hbs');
         this.app.set('views', viewsPath);
+        this.app.use(addLogger)
     }
 
     build() {
@@ -47,7 +49,7 @@ class AppExpress {
         this.app.use('/api/users', usersRouter)
         this.app.use('/api/email', emailRouter)
         const specs = swaggerJSDoc(swaggerOptions)
-        this.app.use(`/apidocs`,swaggerUiExpress.serve,swaggerUiExpress.setup(specs))
+        this.app.use(`/apidocs`, swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
         this.app.use(errorHandler)
     }
 
@@ -58,12 +60,11 @@ class AppExpress {
     close() {
         try {
             this.server.close();
-            console.log('Server closed successfully');
+            this.logger.info('Server closed successfully');
         } catch (error) {
-            console.log('Error closing the server:', error);
+            this.logger.error('Error closing the server:', error);
         }
     }
-
 
     listen() {
         const server = this.app.listen(process.env.SERVER_PORT, () => {
