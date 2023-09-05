@@ -34,9 +34,9 @@ services:
     restart: always
     image: mailhog/mailhog:latest
     ports:
-     - "8025:8025"
+      - "8025:8025"
     networks:
-    - codernet
+      - codernet
 
 networks:
   codernet:

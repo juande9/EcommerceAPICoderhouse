@@ -1,4 +1,3 @@
-import emailManager from "../../domain/managers/emailManager.js";
 import { idValidation } from "../../domain/validations/idValidation.js";
 import TicketManager from "../../domain/managers/TicketManager.js";
 
@@ -12,11 +11,10 @@ export const createTicket = async (req, res, next) => {
         const factoredTicket = await manager.createTicket(currentUser, validatedCartId);
 
         if (factoredTicket.status != 'error') {
-/*             const email = new emailManager()
-            await email.sendMail({ to: currentUser, code: factoredTicket.code }) */
-            res.status(201).send({ status: "success", message: `Ticket creado correctamente.`, ticket: factoredTicket })
+            const ticketData = JSON.stringify(factoredTicket);
+            res.redirect(`/api/payment/create-order?ticketData=${encodeURIComponent(ticketData)}`);
         } else {
-            res.status(404).send(factoredTicket)
+            res.status(400).send(factoredTicket);
         }
     }
     catch (e) {

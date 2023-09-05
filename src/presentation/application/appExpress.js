@@ -10,12 +10,15 @@ import sessionRouter from "../../presentation/routes/sessionRouter.js";
 import usersRouter from "../../presentation/routes/usersRouter.js";
 import roleRouter from "../../presentation/routes/roleRouter.js";
 import emailRouter from "../routes/emailRouter.js";
+import paymentRouter from "../routes/paymentRouter.js";
 
 import errorHandler from "../../presentation/middlewares/errorHandler.js";
 import compression from 'express-compression'
 import { engine } from 'express-handlebars';
 import swaggerOptions from "../../../swagger.js";
 import { addLogger } from "../../utils/logger.js";
+
+import UsersManager from "../../domain/managers/UsersManager.js";
 
 class AppExpress {
 
@@ -48,9 +51,11 @@ class AppExpress {
         this.app.use('/api/session', sessionRouter);
         this.app.use('/api/users', usersRouter)
         this.app.use('/api/email', emailRouter)
+        this.app.use('/api/payment', paymentRouter)
         const specs = swaggerJSDoc(swaggerOptions)
         this.app.use(`/apidocs`, swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
         this.app.use(errorHandler)
+        this.usersManager = new UsersManager();
     }
 
     callback() {

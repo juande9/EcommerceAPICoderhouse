@@ -10,6 +10,7 @@ class User {
         this.role = params.role;
         this.isAdmin = params.isAdmin;
         this.enabled = params.enabled;
+        this.lastActiveSession = params.lastActiveSession;
     }
 }
 

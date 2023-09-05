@@ -1,6 +1,8 @@
 import container from "../../container.js";
 import { createHash } from "../../utils/auth.js";
+
 import jwt from 'jsonwebtoken';
+import cron from 'node-cron'
 import emailManager from "./emailManager.js";
 
 class UsersManager {
@@ -8,6 +10,7 @@ class UsersManager {
     constructor() {
         this.UsersRepository = container.resolve('UsersRepository')
         this.RoleRepository = container.resolve('RoleRepository')
+        this.startInactivityCronJob()
     }
 
     async createUser(data) {
@@ -23,20 +26,11 @@ class UsersManager {
     }
 
     async createUserAdmin(data) {
-        const role = await this.RoleRepository.getOne("647e6757f16ff85ac7ec7c0d")
-        const dto = {
-            ...data,
-            password: await createHash(data.password, 10),
-            isAdmin: true,
-            role: role.id,
-            enabled: true
-        };
-        return this.UsersRepository.createUserAdmin(dto);
+        return this.UsersRepository.createUserAdmin(data);
     }
 
-
-    async getUsers(params, req) {
-        return this.UsersRepository.getUsers(params, req);
+    async getUsers(params) {
+        return this.UsersRepository.getUsers(params);
     }
 
     async getUserById(uid) {
@@ -58,6 +52,32 @@ class UsersManager {
     async assignRole(uid, rid) {
         const role = await this.RoleRepository.getOne(rid)
         return this.UsersRepository.assignRole(uid, role);
+    }
+
+    async checkInactivity() {
+        const currentDate = new Date();
+        const users = await this.UsersRepository.getUsers({});
+
+        const inactiveUsers = users.users.filter(user => {
+            const lastConnection = new Date(user.lastActiveSession)
+            const timeDiff = currentDate - lastConnection
+            const twentyDaysInMillis = 20 * 24 * 60 * 60 * 1000;
+            return timeDiff >= twentyDaysInMillis;
+        });
+
+        inactiveUsers.forEach(user => {
+            this.UsersRepository.deleteUser(user.id)
+            console(`User ${user.email} marked as inactive.`);
+        });
+    }
+
+    startInactivityCronJob() {
+        cron.schedule('0 0 * * *', () => {
+            console.log('Checking inactivity...')
+            this.checkInactivity();
+        }, {
+            timezone: 'America/Argentina/Buenos_Aires'
+        });
     }
 
     async forgotPassword(email) {

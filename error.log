@@ -1,10 +1,51 @@
-[31merror[39m: Error: Incorrect Password.
-    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)
-    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
-{"level":"\u001b[31merror\u001b[39m","message":"Error: Incorrect Password.\n    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)\n    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)"}
-{"level":"error","message":"Error: Incorrect Password.\n    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)\n    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)"}
-undefined
-[31merror[39m: Error: Incorrect Password.
-    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)
-    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
-{"level":"\u001b[31merror\u001b[39m","message":"Error: Incorrect Password.\n    at SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:18:19)\n    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)"}
+[31merror[39m: ReferenceError: result is not defined
+    at recieveWebhook (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:53:71)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at addLogger (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/utils/logger.js:49:5)
+[31merror[39m: ReferenceError: result is not defined
+    at recieveWebhook (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:53:71)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at addLogger (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/utils/logger.js:49:5)
+[31merror[39m: ReferenceError: result is not defined
+    at recieveWebhook (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:53:71)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at addLogger (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/utils/logger.js:49:5)

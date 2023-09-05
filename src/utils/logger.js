@@ -45,6 +45,6 @@ const logger = process.env.NODE_ENV === 'production' ? productionLogger : develo
 
 export const addLogger = (req, res, next) => {
     req.logger = logger;
-    req.logger.http(`${req.method} en ${req.url} - ${new Date().toLocaleTimeString()}`)
+    req.logger.http(`${req.method} in ${req.url} - ${new Date().toLocaleTimeString()}`)
     next()
 }

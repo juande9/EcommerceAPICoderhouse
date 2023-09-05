@@ -2,7 +2,7 @@ import UsersManager from "../../domain/managers/UsersManager.js";
 import { idValidation } from "../../domain/validations/idValidation.js";
 import createUserValidation from "../../domain/validations/createUserValidation.js";
 
-export const getUsers = async (req, res) => {
+export const getUsers = async (req, res, next) => {
     try {
         const manager = new UsersManager();
         const users = await manager.getUsers(req.query)

@@ -2,10 +2,10 @@ import UsersManager from "../../domain/managers/UsersManager.js"
 import emailManager from "../../domain/managers/emailManager.js"
 import passwordValidation from "../../domain/validations/passwordValidation.js"
 
-export const sendEmail = async (req, res, next) => {
+export const ticketConfirmation = async (res, next) => {
     try {
         const email = new emailManager()
-        email.sendMail('testEmail', { userName: 'Joe Doe', test: 'Email sent succesfully.' })
+        email.send('testEmail', { userName: 'Joe Doe', test: 'Email sent succesfully.' })
         res.status(201).send({ status: "success", message: `Mail enviado correctamente.` })
     }
     catch (e) {

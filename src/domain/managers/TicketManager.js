@@ -37,7 +37,7 @@ class TicketManager {
             purchaser: user
         };
 
-        return this.TicketRepository.createTicket(dto);
+         return this.TicketRepository.createTicket(dto);
     }
 
     async getAvailableProductsInCart(cart) {

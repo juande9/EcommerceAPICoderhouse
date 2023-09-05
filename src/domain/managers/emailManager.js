@@ -6,7 +6,7 @@ import { compileEmailTemplate } from "../../presentation/templates/emailTemplate
 import smtpFactory from "../../presentation/factories/smtpFactory.js"
 
 class emailManager {
-
+    
     constructor() {
         this.smtp_config = smtpFactory.create(process.env.SMTP_TYPE)
     }
@@ -19,10 +19,9 @@ class emailManager {
         const mailOptions = {
             from: `${process.env.SMTP_SENDER_NAME} <${process.env.SMTP_SENDER_EMAIL}>`,
             to: 'to@node.com',
-            subject: 'Mail de prueba',
+            subject: 'Cambio de contraseña',
             html: hmtl
         };
-
         await transporter.sendMail(mailOptions)
     }
 }

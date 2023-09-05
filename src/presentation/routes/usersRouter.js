@@ -13,5 +13,4 @@ usersRouter.delete("/:uid", auth, authorization('deleteUser'), deleteUser)
 usersRouter.put("/role/:uid", auth, authorization('assignRole'), assignRole)
 usersRouter.post('/forgot-password', forgotPassword)
 
-
 export default usersRouter

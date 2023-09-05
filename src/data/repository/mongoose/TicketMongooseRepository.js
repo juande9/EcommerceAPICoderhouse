@@ -3,7 +3,7 @@ import Ticket from "../../../domain/entities/ticket.js"
 
 class TicketMongooseRepository {
 
-    async createTicket(data) {
+    async createTicket(data) {       
         const ticketDocument = await ticketSchema.create(data)
 
         return new Ticket({

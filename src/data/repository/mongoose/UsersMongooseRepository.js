@@ -26,6 +26,7 @@ class UsersMongooseRepository {
             password: document.password,
             role: document.role,
             isAdmin: document.isAdmin,
+            lastActiveSession: document.lastActiveSession,
         }))
 
         return {
@@ -46,7 +47,8 @@ class UsersMongooseRepository {
             age: userDocument.age,
             password: userDocument.password,
             role: userDocument.role,
-            isAdmin: userDocument.isAdmin
+            isAdmin: userDocument.isAdmin,
+            lastActiveSession: userDocument.lastActiveSession,
         })
     }
 
@@ -61,7 +63,8 @@ class UsersMongooseRepository {
             age: userDocument.age,
             password: userDocument.password,
             role: userDocument.role,
-            isAdmin: userDocument.isAdmin
+            isAdmin: userDocument.isAdmin,
+            lastActiveSession: userDocument.lastActiveSession,
         })
     }
 
@@ -82,7 +85,7 @@ class UsersMongooseRepository {
             password: userDocument.password,
             role: userDocument.role,
             isAdmin: userDocument.isAdmin,
-            enabled: userDocument.enabled,
+            lastActiveSession: userDocument.lastActiveSession,
         })
     }
 
@@ -102,13 +105,13 @@ class UsersMongooseRepository {
             password: userDocument.password,
             role: userDocument.role,
             isAdmin: userDocument.isAdmin,
+            lastActiveSession: userDocument.lastActiveSession,
         })
     }
 
     async deleteUser(uid) {
-        return await userSchema.deleteOne({ _id: uid });
+        return await userSchema.findOneAndUpdate({ _id: uid }, { enabled: false }, { new: true });
     }
-
 
     async assignRole(uid, role) {
         const newRole = { $set: { role: role.id } }
@@ -126,7 +129,8 @@ class UsersMongooseRepository {
             age: userDocument.age,
             password: userDocument.password,
             role: userDocument.role,
-            isAdmin: userDocument.isAdmin
+            isAdmin: userDocument.isAdmin,
+            lastActiveSession: userDocument.lastActiveSession,
         })
     }
 
@@ -145,7 +149,8 @@ class UsersMongooseRepository {
             age: userDocument.age,
             password: userDocument.password,
             role: userDocument.role,
-            isAdmin: userDocument.isAdmin
+            isAdmin: userDocument.isAdmin,
+            lastActiveSession: userDocument.lastActiveSession,
         })
     }
 }

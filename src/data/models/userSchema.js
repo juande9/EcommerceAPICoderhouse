@@ -11,7 +11,8 @@ const userSchema = new Schema({
     password: { type: String },
     role: { type: Schema.Types.ObjectId, index: true, ref: 'roles' },
     isAdmin: { type: Boolean, default: false },
-    enabled: { type: Boolean, default: true }
+    enabled: { type: Boolean, default: true },
+    lastActiveSession: { type: Date, required: true, default: Date.now },
 });
 
 userSchema.plugin(mongoosePaginate)
