@@ -14,11 +14,11 @@ class emailManager {
         const hmtl = compileEmailTemplate(template, data)
 
         console.log(data)
-        console.log(data.mail)
+        console.log(data.user.mail)
 
         const mailOptions = {
             from: `${process.env.SMTP_SENDER_NAME} <${process.env.SMTP_SENDER_EMAIL}>`,
-            to: `${data.email}`,
+            to: `${data.user.mail}`,
             subject: 'Cambio de contraseña',
             html: hmtl
         };
