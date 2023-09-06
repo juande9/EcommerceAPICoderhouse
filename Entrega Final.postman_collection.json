@@ -1,0 +1,1487 @@
+{
+	"info": {
+		"_postman_id": "9e9ea4dc-c302-413b-bd5f-5057f0fa4dd4",
+		"name": "Entrega Final",
+		"description": "Entrega final del Curso Backend de CoderHouse.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26511432"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						},
+						"description": "Pide todos los productos _type: enabled_. No hace falta permisos para hacer el request."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products with Query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/products?limit=2&sort=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "1"
+								},
+								{
+									"key": "type",
+									"value": "Yerba",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Idem anterior pero utilizando Query Params para ordenar por precio (_sort_), limitar la cantidad de productos mostrados (_limit)_ y/o buscar por nombre del producto (_type)_."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/products/645c270a6db46f0e76038fbf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"645c270a6db46f0e76038fbf"
+							]
+						},
+						"description": "Obtiene un producto según su ID. El mismo debe tener 24 caracteres."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/products/64525323de4100e58267ca5f",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"64525323de4100e58267ca5f"
+							]
+						},
+						"description": "Elimina un producto según su ID. El mismo debe tener 24 caracteres.\n\nSe debe tener permisos de Admin."
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"title\": \"Agua Mineral\",\r\n    \"description\": \"Villa del Sur 6 Lt\",\r\n    \"price\": 400,\r\n    \"code\": \"AGUA01\",\r\n    \"stock\": 7\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						},
+						"description": "Crea un producto nuevo con el modelo de Json detallado.\n\nSe debe tener permisos de Admin."
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"stock\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/products/645c27036db46f0e76038fbd",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"645c27036db46f0e76038fbd"
+							]
+						},
+						"description": "Modifica un producto según su ID. El mismo debe tener 24 caracteres.\n\nSe debe tener permisos de Admin."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints que tienen que ver con el manejo de productos en la base de datos."
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "New Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"console.log(jsonData)\r",
+									"\r",
+									"pm.environment.set(\"CART_ID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts"
+							]
+						},
+						"description": "Crea un nuevo carrito. El usuario debe estar logueado. Tanto client como admin pueden crear."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Carts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts"
+							]
+						},
+						"description": "Obtiene todos los carritos."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}"
+							]
+						},
+						"description": "Obtiene solamente un carrito por ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}"
+							]
+						},
+						"description": "Elimina el carrito. El usuario debe estar logueado."
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product to Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}/products/645c270a6db46f0e76038fbf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}",
+								"products",
+								"645c270a6db46f0e76038fbf"
+							]
+						},
+						"description": "Agrega un producto a un carrito que se obtiene por un ID. Ambos ID deben tener 24 caracteres.\n\nEl usuario debe estar loggeado."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product from Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}/products/645c27036db46f0e76038fbd",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}",
+								"products",
+								"645c27036db46f0e76038fbd"
+							]
+						},
+						"description": "Elimina un producto a un carrito que se obtiene por un ID. Ambos ID deben tener 24 caracteres.\n\nEl usuario debe estar loggeado."
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Quantity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}/products/645c272d6db46f0e76038fc7",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}",
+								"products",
+								"645c272d6db46f0e76038fc7"
+							]
+						},
+						"description": "Modifica la cantidad del producto (pasado por ID) en el carrito seleccionado.\n\nEl usuario debe estar loggeado."
+					},
+					"response": []
+				},
+				{
+					"name": "Check out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}/purchase",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}",
+								"purchase"
+							],
+							"query": [
+								{
+									"key": "paymentMode",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Finaliza el proceso de compra. Genera el ticket en la BD y redirige al link de pago.\n\nHay dos paymentMode posibles: stipe o mercadopago. Si no se pasa, la última se elige por defecto."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints que tienen que ver con el manejo de los carritos."
+		},
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"console.log(jsonData.accessToken)\r",
+									"\r",
+									"pm.environment.set(\"JWT\", jsonData.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{EMAIL}}\",\r\n    \"password\": \"adminCod3r123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/session/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"session",
+								"login"
+							]
+						},
+						"description": "Identifica un usuario y genera el token jwt (duración 30 min)."
+					},
+					"response": []
+				},
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"console.log(jsonData.accessToken)\r",
+									"\r",
+									"pm.environment.set(\"JWT\", jsonData.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"secret123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/session/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"session",
+								"login"
+							]
+						},
+						"description": "Credenciales del Administrador para hacer login."
+					},
+					"response": []
+				},
+				{
+					"name": "Current Jwt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/session/current",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"session",
+								"current"
+							]
+						},
+						"description": "Checkea el jwt activo."
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"NAME\", _.sample(\r",
+									"[\"Juan\", \"Maria\", \"Pedro\", \"Ana\", \"Luis\", \"Laura\", \"Carlos\", \"Sofia\", \"Diego\", \"Andrea\", \"Jose\", \"Isabella\", \"Miguel\", \"Valentina\"]));\r",
+									"pm.environment.set(\"LASTNAME\", _.sample([\"Garcia\", \"Rodriguez\", \"Lopez\", \"Martinez\", \"Hernandez\", \"Gonzalez\", \"Perez\", \"Sanchez\", \"Ramirez\", \"Flores\"]));\r",
+									"const email = `${pm.environment.get(\"NAME\")}${_.random(100, 999)}@gmail.com`;\r",
+									"pm.environment.set(\"EMAIL\", email.toLowerCase());\r",
+									"pm.environment.set(\"AGE\", _.random(18, 60));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"Response has payload\"] = _.has(jsonData, \"payload\");\r",
+									"\r",
+									"pm.environment.set(\"USER_ID\", jsonData.payload.id);\r",
+									"pm.environment.set(\"EMAIL\", jsonData.payload.email);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{NAME}}\",\r\n    \"lastName\": \"{{LASTNAME}}\",\r\n    \"email\": \"{{EMAIL}}\",\r\n    \"age\": {{AGE}},\r\n    \"password\": \"adminCod3r123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/session/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"session",
+								"signup"
+							]
+						},
+						"description": "Registra un nuevo usuario"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints que tienen que ver con las sesiones."
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get Users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Pide todos los usuarios _type: enabled_.\n\nEl usuario debe ser administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"NAME\", _.sample(\r",
+									"    [\"Juan\", \"Maria\", \"Pedro\", \"Ana\", \"Luis\", \"Laura\", \"Carlos\", \"Sofia\", \"Diego\", \"Andrea\", \"Jose\", \"Isabella\", \"Miguel\", \"Valentina\"]));\r",
+									"pm.environment.set(\"LASTNAME\", _.sample([\"Garcia\", \"Rodriguez\", \"Lopez\", \"Martinez\", \"Hernandez\", \"Gonzalez\", \"Perez\", \"Sanchez\", \"Ramirez\", \"Flores\"]));\r",
+									"const email = `${pm.environment.get(\"NAME\")}${_.random(100, 999)}@gmail.com`;\r",
+									"pm.environment.set(\"EMAIL\", email.toLowerCase());\r",
+									"pm.environment.set(\"AGE\", _.random(18, 60));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{NAME}}\",\r\n    \"lastName\": \"{{LASTNAME}}\",\r\n    \"email\": \"{{EMAIL}}\",\r\n    \"age\": {{AGE}},\r\n    \"password\": \"adminCod3r123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Crea un nuevo usuario directamente sobre la BD.\n\nEl usuario debe ser administrador."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/{{USER_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{USER_ID}}"
+							]
+						},
+						"description": "Devuelve un usuario buscado por su ID.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\":85\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/{{USER_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{USER_ID}}"
+							]
+						},
+						"description": "Modifica el usuario.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"647e6757f16ff85ac7ec7c0d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/role/{{USER_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"role",
+								"{{USER_ID}}"
+							]
+						},
+						"description": "Le asigna un rol al usuario.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users/{{USER_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{USER_ID}}"
+							]
+						},
+						"description": "Elimina un usuario de la BD.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints que manejan a los usuarios en la BD."
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Get Roles",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/roles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "Obtiene todos los roles creados.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;\r",
+									"tests[\"Status code is 401\"] = responseCode.code === 401;\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"Response has payload\"] = _.has(jsonData, \"payload\");\r",
+									"\r",
+									"pm.environment.set(\"ROLE_ID\", jsonData.role.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"client\",\r\n    \"permissions\": [\r\n        \"getUsers\",\r\n        \"emptyCart\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/roles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "Crea un nuevo rol.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Role by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/roles/{{ROLE_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"{{ROLE_ID}}"
+							]
+						},
+						"description": "Obtiene un rol por ID.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"permissions\": [\r\n        \"createCart\",\r\n        \"addProductCart\",\r\n        \"emptyCart\",\r\n        \"updateProductCart\",\r\n        \"deleteProductCart\",\r\n        \"endPurchase\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/roles/{{ROLE_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"{{ROLE_ID}}"
+							]
+						},
+						"description": "Modifica algun rol buscado por su ID.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/roles/{{ROLE_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"{{ROLE_ID}}"
+							]
+						},
+						"description": "Elimina un rol buscado por ID.\n\nSolo el administrador puede hacerlo."
+					},
+					"response": []
+				}
+			],
+			"description": "Aquellos endpoints que modifican los roles en BD."
+		},
+		{
+			"name": "Check Out Flow",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+									"\r",
+									"pm.test(\"El accessToken es un string\", function () { pm.expect(pm.response.json().accessToken).to.be.a('string'); });\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"JWT\", jsonData.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"maria292@gmail.com\",\r\n    \"password\": \"adminCod3r123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/session/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"session",
+								"login"
+							]
+						},
+						"description": "Loguearse con un usuario para tener la autorización correspondiente."
+					},
+					"response": []
+				},
+				{
+					"name": "New Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"CART_ID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts"
+							]
+						},
+						"description": "Crear un nuevo carrito"
+					},
+					"response": []
+				},
+				{
+					"name": "Agrega Producto a Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}/products/645c270a6db46f0e76038fbf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}",
+								"products",
+								"645c270a6db46f0e76038fbf"
+							]
+						},
+						"description": "Agregar un producto al carrito. En este caso, el producto es \"Huevos\" cuyo id es _645c270a6db46f0e76038fbf_"
+					},
+					"response": []
+				},
+				{
+					"name": "Finalizar Compra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+									"\r",
+									"pm.test(\"La respuesta contiene un campo payment_url\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('payment_url');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"payment_url es un enlace válido\", function () {\r",
+									"    pm.expect(pm.response.json().payment_url).to.match(/^https?:\\/\\/\\S+/);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El campo status es igual a 'success'\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.property('status', 'success');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/carts/{{CART_ID}}/purchase?paymentMode=",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"carts",
+								"{{CART_ID}}",
+								"purchase"
+							],
+							"query": [
+								{
+									"key": "paymentMode",
+									"value": ""
+								}
+							]
+						},
+						"description": "Se completa la compra creando un ticket que se almacena en la base de datos y se genera un link de pago dependiendo de la plataforma de pago que se pasa por query. Por defecto, es mercado pago pero tambien puede ser stripe."
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones para realizar un check out exitoso."
+		},
+		{
+			"name": "Cambiar Contraseña",
+			"item": [
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"juan159@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/forgot-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"forgot-password"
+							]
+						},
+						"description": "Cambia la contraseña de un usuario encontrado por su email.\n\nSi el usuario es encontrado, se envia un mail con un link para asignarle una nueva contraseña. El mismo es valido por 1 hora. Si se vence, se debe crear un nuevo enlace."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "EMAIL",
+			"value": ""
+		},
+		{
+			"key": "USER_ID",
+			"value": ""
+		},
+		{
+			"key": "JWT",
+			"value": ""
+		},
+		{
+			"key": "NAME",
+			"value": ""
+		},
+		{
+			"key": "LASTNAME",
+			"value": ""
+		},
+		{
+			"key": "AGE",
+			"value": ""
+		}
+	]
+}
