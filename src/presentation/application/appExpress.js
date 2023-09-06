@@ -11,6 +11,7 @@ import emailRouter from "../routes/emailRouter.js";
 import paymentRouter from "../routes/paymentRouter.js";
 
 import errorHandler from "../../presentation/middlewares/errorHandler.js";
+import checkDomain from "../middlewares/checkDomain.js";
 import compression from 'express-compression'
 import { engine } from 'express-handlebars';
 import { addLogger } from "../../utils/logger.js";
@@ -50,6 +51,7 @@ class AppExpress {
         this.app.use('/api/email', emailRouter)
         this.app.use('/api/payment', paymentRouter)
         this.app.use(errorHandler)
+        this.app.use(checkDomain)
         this.usersManager = new UsersManager();
     }
 

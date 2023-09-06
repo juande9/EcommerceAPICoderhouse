@@ -80,12 +80,14 @@ class UsersManager {
         });
     }
 
-    async forgotPassword(email) {
+    async forgotPassword(req, email) {
         const user = await this.UsersRepository.getOneByEmail(email)
 
         if (user instanceof Error) {
             throw new Error('Usuario no encontrado')
         }
+
+        console.log(req.customDomain)
 
         const token = jwt.sign({ user: user.id }, process.env.JWT_SECRET_PASSRESET, { expiresIn: '1h' });
         const resetLink = `http://localhost:${process.env.SERVER_PORT}/api/email/reset-password?token=${token}`;
