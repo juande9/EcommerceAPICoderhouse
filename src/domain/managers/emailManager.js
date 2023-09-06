@@ -12,10 +12,11 @@ class emailManager {
         const transporter = nodemailer.createTransport(this.smtp_config)
 
         const hmtl = compileEmailTemplate(template, data)
+        console.log(data)
 
         const mailOptions = {
             from: `${process.env.SMTP_SENDER_NAME} <${process.env.SMTP_SENDER_EMAIL}>`,
-            to: 'to@node.com',
+            to: `${data.email}`,
             subject: 'Cambio de contraseña',
             html: hmtl
         };

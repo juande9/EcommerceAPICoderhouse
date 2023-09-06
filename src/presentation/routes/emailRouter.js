@@ -1,9 +1,8 @@
 import { Router } from 'express';
-import { resetPassword, confirmPassReset, ticketConfirmation } from '../controllers/emailController.js';
+import { resetPassword, confirmPassReset } from '../controllers/emailController.js';
 
 const emailRouter = Router()
 
-emailRouter.post('/testEmail', ticketConfirmation)
 emailRouter.get('/reset-password', resetPassword)
 emailRouter.post('/confirm-password-change', confirmPassReset)
 

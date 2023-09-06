@@ -725,3 +725,8 @@
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async CartManager.addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:28:33)
     at async addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:48:29)
+[31merror[39m: Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\Users\Juan\Desktop\BackendCoder\Ecommerce\node_modules\jsonwebtoken\sign.js:105:20)
+    at UsersManager.forgotPassword (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/domain/managers/UsersManager.js:90:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async forgotPassword (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/presentation/controllers/usersController.js:95:9)
