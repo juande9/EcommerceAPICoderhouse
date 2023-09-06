@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
-dotenv.config();
-
-import SmtpTest from "../application/smtpTest.js";
+import SmtpTest from "../application/SmtpTest.js";
 import SmtpGmail from "../application/SmtpGmail.js";
 
 class smtpFactory {
