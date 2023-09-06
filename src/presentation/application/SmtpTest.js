@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 class SmtpTest {
     constructor() {
         this.smtpConfig = {
