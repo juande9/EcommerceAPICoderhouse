@@ -49,3 +49,679 @@
     at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
     at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
     at addLogger (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/utils/logger.js:49:5)
+[31merror[39m: ReferenceError: Cannot access 'paymentMode' before initialization
+    at createTicket (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/ticketController.js:16:48)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[31merror[39m: Error: Missing required param: success_url.
+    at StripeError.generate (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/stripe/esm/Error.js:7:20)
+    at res.toJSON.then.StripeAPIError.message (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/stripe/esm/RequestSender.js:102:43)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/productsController.js:32:30)
+[31merror[39m: TypeError: this.validateTicketData is not a function
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:22:18)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: TypeError: this.validateTicketData is not a function
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:22:18)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: TypeError: this.validateTicketData is not a function
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:22:18)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: TypeError: this.validateTicketData is not a function
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:22:18)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: ReferenceError: stripe is not defined
+    at Object.createOrderWithStripe [as stripe] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:61:29)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'sessions')
+    at Object.createOrderWithStripe [as stripe] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:61:56)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'sessions')
+    at Object.createOrderWithStripe [as stripe] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:63:56)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: ReferenceError: stripe is not defined
+    at Object.createOrderWithStripe [as stripe] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:62:25)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'sessions')
+    at Object.createOrderWithStripe [as stripe] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:63:56)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:24)
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'sessions')
+    at Object.createOrderWithStripe [as stripe] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:61:56)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: Error: Received unknown parameter: line_items[0][price_data][product_data][id]
+    at StripeError.generate (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/stripe/esm/Error.js:7:20)
+    at res.toJSON.then.StripeAPIError.message (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/stripe/esm/RequestSender.js:102:43)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[31merror[39m: Error: The Checkout Session's total amount must convert to at least 50 cents. $20.00 ARS converts to approximately $0.06 USD.
+    at StripeError.generate (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/stripe/esm/Error.js:7:20)
+    at res.toJSON.then.StripeAPIError.message (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/stripe/esm/RequestSender.js:102:43)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[31merror[39m: ReferenceError: container is not defined
+    at new PaymentManager (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:8:34)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:13:25)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: ReferenceError: getProductTitle is not defined
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:24:25
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:23:54)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: ReferenceError: p is not defined
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:24:50
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:23:54)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: TypeError: this.getProductTitle is not a function
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:25:34
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:23:54)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'getProductById')
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:24:70
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:23:72)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'getProductById')
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:24:70
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:23:72)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: Error: ProductRepository is undefined.
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:29:23)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'getProductById')
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:20:70
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:19:72)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: Error: User not found
+    at UsersMongooseRepository.updateUser (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/UsersMongooseRepository.js:141:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:20:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'getProductById')
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:20:70
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:19:72)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'getProductById')
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:20:70
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:19:72)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: TypeError: Cannot read properties of undefined (reading 'getProductById')
+    at file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:23:70
+    at Array.map (<anonymous>)
+    at Object.createOrderWithMercadoPago [as mercadopago] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/PaymentManager.js:22:72)
+    at createOrder (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/paymentController.js:24:57)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\express\lib\router\index.js:286:9
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "email"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "password"
+    ],
+    "message": "Required"
+  }
+]
+    at get error [as error] (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:537:31)
+    at ZodObject.parseAsync (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/node_modules/zod/lib/index.mjs:659:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:10:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CartManager.addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:28:33)
+    at async addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:48:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CartManager.addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:28:33)
+    at async addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:48:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CartManager.addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:28:33)
+    at async addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:48:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/productsController.js:32:30)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CartManager.addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:28:33)
+    at async addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:48:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CartManager.updateQuantity (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:44:33)
+    at async updateQuantity (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:82:29)
+[31merror[39m: Error: Usuario no encontrado
+    at UsersManager.forgotPassword (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/UsersManager.js:87:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async forgotPassword (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/usersController.js:95:9)
+[31merror[39m: MongoServerError: E11000 duplicate key error collection: ecommerce.roles index: name_1 dup key: { name: "client" }
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\operations\insert.js:50:33
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\cmap\connection_pool.js:327:21
+    at C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\sdam\server.js:207:17
+    at handleOperationResult (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\sdam\server.js:323:20)
+    at Connection.onMessage (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\cmap\connection.js:206:9)
+    at MessageStream.<anonymous> (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\cmap\message_stream.js:124:16)
+    at MessageStream._write (C:\Users\juan_\OneDrive\Escritorio\PreEntrega1\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:392:12)
+    at _write (node:internal/streams/writable:333:10)
+    at Writable.write (node:internal/streams/writable:337:10)
+    at TLSSocket.ondata (node:internal/streams/readable:766:22)
+    at TLSSocket.emit (node:events:513:28)
+    at addChunk (node:internal/streams/readable:324:12)
+    at readableAddChunk (node:internal/streams/readable:297:9)
+[31merror[39m: Error: User not found
+    at UsersMongooseRepository.updateUser (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/UsersMongooseRepository.js:141:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:20:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: Error: User not found
+    at UsersMongooseRepository.updateUser (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/UsersMongooseRepository.js:141:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:20:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CartManager.addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:28:33)
+    at async addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:48:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/productsController.js:32:30)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/productsController.js:32:30)
+[31merror[39m: Error: User not found
+    at UsersMongooseRepository.updateUser (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/UsersMongooseRepository.js:141:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async SessionManager.login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/SessionManager.js:20:9)
+    at async login (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: Error: Product not found
+    at ProductMongooseRepository.getProductById (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/data/repository/mongoose/ProductMongooseRepository.js:58:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async CartManager.addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/domain/managers/CartManager.js:28:33)
+    at async addProduct (file:///C:/Users/juan_/OneDrive/Escritorio/PreEntrega1/src/presentation/controllers/cartController.js:48:29)

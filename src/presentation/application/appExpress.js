@@ -1,8 +1,6 @@
 import express from "express"
 import cookieParser from "cookie-parser";
 import { resolve } from 'path';
-import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUiExpress from "swagger-ui-express";
 
 import pmRouter from "../../presentation/routes/productRouter.js";
 import cartRouter from "../../presentation/routes/cartRouter.js";
@@ -15,7 +13,6 @@ import paymentRouter from "../routes/paymentRouter.js";
 import errorHandler from "../../presentation/middlewares/errorHandler.js";
 import compression from 'express-compression'
 import { engine } from 'express-handlebars';
-import swaggerOptions from "../../../swagger.js";
 import { addLogger } from "../../utils/logger.js";
 
 import UsersManager from "../../domain/managers/UsersManager.js";
@@ -52,8 +49,6 @@ class AppExpress {
         this.app.use('/api/users', usersRouter)
         this.app.use('/api/email', emailRouter)
         this.app.use('/api/payment', paymentRouter)
-        const specs = swaggerJSDoc(swaggerOptions)
-        this.app.use(`/apidocs`, swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
         this.app.use(errorHandler)
         this.usersManager = new UsersManager();
     }

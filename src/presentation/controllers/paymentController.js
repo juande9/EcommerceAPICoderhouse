@@ -1,7 +1,8 @@
-import mercadopago from "mercadopago"
+import PaymentManager from "../../domain/managers/PaymentManager.js";
 
 export const createOrder = async (req, res, next) => {
     try {
+        const paymentMode = req.query.paymentMode
 
         if (!req.query.ticketData) {
             return res.status(400).send({ status: "error", message: "Ticket data is missing." });
@@ -9,30 +10,19 @@ export const createOrder = async (req, res, next) => {
 
         const ticketData = req.query.ticketData;
         const factoredTicket = JSON.parse(decodeURIComponent(ticketData))
+        const manager = new PaymentManager(paymentMode);
 
+        const paymentMethods = {
+            mercadopago: manager.createOrderWithMercadoPago,
+            stripe: manager.createOrderWithStripe,
+        };
 
-        mercadopago.configure({
-            access_token: process.env.MP_TEST_ACCESSTOKEN
-        })
-
-        if (!factoredTicket.products || factoredTicket.products.length === 0) {
-            return res.status(400).send({ status: "error", message: "Ticket data is incomplete." });
+        if (!paymentMethods[paymentMode]) {
+            return res.status(400).send({ status: "error", message: "Invalid payment mode." });
         }
 
-        const products = factoredTicket.products.map(product => {
-            return {
-                id: product.product,
-                unit_price: product.price,
-                currency_id: 'ARS',
-                quantity: product.quantity
-            }
-        })
-
-        const result = await mercadopago.preferences.create({
-            items: products,
-        })
-        
-        return res.status(200).send({ status: "success", payment_url: result.body.init_point });
+        const result = await paymentMethods[paymentMode](factoredTicket);
+        return res.status(200).send({ status: "success", payment_url: result, factoredTicket });
     }
     catch (e) {
         next(e)

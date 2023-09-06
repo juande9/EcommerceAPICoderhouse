@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import nodemailer from "nodemailer";
 import { compileEmailTemplate } from "../../presentation/templates/emailTemplates.js";
 import smtpFactory from "../../presentation/factories/smtpFactory.js"
