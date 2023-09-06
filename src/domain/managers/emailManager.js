@@ -12,7 +12,6 @@ class emailManager {
         const transporter = nodemailer.createTransport(this.smtp_config)
 
         const hmtl = compileEmailTemplate(template, data)
-        console.log(data)
 
         const mailOptions = {
             from: `${process.env.SMTP_SENDER_NAME} <${process.env.SMTP_SENDER_EMAIL}>`,
@@ -20,6 +19,8 @@ class emailManager {
             subject: 'Cambio de contraseña',
             html: hmtl
         };
+
+        console.log(mailOptions)
         await transporter.sendMail(mailOptions)
     }
 }
