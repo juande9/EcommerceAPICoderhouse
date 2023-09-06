@@ -19,9 +19,7 @@ class emailManager {
             subject: 'Cambio de contraseña',
             html: hmtl
         };
-
-        console.log(mailOptions)
-        
+       
         await transporter.sendMail(mailOptions)
     }
 }
