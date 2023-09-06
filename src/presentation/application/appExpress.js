@@ -43,6 +43,7 @@ class AppExpress {
     }
 
     build() {
+        this.app.use(checkDomain)
         this.app.use('/api/carts', cartRouter);
         this.app.use('/api/products', pmRouter);
         this.app.use('/api/roles', roleRouter)
@@ -51,7 +52,6 @@ class AppExpress {
         this.app.use('/api/email', emailRouter)
         this.app.use('/api/payment', paymentRouter)
         this.app.use(errorHandler)
-        this.app.use(checkDomain)
         this.usersManager = new UsersManager();
     }
 

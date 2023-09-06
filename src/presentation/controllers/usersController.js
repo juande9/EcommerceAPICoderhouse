@@ -91,9 +91,8 @@ export const deleteUser = async (req, res, next) => {
 export const forgotPassword = async (req, res, next) => {
     try {
         const { email } = req.body
-        const domain = req.customDomain
         const manager = new UsersManager();
-        await manager.forgotPassword(email, domain)
+        await manager.forgotPassword(email, req.domain)
         res.status(200).send({ status: "success", message: `Hemos enviado un link para que generes una nueva contraseña` })
     }
     catch (e) {

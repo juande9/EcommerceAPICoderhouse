@@ -45,7 +45,7 @@ export const updateProduct = async (req, res, next) => {
         const newData = req.body
 
         const productUpdated = await manager.updateProduct(validatedProdId, newData);
-        res.status(200).send({ status: "success", message: `Producto modificado`})
+        res.status(200).send({ status: "success", message: `Producto modificado` })
     }
     catch (e) {
         next(e)
