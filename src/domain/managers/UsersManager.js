@@ -97,13 +97,12 @@ class UsersManager {
     }
 
     async changePassword(token, newPassword) {
-
         const isValidToken = jwt.verify(token, process.env.JWT_SECRET_PASSRESET);
         if (!isValidToken) {
             return res.status(401).send('Token inválido');
         }
-        const { user } = isValidToken
 
+        const { user } = isValidToken
         const passUpdated = await this.UsersRepository.updateUser(user, { password: await createHash(newPassword, 10) })
         return passUpdated
     }

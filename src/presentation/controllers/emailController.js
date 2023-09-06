@@ -4,7 +4,11 @@ import passwordValidation from "../../domain/validations/passwordValidation.js"
 export const resetPassword = async (req, res, next) => {
     try {
         const { token } = req.query;
-        res.render('resetPassword', { token });
+        const isValidToken = jwt.verify(token, process.env.JWT_SECRET_PASSRESET);
+        if (!isValidToken) {
+            return res.status(401).send('Token inválido');
+        }
+        res.render('resetPassword', { isValidToken });
     }
     catch (e) {
         next(e)

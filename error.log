@@ -735,3 +735,14 @@
     at UsersManager.forgotPassword (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/domain/managers/UsersManager.js:90:27)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async forgotPassword (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/presentation/controllers/usersController.js:95:9)
+[31merror[39m: Error: Incorrect Password
+    at SessionManager.login (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/domain/managers/SessionManager.js:24:19)
+    at async login (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: Error: Incorrect Password
+    at SessionManager.login (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/domain/managers/SessionManager.js:24:19)
+    at async login (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/presentation/controllers/sessionController.js:6:29)
+[31merror[39m: Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\Users\Juan\Desktop\BackendCoder\Ecommerce\node_modules\jsonwebtoken\sign.js:105:20)
+    at UsersManager.forgotPassword (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/domain/managers/UsersManager.js:90:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async forgotPassword (file:///C:/Users/Juan/Desktop/BackendCoder/Ecommerce/src/presentation/controllers/usersController.js:95:9)
