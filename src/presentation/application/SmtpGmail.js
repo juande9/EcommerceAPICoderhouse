@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 class SmtpGmail {
     constructor() {
         this.smtpConfig = {
