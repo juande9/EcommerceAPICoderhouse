@@ -1,10 +1,11 @@
 import UsersManager from "../../domain/managers/UsersManager.js"
 import passwordValidation from "../../domain/validations/passwordValidation.js"
+import jwt from 'jsonwebtoken';
 
 export const resetPassword = async (req, res, next) => {
     try {
         const { token } = req.query;
-        const isValidToken = token.verify(token, process.env.JWT_SECRET_PASSRESET);
+        const isValidToken = jwt.verify(token, process.env.JWT_SECRET_PASSRESET);
         if (!isValidToken) {
             return res.status(401).send('Token inválido');
         }
