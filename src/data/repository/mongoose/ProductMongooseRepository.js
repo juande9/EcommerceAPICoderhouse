@@ -51,8 +51,8 @@ class ProductMongooseRepository {
     })
   }
 
-  async getProductById(uid) {
-    const productDocument = await productSchema.findOne({ _id: uid });
+  async getProductById(pid) {
+    const productDocument = await productSchema.findOne({ _id: pid });
 
     if (!productDocument) {
       throw new Error('Product not found')
@@ -70,24 +70,24 @@ class ProductMongooseRepository {
     })
   }
 
-  async updateProduct(uid, updatedData) {
-    const productDocument = await productSchema.updateOne({ _id: uid }, updatedData);
+  async updateProduct(pid, updatedData) {
+    const productDocument = await productSchema.updateOne({ _id: pid }, updatedData);
 
     if (productDocument.matchedCount == 0) {
       throw new Error('Product not found')
     }
   }
 
-  async deleteProduct(uid) {
-    const productDocument = await productSchema.deleteOne({ _id: uid, enabled: true });
+  async deleteProduct(pid) {
+    const productDocument = await productSchema.findOneAndUpdate({ _id: pid }, { enabled: false }, { new: true });
 
     if (productDocument.deletedCount === 0) {
       throw new Error('Product not found');
     }
   }
 
-  async updateStock(uid, updatedNumber) {
-    const productDocument = await productSchema.updateOne({ _id: uid }, { stock: updatedNumber });
+  async updateStock(pid, updatedNumber) {
+    const productDocument = await productSchema.updateOne({ _id: pid }, { stock: updatedNumber });
 
     if (productDocument.nModified === 0) {
       throw new Error('Product not found');

@@ -5,10 +5,13 @@ import jwt from 'jsonwebtoken';
 export const resetPassword = async (req, res, next) => {
     try {
         const { token } = req.query;
+
         const isValidToken = jwt.verify(token, process.env.JWT_SECRET_PASSRESET);
+
         if (!isValidToken) {
             return res.status(401).send('Token inválido');
         }
+
         res.render('resetPassword', { isValidToken });
     }
     catch (e) {
