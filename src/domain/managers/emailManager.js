@@ -14,7 +14,7 @@ class emailManager {
         const hmtl = compileEmailTemplate(template, data)
 
         console.log(data)
-        console.log(data.user.mail)
+        console.log(data.user)
 
         const mailOptions = {
             from: `${process.env.SMTP_SENDER_NAME} <${process.env.SMTP_SENDER_EMAIL}>`,
