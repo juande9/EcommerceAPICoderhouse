@@ -67,8 +67,9 @@ class AppExpress {
     }
 
     listen() {
-        const server = this.app.listen(process.env.SERVER_PORT, () => {
-            console.log(`Conectado al server en el puerto: ${process.env.SERVER_PORT}`);
+        const port = process.env.PORT ?? 8080
+        const server = this.app.listen(port, () => {
+            console.log(`Conectado al server en el puerto: ${port}`);
         });
 
         return server
