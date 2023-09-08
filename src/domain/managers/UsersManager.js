@@ -67,7 +67,7 @@ class UsersManager {
 
         inactiveUsers.forEach(user => {
             this.UsersRepository.deleteUser(user.id)
-            console(`User ${user.email} marked as inactive.`);
+            console.log(`User ${user.email} marked as inactive.`);
         });
     }
 
